@@ -3,131 +3,96 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Aunirbhan Das">
-    <meta name="description"
-        content="Contact the NYU Concrete Canoe team for collaboration, sponsorship, or inquiries.">
-
-    <title>NYU Concrete Canoe | Contact</title>
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Font Awesome Icons -->
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-    <!-- Custom Styles -->
+    <meta name="description" content="Contact the NYU Concrete Canoe team.">
+    <title>Contact | NYU Concrete Canoe</title>
     <link rel="stylesheet" href="assets/css/style.css">
-
-    <!-- Backend (as of now mostly for styling reasons) -->
-    <script src="assets/js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<body class="bg-light text-dark">
+<body>
 
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <!-- Navigation -->
+    <nav>
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">NYU Concrete Canoe</a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="about.html" id="aboutDropdown"
-                            data-bs-toggle="dropdown" aria-expanded="false"
-                            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
-                            About Us
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="aboutDropdown">
-                            <li><a class="dropdown-item" href="about.html#subteams">Subteams</a></li>
-                            <li><a class="dropdown-item" href="about.html#leadership">Leadership</a></li>
-                            <li><a class="dropdown-item" href="about.html#faq">FAQ</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="sponsors.html">Sponsors</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-
-                </ul>
-            </div>
+            <a href="index.html" class="nav-brand">NYU Concrete Canoe</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="timeline.html">Timeline</a></li>
+                <li><a href="sponsors.html">Sponsors</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
         </div>
     </nav>
 
-    <!-- Contact Section -->
-    <main class="container" style="padding-top: 120px; padding-bottom: 80px; max-width: 700px;">
-        <div class="text-center mb-5">
-            <h1 class="fw-bold">Contact Us</h1>
-            <p class="lead">Have questions, want to sponsor, or collaborate with our team? Send us a message below or
-                connect with us directly.</p>
-        </div>
+    <main>
+        <!-- Intro -->
+        <section>
+            <h1>Contact Us</h1>
+            <p>Have questions or want to collaborate? Reach out to our team below.</p>
+        </section>
 
-        <!-- Contact Form (NEED TO SET UP FORMSPREE ACCT)-->
-        <form action="https://formspree.io/f/yourFormID" method="POST" class="bg-white p-5 shadow-sm rounded">
-            <input type="hidden" name="_subject" value="New message from NYU Concrete Canoe website">
+        <!-- Contact Form -->
+        <section style="max-width: 600px; margin: 0 auto;">
+            <div class="card">
+                <!-- FORM FUNCTIONALITY: 
+                     To make this send to nyuconcretecanoe@gmail.com:
+                     1. Go to Formspree.io and create a free account.
+                     2. Create a new form and copy the unique ID.
+                     3. Replace 'yourFormID' below with that ID. 
+                -->
+                <form action="https://formspree.io/f/yourFormID" method="POST" style="text-align: left;">
+                    <div style="margin-bottom: 1.5rem;">
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; color: var(--text-dim); font-size: 0.9rem;">Full
+                            Name</label>
+                        <input type="text" name="name" placeholder="Your Name" required
+                            style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white;">
+                    </div>
 
-            <div class="mb-3">
-                <label for="name" class="form-label fw-semibold">Full Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Your name" required>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; color: var(--text-dim); font-size: 0.9rem;">Email
+                            Address</label>
+                        <input type="email" name="email" placeholder="you@example.com" required
+                            style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white;">
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; color: var(--text-dim); font-size: 0.9rem;">Message</label>
+                        <textarea name="message" rows="5" placeholder="How can we help?" required
+                            style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; resize: vertical;"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn" style="width: 100%; background: white; color: black;">
+                        Send Message
+                    </button>
+                </form>
+
+                <div style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 3rem;">
+                    <a href="https://www.instagram.com/nyuconcretecanoe/" target="_blank" class="btn"
+                        style="border-radius: 50%; width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                    <a href="mailto:nyuconcretecanoe@gmail.com" class="btn"
+                        style="border-radius: 50%; width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                        <i class="fa fa-envelope"></i>
+                    </a>
+                    <a href="assets/files/sponsorship.pdf.zip" target="_blank" class="btn"
+                        style="border-radius: 50%; width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                        <i class="fa fa-heart"></i>
+                    </a>
+                </div>
             </div>
-
-            <div class="mb-3">
-                <label for="email" class="form-label fw-semibold">Email Address</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="subject" class="form-label fw-semibold">Subject</label>
-                <input type="text" class="form-control" id="subject" name="subject" placeholder="Sponsorship Inquiry"
-                    required>
-            </div>
-
-            <div class="mb-4">
-                <label for="message" class="form-label fw-semibold">Message</label>
-                <textarea class="form-control" id="message" name="message" rows="5" placeholder="Write your message..."
-                    required></textarea>
-            </div>
-
-            <div class="d-grid">
-                <button type="submit" class="btn btn-primary btn-lg">
-                    <i class="fa fa-paper-plane me-2"></i>Send Message
-                </button>
-            </div>
-        </form>
-
-        <!-- Social Links -->
-        <div class="d-flex justify-content-center gap-4">
-            <a href="https://www.instagram.com/nyuconcretecanoe/" target="_blank" class="text-white fs-3"><i
-                    class="fa fa-instagram"></i></a>
-            <a href="https://www.givecampus.com/schools/NewYorkUniversity/nyu-concrete-canoe" target="_blank"
-                class="text-white fs-3"><i class="fa fa-heart"></i></a>
-            <a href="mailto:nyuconcretecanoe@gmail.com" class="text-white fs-3"><i class="fa fa-envelope"></i></a>
-        </div>
+        </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="text-center py-3 bg-dark text-white">
-        <p class="mb-0 small">© 2025 NYU Concrete Canoe | NYU Tandon School of Engineering</p>
+    <footer>
+        <p>&copy; 2025 NYU Concrete Canoe | NYU Tandon School of Engineering</p>
     </footer>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

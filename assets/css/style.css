@@ -1,516 +1,309 @@
 /* ==============================================
-   NYU CONCRETE CANOE - GLOBAL STYLESHEET
-   Author: Aunirbhan Das
-   Theme: NYU Purple (#57068C)
+   NYU CONCRETE CANOE - ULTRA-GLOSSY LIQUID GLASS
+   Apple-Style Minimalist Theme
    ============================================== */
 
-body, html {
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-bg-hover: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --text-light: #ffffff;
+  --text-dim: rgba(255, 255, 255, 0.7);
+  --blur-amount: 60px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+* {
   margin: 0;
   padding: 0;
-  font-family: 'Inter', 'Open Sans', sans-serif;
-  scroll-behavior: smooth;
-  background-color: #e1e0e1;
-  color: #2a2a2a;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
 }
 
-*{
-  
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+  background-image: url('canoe.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-color: #000;
+  color: var(--text-light);
+  line-height: 1.6;
+  min-height: 100vh;
 }
 
-/* -------- Navigation  Bar -------- */
-.navbar {
-  background: linear-gradient(
-    to right,
-    #7104b9f2 0%,
-    #3c095f99 50%,
-    #31035099 65%
-  );
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  font-size: 1.05rem;
-  opacity: 1; /* start visible */
-  transition: background 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease;
-  z-index: 1000;
-}
-
-/* Fade + color shift when scrolled */
-.navbar.scrolled {
-  opacity: 0.6; /* fade slightly */
-  background: linear-gradient(
-    to right,
-    rgba(87, 6, 140, 0.9),
-    rgba(124, 76, 191, 0.5),
-    rgba(87, 6, 140, 0)
-  );
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
-
-/* Mouse hover for a glow */
-.navbar:hover {
-  opacity: 1 !important; /* bring back full opacity */
-  box-shadow: 0 0 25px rgba(124, 76, 191, 0.5); /* soft purple glow */
-  transition: box-shadow 0.5s ease, opacity 0.4s ease;
-}
-
-/* Navbar links */
-.navbar-brand, .nav-link {
-  color: #fff !important;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover,
-.navbar-brand:hover {
-  color: #d1b3ff !important;
-}
-
-.navbar.scrolled .nav-link {
-  color: #e9ddf9 !important;
-}
-
-/* Prevent text from blurring on backdrop-filter */
-.navbar * {
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-}
-
-/* -------- Dropdown Menu -------- */
-.dropdown-menu-dark {
-  background: rgba(30, 10, 50, 0.95); /* Deep purple-black glass look */
-  border: 1px solid rgba(183, 145, 240, 0.2);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border-radius: 6px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  transition: all 0.3s ease;
-}
-
-.dropdown-item {
-  color: #ffffff !important;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.dropdown-item:hover {
-  background: linear-gradient(
-    to right,
-    rgba(87, 6, 140, 0.9),
-    rgba(124, 76, 191, 0.7)
-  );
-  color: #fff !important;
-}
-
-.dropdown-divider {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Optional subtle glow on hover */
-.dropdown-menu-dark:hover {
-  box-shadow: 0 0 25px rgba(124, 76, 191, 0.5);
-}
-
-
-/* -------- Home Page -------- */
-#hero {
-  position: relative;
-  background: url('canoe.png') center 20%/cover no-repeat;
-  height: 100vh;
-  display: flex;
-  align-items:first baseline;
-  justify-content: center;
-  text-align: center;
-  color: #fff;
-}
-
-#hero .overlay {
-  position: absolute;
+/* Navigation */
+nav {
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.45);
-  /* z-index: 1; */
+  right: 0;
+  z-index: 1000;
+  padding: 1.5rem 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* .hero-content {
-  position: relative;
-  z-index: 2;
+nav .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.hero-content h1 {
-  font-size: 10.5rem;
-  font-weight: 900;
-  letter-spacing: 2px;
-}
-
-.hero-content p {
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
-} */
-
-.hero_text{
-  color: #5c4a78;
+.nav-brand {
   font-weight: 700;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 1.2rem;
+  color: white;
+  text-decoration: none;
+  letter-spacing: -0.02em;
 }
 
-
-
-/* -------- Buttons -------- */
-.btn-primary {
-  background-color: #57068C;
-  border: none;
-  transition: all 0.3s ease;
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
 }
 
-.btn-primary:hover {
-  background-color: #7c4cbf;
-  transform: scale(1.03);
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-dim);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.3s;
 }
 
-/* -------- Sponsor Cards -------- */
+.nav-links a:hover {
+  color: white;
+}
+
+/* Glossy Cards */
 .card {
-  border-radius: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: var(--glass-bg);
+  backdrop-filter: saturate(180%) blur(var(--blur-amount));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--blur-amount));
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 3rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.4s;
+  animation: reveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) backwards, float 6s ease-in-out infinite 0.8s;
 }
 
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  background: var(--glass-bg-hover);
+  transform: translateY(-8px);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
-.card img {
-  max-height: 150px;
-  object-fit: contain;
-}
-
-/* -------- Forms -------- */
-form .form-control {
-  border-radius: 6px;
-  border: 1px solid #ced4da;
-  font-size: 1rem;
-}
-
-form .form-control:focus {
-  border-color: #57068C;
-  box-shadow: 0 0 0 0.25rem rgba(87, 6, 140, 0.25);
-}
-
-form label {
-  color: #57068C;
-}
-
-/* -------- Section Headings -------- */
-h1, h2, h3, h4, h5 {
-  color: #57068C;
-}
-
-/* -------- Social Icons -------- */
-.social-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 1rem 0;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.social-menu a {
-  color: #ffffff;
-  font-size: 1.8rem;
-  transition: color 0.3s ease;
-}
-
-.social-menu a:hover {
-  color: #b89ddf;
-}
-
-/* Dark icons for light backgrounds */
-a.text-dark:hover {
-  color: #57068C !important;
-}
-
-/* -------- Footer -------- */
-footer {
-  background-color: #2a2a2a;
-  color: #ffffff;
-}
-
-footer p {
-  margin: 0;
-}
-
-footer small {
-  display: block;
-  color: #cccccc;
-}
-
-/* -------- Utility Classes -------- */
-.section-padding {
-  padding-top: 80px;
-  padding-bottom: 80px;
-}
-
-.shadow-light {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-}
-
-/* -------- Responsive Adjustments -------- */
-@media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: 2.3rem;
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
 
-  .hero-content p {
-    font-size: 1.1rem;
-  }
-
-  .card img {
-    max-height: 120px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+/* Animations */
+@keyframes float {
 
-/* ----------- HOME PARALLAX ---------- */
-.parallax-hero {
-  background-image: url('canoe.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center 80%; 
-  background-attachment: scroll;
-  position: relative;
-  z-index: 1;
-  transition: background-position 0.1s ease-out;
-}
+  0%,
+  100% {
+    transform: translateY(0);
+  }
 
-.parallax-hero .overlay {
-  position: absolute;
-  inset: 0;
-  background: url('canoe.png');
-  z-index: 2;
-}
-.parallax-hero .container {
-  position: relative;
-  z-index: 3;
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
-/* ----- TIMELINE TRANSITION ----- */
-.timeline-parallax {
-  position: relative;
-  background-color: #fff; /* the timeline background */
-  z-index: 5;
-  margin-top: -10vh; /* overlap hero slightly for smoother transition */
-  scroll-snap-type: y mandatory;
+/* Main Content Layout */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 140px 2rem 4rem;
 }
 
+section {
+  margin-bottom: 8rem;
+}
 
-.layout {
-  display: flex;
-}
-.canoe-timeline {
-  scroll-behavior: smooth;
-  overflow: scroll;
-  height: 100vh;
-  height: 100dvh;
-  flex-grow: 1;
-  scroll-snap-type: y mandatory;
-}
-.canoe-content {
-  max-width: 36ch;
-  margin: var(--space-md);
-}
-.canoe-year {
-  scroll-snap-align: center;
-  position: relative;
-  overflow: hidden;
-  min-height: 100vh;
+.hero {
+  height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-.canoe-year .canoe-icon {
-  font-weight: 800;
-  opacity: 0.05;
-  position: absolute;
-  line-height: 1;
-  font-size: 30em;
-  top: calc(50% - 0.6em);
-  left: -0.2em;
-}
-.timeline-sidebar {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-left: var(--border-width) solid var(--color-background-muted);
-}
-.scroll-link-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.scroll-link {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.5rem;
   align-items: center;
-  position: relative;
-  height: 2.5rem;
-  padding: 0.75rem;
-}
-.scroll-link::before {
-  content: "";
-  position: absolute;
-  height: 0;
-  left: calc(-1 * var(--border-width));
-  background: var(--color-accent);
-  width: var(--border-width);
-  transition: height 150ms;
-}
-.scroll-link[data-selected="true"]::before {
-  height: 100%;
-}
-.scroll-link .title {
-  width: 0;
-  overflow: hidden;
-}
-.scroll-link .canoe-icon {
-  text-align: center;
-  font-size: 1.5rem;
-  line-height: 1;
-  height: 1em;
-  width: 1em;
-  border-radius: 0.75rem;
-  flex-shrink: 0;
-  transition: background 150ms;
-}
-@media (min-width: 540px) {
-  .layout {
-    flex-direction: row-reverse;
-  }
-  .timeline-sidebar {
-    margin-left: var(--space-lg);
-    border-left: none;
-    border-right: var(--border-width) solid var(--color-background-muted);
-  }
-  .scroll-link::before {
-    left: unset;
-    right: calc(-1 * var(--border-width));
-  }
-  .scroll-link .title {
-    width: auto;
-  }
+  margin-bottom: 12rem;
 }
 
-/* --- Flip Card Styles for Sponsors --- */
+.hero h1 {
+  font-size: clamp(3.5rem, 10vw, 6rem);
+}
 
+.hero p {
+  font-size: 1.6rem;
+}
+
+/* Sponsor Flip Cards */
 .flip-card {
-    /* Define the size and perspective for the flip effect */
-    width: 100%; /* Will take the width of the col-lg-5 container */
-    height: 250px; /* Adjust height as needed for your content */
-    perspective: 1000px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Replace the default card shadow */
-    border-radius: 0.5rem;
-    overflow: hidden; /* Ensures content stays within the rounded corners */
+  width: 100%;
+  height: 280px;
+  perspective: 1000px;
 }
 
 .flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
 }
 
-/* Hover effect */
 .flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
 .card-front,
 .card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden; /* Hides the back side when rotated away */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: var(--glass-bg);
+  backdrop-filter: saturate(180%) blur(var(--blur-amount));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--blur-amount));
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
 }
 
-.card-front {
-    background: white;
-    /* Optional: Add a light border */
-    border: 1px solid #e5e7eb; 
+.card-front img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
 }
 
 .card-back {
-    /* Use a primary color from your site for the back */
-    background: var(--bs-dark); /* Using dark background for contrast, adjust as needed */
-    color: white;
-    transform: rotateY(180deg); /* Initial rotation to hide the back */
-    text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+  transform: rotateY(180deg);
+  text-align: center;
 }
 
-/* Ensure images scale correctly within the front face */
-.card-front img {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
+h1 {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
-/* --- Leadership Card Styles --- */
-
-/* 1. Remove any padding/margin that creates whitespace */
-.leadership-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden; /* Prevents any overflow */
+h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
-.leadership-card .card-img-top {
-    margin: 0;
-    padding: 0;
-    border-radius: 0; /* Remove any border radius that might cause gaps */
+h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
-/* 2. Image container - fixed height, no gaps */
-.square-img-container {
-    width: 100%;
-    height: 350px; /* Adjust as needed */
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    line-height: 0; /* Removes inline element spacing */
+p {
+  font-size: 1.15rem;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
-/* 3. Image fills container completely */
-.leader-headshot {
-    object-fit: cover;
-    object-position: center;
-    width: 100%;
-    height: 100%;
-    display: block;
-    margin: 0;
-    padding: 0;
+/* Features Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
 }
 
-/* 4. Card body styling */
-.leadership-card .card-body {
-    margin: 0;
-    padding: 1rem;
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+  text-align: center;
 }
 
-/* 5. Hover effect */
-.leadership-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3) !important;
+.btn:hover {
+  background: white;
+  color: black;
+  transform: scale(1.05);
 }
 
-.shadow-lg {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+/* Timeline Components */
+.timeline-year {
+  display: inline-block;
+  padding: 0.4rem 1.2rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+.tag {
+  padding: 0.3rem 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav .container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+}
+
+footer {
+  text-align: center;
+  padding: 4rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0.6;
 }

@@ -3,250 +3,138 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Aunirbhan Das">
     <meta name="description" content="Official website for NYU Concrete Canoe Team">
-
-    <title>NYU Concrete Canoe | About Us</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>About Us | NYU Concrete Canoe</title>
     <link rel="stylesheet" href="assets/css/style.css">
-
 </head>
 
-<body class="bg-light text-dark">
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+<body>
+
+    <!-- Navigation -->
+    <nav>
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">NYU Concrete Canoe</a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="about.html" id="aboutDropdown"
-                            data-bs-toggle="dropdown" aria-expanded="false"
-                            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
-                            About Us
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="aboutDropdown">
-                            <li><a class="dropdown-item" href="about.html#subteams">Subteams</a></li>
-                            <li><a class="dropdown-item" href="about.html#leadership">Leadership</a></li>
-                            <li><a class="dropdown-item" href="about.html#faq">FAQ</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="sponsors.html">Sponsors</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-
-                </ul>
-            </div>
+            <a href="index.html" class="nav-brand">NYU Concrete Canoe</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="timeline.html">Timeline</a></li>
+                <li><a href="sponsors.html">Sponsors</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
         </div>
     </nav>
 
     <main>
-        <section id="general-overview" class="py-5">
-            <div class="container">
-                <h2 class="display-5 fw-bold text-center mb-4">General Overview</h2>
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <p class="lead text-center">
-                            Welcome to the NYU Concrete Canoe team! We are an interdisciplinary group of students
-                            dedicated to designing, constructing, and racing a canoe made entirely out of concrete.
-                            This project tests our knowledge in civil engineering, materials science, and project
-                            management.
-                        </p>
-                    </div>
+        <!-- General Overview -->
+        <section>
+            <h1>About Our Team</h1>
+            <div class="card">
+                <h2>Vertically Integrated Projects</h2>
+                <p>Concrete Canoe is a Tandon VIP (Vertically Integrated Project) that teaches students design through
+                    the construction of a concrete canoe. Throughout the year-long process, we develop creative and
+                    innovative ideas to produce the most efficient design, from hydrodynamic analysis to digital
+                    fabrication.</p>
+            </div>
+        </section>
+
+        <!-- Methods & Tech
+        <section>
+            <h2>Methods & Technologies</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Material Design</h3>
+                    <p>Optimizing concrete mixture aggregates for buoyancy and strength.</p>
+                </div>
+                <div class="card">
+                    <h3>Engineering</h3>
+                    <p>Structural analysis and CAD modeling for hull geometries.</p>
+                </div>
+                <div class="card">
+                    <h3>Fabrication</h3>
+                    <p>Utilizing robotic and digital fabrication technology for casting.</p>
+                </div>
+                <div class="card">
+                    <h3>Soft Skills</h3>
+                    <p>Technical writing, leadership, and project management.</p>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- Subteams -->
+        <section id="subteams">
+            <h2>Our Subteams</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Mix Design</h3>
+                    <p>Developing the perfect concrete mixture that is both lightweight and strong.</p>
+                </div>
+                <div class="card">
+                    <h3>Hull Design</h3>
+                    <p>Modeling and optimizing the canoe's shape for hydrodynamic stability.</p>
+                </div>
+                <div class="card">
+                    <h3>Construction</h3>
+                    <p>Building the specialized mold and managing the casting process.</p>
+                </div>
+                <div class="card">
+                    <h3>Aesthetics</h3>
+                    <p>Applying the final finish, graphics, and technical presentation.</p>
                 </div>
             </div>
         </section>
 
-
-
-        <section id="subteams" class="py-5 bg-white">
-            <div class="container">
-                <h2 class="display-5 fw-bold text-center mb-4">Our Subteams</h2>
-                <p class="text-center mb-5">
-                    Our team is divided into specialized subteams, ensuring all aspects of the competition are covered.
-                </p>
-                <div class="row">
-                    <div class="col-md-6 col-lg-3 mb-4">
-                        <div class="card h-100 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Mix Design</h5>
-                                <p class="card-text">Developing the perfect concrete mixture.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 mb-4">
-                        <div class="card h-100 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Hull Design</h5>
-                                <p class="card-text">Modeling and optimizing the canoe's shape.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 mb-4">
-                        <div class="card h-100 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Construction</h5>
-                                <p class="card-text">Building the mold and pouring the canoe.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 mb-4">
-                        <div class="card h-100 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Aesthetics</h5>
-                                <p class="card-text">Applying the final finish and graphics.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 mb-4">
-                        <div class="card h-100 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Marketting</h5>
-                                <p class="card-text">
-                                    Organizing social events, finding sponsors, and maintaining the teams media
-                                    presence.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-3 mb-4">
-                        <div class="card h-100 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Special Projects</h5>
-                                <p class="card-text">
-                                    Responsible for miscellaneous tasks, often with a heavy interdisciplinary focus.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Leadership -->
+        <section id="leadership">
+            <h2>Student Leadership</h2>
+            <div class="grid">
+                <div class="card">
+                    <img src="assets/img/dwayneHeadshot.JPG" alt="Dwayne Ong"
+                        style="width: 100%; border-radius: 12px; margin-bottom: 1.5rem;">
+                    <h3>Dwayne Ong</h3>
+                    <p>Team Captain</p>
+                </div>
+                <div class="card">
+                    <img src="assets/img/tonyHeadshot.JPG" alt="Tony Chen"
+                        style="width: 100%; border-radius: 12px; margin-bottom: 1.5rem;">
+                    <h3>Tony Chen</h3>
+                    <p>Paddling Captain</p>
+                </div>
+                <div class="card">
+                    <img src="assets/img/malikHeadshot.JPG" alt="Malik"
+                        style="width: 100%; border-radius: 12px; margin-bottom: 1.5rem;">
+                    <h3>Malik</h3>
+                    <p>Marketing Lead</p>
                 </div>
             </div>
         </section>
 
-
-        <section id="leadership" class="py-5">
-            <div class="container">
-                <h2 class="display-5 fw-bold text-center mb-4">Meet Our Leaders 🥇</h2>
-                <p class="text-center mb-5 lead text-muted">
-                    The team is guided by a dedicated group of student leaders.
-                </p>
-
-                <div class="row justify-content-center g-4">
-
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card leadership-card h-100 shadow-lg border-0">
-                            <!-- <div class="square-img-container"> -->
-                            <img src="assets/img/dwayneHeadshot.JPG" class="leader-headshot card-img-top"
-                                alt="Dwayne Ong Headshot">
-                            <!-- </div> -->
-
-                            <div class="card-body py-3 d-flex flex-column justify-content-center text-center">
-                                <h5 class="fw-bold mb-0">Dwayne Ong</h5>
-                                <p class="small text-primary mb-0">Team Captain</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card leadership-card h-100 shadow-lg border-0">
-
-                            <!-- <div class="square-img-container"> -->
-                            <img src="assets/img/tonyHeadshot.JPG" class="leader-headshot card-img-top"
-                                alt="Tony Chen Headshot">
-                            <!-- </div> -->
-
-                            <div class="card-body py-3 d-flex flex-column justify-content-center text-center">
-                                <h5 class="fw-bold mb-0">Tony Chen</h5>
-                                <p class="small text-primary mb-0">Paddling Captain</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card leadership-card h-100 shadow-lg border-0">
-
-                            <!-- <div class="square-img-container"> -->
-                            <img src="assets/img/malikHeadshot.JPG" class="leader-headshot card-img-top"
-                                alt="Malik Headshot">
-                            <!-- </div> -->
-
-                            <div class="card-body py-3 d-flex flex-column justify-content-center text-center">
-                                <h5 class="fw-bold mb-0">Malik</h5>
-                                <p class="small text-primary mb-0">Marketing Lead</p>
-                            </div>
-                        </div>
-                    </div>
-
+        <!-- Faculty Advisor -->
+        <section>
+            <h2>Faculty Advisor</h2>
+            <div style="max-width: 400px; margin: 0 auto;">
+                <div class="card">
+                    <h3>Weihua Jin</h3>
+                    <p>Faculty Advisor</p>
+                    <p style="font-size: 0.9rem;">wjin@nyu.edu</p>
                 </div>
             </div>
         </section>
 
-        <section id="faq" class="py-5 bg-white">
-            <div class="container">
-                <h2 class="display-5 fw-bold text-center mb-4">Frequently Asked Questions</h2>
-                <div class="accordion accordion-flush" id="faqAccordion">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                Can a concrete canoe actually float?
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                            data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                **Yes, absolutely!** Density, not weight, determines buoyancy. Our special lightweight
-                                concrete mix and careful design ensure the canoe displaces enough water to float and be
-                                competitive.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                How can I join the team?
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                            data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                We hold open meetings at the start of each semester. All majors are welcome! Check our
-                                social media for the next meeting time or reach out via the Contact page.
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Partners -->
+        <section>
+            <div class="card">
+                <h2>Our Partners</h2>
+                <p style="font-size: 0.95rem; opacity: 0.8;">NYU Tandon School of Engineering • NYU Civil and Urban
+                    Engineering • ASCE • NYU MakerSpace</p>
             </div>
         </section>
     </main>
 
-    <footer class="text-center py-3 bg-dark mt-auto">
-        <p class="mb-0 small text-white">© 2025 NYU Concrete Canoe | NYU Tandon School of Engineering</p>
+    <footer>
+        <p>&copy; 2025 NYU Concrete Canoe | NYU Tandon School of Engineering</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/script.js"></script>
 </body>
 
 </html>
