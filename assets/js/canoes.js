@@ -1,4 +1,4 @@
-{
+const CANOE_DATA = {
   "canoes": [
     {
       "year": 2025,
@@ -193,4 +193,4 @@
       "images": []
     }
   ]
-}
+};

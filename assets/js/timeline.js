@@ -1,56 +1,65 @@
 /* ==============================================
-   NYU CONCRETE CANOE - TIMELINE LOGIC
-   Ultra-Glossy Liquid Glass Rendering
+   NYU CONCRETE CANOE - TIMELINE SIMPLE
+   Uses local data from canoes.js to avoid CORS
    ============================================== */
 
-async function initTimeline() {
-    const container = document.getElementById('timelineContainer');
-    if (!container) return;
+function initTimeline() {
+    console.log('Starting timeline initialization...');
+    const container = document.getElementById('canoeTimeline');
+    
+    if (!container) {
+        console.error('Container #canoeTimeline not found');
+        return;
+    }
 
     try {
-        // Clear loading state
-        container.innerHTML = '<p class="text-center" style="opacity: 0.5;">Loading legacy...</p>';
-
-        const response = await fetch('assets/data/canoes.json');
-        if (!response.ok) throw new Error('Data not found');
+        // Use CANOE_DATA from canoes.js instead of fetch
+        // local data is much more reliable for future club members
+        const data = CANOE_DATA;
         
-        const data = await response.json();
+        console.log('Data loaded:', data.canoes ? data.canoes.length : 0, 'canoes');
+        
         container.innerHTML = '';
 
         if (!data.canoes || data.canoes.length === 0) {
-            container.innerHTML = '<p class="text-center">No canoes found.</p>';
+            container.innerHTML = '<p class="text-center">No history found.</p>';
             return;
         }
 
-        data.canoes.forEach((canoe, index) => {
+        data.canoes.forEach((canoe) => {
             const card = document.createElement('div');
-            card.className = 'card timeline-item';
+            card.className = 'card';
+            card.style.marginBottom = '4rem';
             
             card.innerHTML = `
-                <div style="text-align: center;">
-                    <span class="timeline-year">${canoe.year}</span>
-                    <h2 style="font-size: 2rem; margin-top: 1rem;">${canoe.name}</h2>
-                    <p style="margin: 1.5rem 0; line-height: 1.8;">${canoe.description}</p>
-                    <div class="timeline-tags">
-                        ${canoe.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 1.5rem;">
+                    <span style="font-size: 3rem;">${canoe.icon || '🛶'}</span>
+                    <div style="text-align: left;">
+                        <span class="timeline-year">${canoe.year}</span>
+                        <h2 style="margin: 0; text-align: left;">${canoe.name}</h2>
                     </div>
+                </div>
+                <p style="text-align: left; line-height: 1.8;">${canoe.description}</p>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.5rem;">
+                    ${canoe.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                 </div>
             `;
             container.appendChild(card);
         });
+        console.log('Timeline rendering complete.');
 
-    } catch (error) {
-        console.error('Timeline Error:', error);
+    } catch (e) {
+        console.error('Timeline Error:', e);
         container.innerHTML = `
-            <div class="card text-center">
-                <p>Unable to load the history at this time.</p>
-                <p style="font-size: 0.9rem; opacity: 0.6;">${error.message}</p>
+            <div class="card" style="border-color: rgba(255,0,0,0.3);">
+                <h3>Error Loading Legacy</h3>
+                <p>Data source 'CANOE_DATA' missing or malformed.</p>
             </div>
         `;
     }
 }
 
-// Ensure the function runs when DOM is ready
+// Fire immediately or on load
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initTimeline);
 } else {

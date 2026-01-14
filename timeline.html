@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Chronological history of NYU Concrete Canoe competition boats.">
     <title>Timeline | NYU Concrete Canoe</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -25,17 +24,15 @@
         </div>
     </nav>
 
-    <main>
-        <!-- Header -->
-        <section>
+    <main style="max-width: 800px; margin: 0 auto; padding-top: 140px;">
+        <section style="text-align: center; margin-bottom: 4rem;">
             <h1>Our Legacy</h1>
-            <p>A chronological history of engineering, innovation, and competition.</p>
+            <p>A history of innovation and engineering excellence.</p>
         </section>
 
-        <!-- Dynamic Timeline Container -->
-        <div id="timelineContainer" style="max-width: 900px; margin: 0 auto;">
-            <!-- Content loaded via assets/js/timeline.js -->
-            <p class="text-center" style="opacity: 0.5;">Preparing the journey...</p>
+        <!-- Dynamic Content -->
+        <div id="canoeTimeline">
+            <p class="text-center" style="opacity: 0.5;">Loading legacy content...</p>
         </div>
     </main>
 
@@ -43,7 +40,7 @@
         <p>&copy; 2025 NYU Concrete Canoe | NYU Tandon School of Engineering</p>
     </footer>
 
-    <!-- Timeline Logic -->
+    <script src="assets/js/canoes.js"></script>
     <script src="assets/js/timeline.js"></script>
 </body>
 
