@@ -2,195 +2,220 @@
   "canoes": [
     {
       "year": 2025,
-      "name": "Butterfly",
+      "name": "W-Train",
       "icon": "🦋",
-      "description": "The 2025 canoe, <strong>Butterfly</strong>, represents renewal and transformation as the team pushes design boundaries with sustainable materials and improved hydrodynamics.",
-      "tags": [
-        "Sustainability",
-        "Innovation",
-        "Hydrodynamics"
-      ],
-      "images": []
+      "description": "The 2025 canoe, <strong>W-Train</strong>, represents renewal and transformation as the team pushes design boundaries with sustainable materials and improved hydrodynamics.",
+      "tags": ["Sustainability", "Innovation", "Hydrodynamics"],
+      "images": [
+        "assets/img/canoes/2025/1.jpeg",
+        "assets/img/canoes/2025/2.jpeg",
+        "assets/img/canoes/2025/3.jpg",
+        "assets/img/canoes/2025/4.jpg"
+      ]
     },
     {
       "year": 2024,
       "name": "Rise",
       "icon": "🌅",
       "description": "<strong>Rise</strong> stood for resilience and teamwork. The team achieved major aesthetic and structural improvements for the national showcase.",
-      "tags": [
-        "Resilience",
-        "Teamwork",
-        "National Competition"
-      ],
-      "images": []
+      "tags": ["Resilience", "Teamwork", "National Competition"],
+      "images": [
+        "assets/img/canoes/2024/1.jpeg",
+        "assets/img/canoes/2024/2.jpeg",
+        "assets/img/canoes/2024/3.jpg",
+        "assets/img/canoes/2024/4.jpg",
+        "assets/img/canoes/2024/5.jpg",
+        "assets/img/canoes/2024/6.jpg"
+      ]
     },
     {
       "year": 2023,
       "name": "Jet",
       "icon": "✈️",
       "description": "<strong>Jet</strong> emphasized lightweight innovation and aerodynamic flow, earning recognition for technical writing and design presentation.",
-      "tags": [
-        "Lightweight",
-        "Aerodynamics",
-        "Technical Excellence"
-      ],
-      "images": []
+      "tags": ["Lightweight", "Aerodynamics", "Technical Excellence"],
+      "images": [
+        "assets/img/canoes/2023/1.jpeg",
+        "assets/img/canoes/2023/2.jpg",
+        "assets/img/canoes/2023/3.jpeg",
+        "assets/img/canoes/2023/4.jpg",
+        "assets/img/canoes/2023/5.jpeg"
+      ]
     },
     {
       "year": 2022,
       "name": "Blossom",
       "icon": "🌸",
       "description": "<strong>Blossom</strong> symbolized the team's return to form after the pandemic hiatus — a celebration of rebirth through collaborative spirit.",
-      "tags": [
-        "Rebirth",
-        "Collaboration",
-        "Post-Pandemic"
-      ],
-      "images": []
+      "tags": ["Rebirth", "Collaboration", "Post-Pandemic"],
+      "images": [
+        "assets/img/canoes/2022/1.jpeg",
+        "assets/img/canoes/2022/2.jpg",
+        "assets/img/canoes/2022/3.jpeg",
+        "assets/img/canoes/2022/4.jpg",
+        "assets/img/canoes/2022/5.jpeg"
+      ]
     },
     {
       "year": 2021,
       "name": "Golem",
       "icon": "🪨",
       "description": "With <strong>Golem</strong>, the team focused on durability, strength, and balance, combining traditional casting methods with digital fabrication tools.",
-      "tags": [
-        "Durability",
-        "Digital Fabrication",
-        "Strength"
-      ],
-      "images": []
+      "tags": ["Durability", "Digital Fabrication", "Strength"],
+      "images": [
+        "assets/img/canoes/2021/1.jpeg",
+        "assets/img/canoes/2021/2.jpeg",
+        "assets/img/canoes/2021/3.jpg"
+      ]
     },
     {
       "year": 2020,
       "name": "Voyager",
       "icon": "🚀",
       "description": "<strong>Voyager</strong> was inspired by exploration — a design that pushed experimentation with advanced concrete composites and curing methods.",
-      "tags": [
-        "Exploration",
-        "Advanced Composites",
-        "Innovation"
-      ],
-      "images": []
+      "tags": ["Exploration", "Advanced Composites", "Innovation"],
+      "images": [
+        "assets/img/canoes/2020/1.jpg",
+        "assets/img/canoes/2020/2.jpg",
+        "assets/img/canoes/2020/3.jpg"
+      ]
     },
     {
       "year": 2019,
       "name": "Bluefin",
       "icon": "🐟",
       "description": "<strong>Bluefin</strong> emphasized hydrodynamic efficiency, with a streamlined hull and a renewed focus on paddling performance.",
-      "tags": [
-        "Hydrodynamics",
-        "Performance",
-        "Streamlined"
-      ],
-      "images": []
+      "tags": ["Hydrodynamics", "Performance", "Streamlined"],
+      "images": [
+        "assets/img/canoes/2019/1.jpg",
+        "assets/img/canoes/2019/2.jpg",
+        "assets/img/canoes/2019/3.jpg",
+        "assets/img/canoes/2019/4.jpg",
+        "assets/img/canoes/2019/5.jpg"
+      ]
     },
     {
       "year": 2018,
       "name": "Spotlight",
       "icon": "💡",
       "description": "<strong>Spotlight</strong> brought creative innovation into the mix design and aesthetics, highlighting the team's growing technical versatility.",
-      "tags": [
-        "Creative Design",
-        "Mix Innovation",
-        "Versatility"
-      ],
-      "images": []
+      "tags": ["Creative Design", "Mix Innovation", "Versatility"],
+      "images": [
+        "assets/img/canoes/2018/1.jpg",
+        "assets/img/canoes/2018/2.jpg",
+        "assets/img/canoes/2018/3.jpeg",
+        "assets/img/canoes/2018/4.jpeg",
+        "assets/img/canoes/2018/5.jpeg"
+      ]
     },
     {
       "year": 2017,
       "name": "Sprout",
       "icon": "🌱",
       "description": "<strong>Sprout</strong> represented the new generation of builders, integrating sustainability and eco-friendly design principles.",
-      "tags": [
-        "New Generation",
-        "Eco-Friendly",
-        "Sustainability"
-      ],
-      "images": []
+      "tags": ["New Generation", "Eco-Friendly", "Sustainability"],
+      "images": [
+        "assets/img/canoes/2017/1.jpg",
+        "assets/img/canoes/2017/2.jpg",
+        "assets/img/canoes/2017/3.jpg",
+        "assets/img/canoes/2017/4.jpg",
+        "assets/img/canoes/2017/5.jpg",
+        "assets/img/canoes/2017/6.jpg",
+        "assets/img/canoes/2017/7.jpg"
+      ]
     },
     {
       "year": 2016,
       "name": "Koi",
       "icon": "🐠",
       "description": "<strong>Koi</strong> featured colorful visual motifs and experimental aggregate mixtures inspired by fluid motion and aquatic balance.",
-      "tags": [
-        "Visual Design",
-        "Experimental",
-        "Aquatic Inspiration"
-      ],
-      "images": []
+      "tags": ["Visual Design", "Experimental", "Aquatic Inspiration"],
+      "images": [
+        "assets/img/canoes/2016/1.jpg",
+        "assets/img/canoes/2016/2.jpg",
+        "assets/img/canoes/2016/3.jpg",
+        "assets/img/canoes/2016/4.jpg",
+        "assets/img/canoes/2016/5.jpg"
+      ]
     },
     {
       "year": 2015,
       "name": "Graffiti",
       "icon": "🎨",
       "description": "<strong>Graffiti</strong> captured artistic expression, merging engineering with creative visuals for a bold and modern identity.",
-      "tags": [
-        "Artistic",
-        "Bold Design",
-        "Modern"
-      ],
-      "images": []
+      "tags": ["Artistic", "Bold Design", "Modern"],
+      "images": [
+        "assets/img/canoes/2015/1.jpg"
+      ]
     },
     {
       "year": 2014,
       "name": "Maka",
       "icon": "🏝️",
       "description": "<strong>Maka</strong> emphasized balance between design and craft — its minimalist shape refined through precise formwork techniques.",
-      "tags": [
-        "Minimalist",
-        "Precision",
-        "Balance"
-      ],
-      "images": []
+      "tags": ["Minimalist", "Precision", "Balance"],
+      "images": [
+        "assets/img/canoes/2014/1.jpg",
+        "assets/img/canoes/2014/2.jpg"
+      ]
     },
     {
       "year": 2013,
       "name": "Illa",
       "icon": "🏄",
       "description": "<strong>Illa</strong> was a pivotal design, marking the team's transition to lighter, high-performance materials for faster competition speeds.",
-      "tags": [
-        "Pivotal",
-        "High-Performance",
-        "Speed"
-      ],
-      "images": []
+      "tags": ["Pivotal", "High-Performance", "Speed"],
+      "images": [
+        "assets/img/canoes/2013/1.jpg",
+        "assets/img/canoes/2013/2.jpg",
+        "assets/img/canoes/2013/3.jpg",
+        "assets/img/canoes/2013/4.jpg",
+        "assets/img/canoes/2013/5.jpg"
+      ]
     },
     {
       "year": 2010,
       "name": "KingConCrete",
       "icon": "👑",
       "description": "<strong>KingConCrete</strong> became one of NYU's most iconic canoes, known for its strength and unique layered aggregate finish.",
-      "tags": [
-        "Iconic",
-        "Strength",
-        "Legendary"
-      ],
-      "images": []
+      "tags": ["Iconic", "Strength", "Legendary"],
+      "images": [
+        "assets/img/canoes/2010/1.jpg",
+        "assets/img/canoes/2010/2.jpg",
+        "assets/img/canoes/2010/3.jpg",
+        "assets/img/canoes/2010/4.jpg",
+        "assets/img/canoes/2010/5.jpg"
+      ]
     },
     {
       "year": 2009,
       "name": "Fusion",
-      "icon": "⚡",
-      "description": "<strong>Fusion</strong> symbolized the merging of ideas and expertise, resulting in innovative hull curvature and improved paddling speed.",
-      "tags": [
-        "Collaboration",
-        "Innovation",
-        "Hull Design"
-      ],
-      "images": []
+      "icon": "🏺",
+      "description": "<strong>Fusion</strong> was a competitive canoe of Poly's Concrete Canoe legacy — representing the team's early spirit.",
+      "tags": ["Origin", "Legacy", "Foundation"],
+      "images": [
+        "assets/img/canoes/2009/1.jpg",
+        "assets/img/canoes/2009/2.jpg",
+        "assets/img/canoes/2009/3.jpg",
+        "assets/img/canoes/2009/4.jpg",
+        "assets/img/canoes/2009/5.jpg",
+        "assets/img/canoes/2009/6.jpg",
+        "assets/img/canoes/2009/7.jpg"
+      ]
     },
     {
       "year": 2008,
       "name": "Osiris",
       "icon": "🏺",
       "description": "<strong>Osiris</strong> was the origin of NYU's modern Concrete Canoe legacy — representing the team's early dedication to precision and spirit.",
-      "tags": [
-        "Origin",
-        "Legacy",
-        "Foundation"
-      ],
-      "images": []
+      "tags": ["Origin", "Legacy", "Foundation"],
+      "images": [
+        "assets/img/canoes/2008/1.jpg",
+        "assets/img/canoes/2008/2.jpg",
+        "assets/img/canoes/2008/3.jpg",
+        "assets/img/canoes/2008/4.jpg",
+        "assets/img/canoes/2008/5.jpg"
+      ]
     }
   ]
 }

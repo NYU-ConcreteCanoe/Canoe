@@ -1,0 +1,72 @@
+{
+  "leadership": [
+    {
+      "name": "Dwayne Ong",
+      "role": "Team Captain",
+      "image": "assets/img/headshots/dwayneO.JPG"
+    },
+    {
+      "name": "Janice Chen",
+      "role": "Vice Captain",
+      "image": "assets/img/headshots/janiceC.JPG"
+    },
+    {
+      "name": "Vivian Zou",
+      "role": "Construction Manager",
+      "image": "assets/img/headshots/vivianZ.JPG"
+    },
+    {
+      "name": "Yamin Dembrow",
+      "role": "Structural Lead",
+      "image": "assets/img/headshots/yaminD.JPG"
+    },
+    {
+      "name": "Tony Chen",
+      "role": "Paddling Captain",
+      "image": "assets/img/headshots/tonyC.JPG"
+    },
+    {
+      "name": "Malik",
+      "role": "Marketing Lead",
+      "image": "assets/img/headshots/malikU.JPG"
+    },
+    {
+      "name": "Ren Liao",
+      "role": "Principal Reaction Engineer",
+      "image": "assets/img/headshots/renL.JPG"
+    },
+    {
+      "name": "Julia Jakubisiak",
+      "role": "Principal Reaction Engineer",
+      "image": "assets/img/headshots/juliaJ.JPG"
+    },
+    {
+      "name": "Yanik Jhaveri",
+      "role": "Head of Optimization and Automation & Aesthetics",
+      "image": "assets/img/headshots/yanikJ.JPG"
+    },
+    {
+      "name": "Yifan Chen",
+      "role": "Head of Optimization and Automation",
+      "image": "assets/img/headshots/yifanC.JPG"
+    },
+    {
+      "name": "Joy Lin",
+      "role": "Aesthetics",
+      "image": "assets/img/headshots/joyL.JPG"
+    },
+    {
+      "name": "Alex Huang",
+      "role": "Senior Advisor",
+      "image": "assets/img/headshots/alexH.JPG"
+    }
+  ],
+
+  "members": [
+    {
+      "name": "First Last",
+      "role": "Structures",
+      "image": "assets/img/placeholder.jpg"
+    }
+  ]
+}

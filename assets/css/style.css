@@ -1,16 +1,15 @@
 /* ==============================================
-   NYU CONCRETE CANOE - ULTRA-GLOSSY LIQUID GLASS
-   Apple-Style Minimalist Theme
+   NYU CONCRETE CANOE - Liquid Glassmorphism Theme
    ============================================== */
 
 :root {
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-bg-hover: rgba(255, 255, 255, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-bg-hover: rgba(255, 255, 255, 0.12);
   --glass-border: rgba(255, 255, 255, 0.2);
   --text-light: #ffffff;
-  --text-dim: rgba(255, 255, 255, 0.7);
-  --blur-amount: 60px;
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --text-dim: rgba(255, 255, 255, 0.85);
+  --blur-amount: 30px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -31,6 +30,31 @@ body {
   color: var(--text-light);
   line-height: 1.6;
   min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Prevent links from turning purple */
+a,
+a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Global Font Bolding */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 800;
+}
+
+p,
+span,
+li,
+a {
+  font-weight: 500;
 }
 
 /* Navigation */
@@ -128,9 +152,16 @@ nav .container {
 
 /* Main Content Layout */
 main {
+  max-width: 100%;
+  /* Spans full width for background */
+  margin: 0;
+  padding: 0;
+}
+
+.content-wrapper {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 140px 2rem 4rem;
+  padding: 0 2rem;
 }
 
 section {
@@ -138,13 +169,38 @@ section {
 }
 
 .hero {
-  height: 60vh;
+  height: 80vh;
+  /* Taller hero */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 12rem;
+  margin-bottom: 0;
+  /* Changed for parallax layout */
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
+
+.parallax-section {
+  position: relative;
+  background: rgba(10, 10, 10, 0.8);
+  /* Opaque dark wall, very slightly transparent */
+  padding-top: 5vh;
+  padding-bottom: 10vh;
+  margin-top: 0;
+  min-height: 100vh;
+  z-index: 1;
+}
+
+/* Specific heights for different pages */
+.page-home .hero {
+  height: 100vh;
+}
+
+.page-other .hero {
+  height: 66vh;
+}
+
+/* Start at bottom third */
 
 .hero h1 {
   font-size: clamp(3.5rem, 10vw, 6rem);
@@ -228,9 +284,12 @@ h3 {
 }
 
 p {
-  font-size: 1.15rem;
-  color: var(--text-dim);
-  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  /* Slightly larger */
+  color: var(--text-light);
+  /* Switched from dim to light for visibility */
+  font-weight: 500;
+  margin-bottom: 1.5rem;
   text-align: center;
 }
 
@@ -245,8 +304,8 @@ p {
 .btn {
   display: inline-block;
   padding: 1rem 2.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(30, 30, 30, 0.67);
+  border: 1px solid rgba(255, 255, 255);
   border-radius: 100px;
   text-decoration: none;
   font-weight: 600;
@@ -257,7 +316,7 @@ p {
 .btn:hover {
   background: white;
   color: black;
-  transform: scale(1.05);
+  transform: scale(1.5)
 }
 
 /* Timeline Components */
@@ -288,6 +347,65 @@ p {
   color: var(--text-dim);
 }
 
+/* Carousel Styles */
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-top: 1.5rem;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-item {
+  min-width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s;
+}
+
+.carousel-control:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-control.prev {
+  left: 1rem;
+}
+
+.carousel-control.next {
+  right: 1rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   nav .container {
@@ -296,7 +414,7 @@ p {
   }
 
   .nav-links {
-    gap: 1rem;
+    gap: 1.5rem;
   }
 }
 

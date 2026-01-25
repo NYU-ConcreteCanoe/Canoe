@@ -1,0 +1,18 @@
+{
+  "sponsors": [
+    {
+      "name": "TMS",
+      "tier": "Platinum",
+      "tierColor": "#ffd700",
+      "commitment": "$5,000+ Commitment",
+      "logo": "assets/img/tmsLogo.png"
+    },
+    {
+      "name": "Carbicrete",
+      "tier": "Gold",
+      "tierColor": "#c0c0c0",
+      "commitment": "$2,000+ Commitment",
+      "logo": "assets/img/CarbicreteLogo_2019.webp"
+    }
+  ]
+}

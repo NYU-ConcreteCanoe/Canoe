@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body>
+<body class="page-other">
 
     <!-- Navigation -->
     <nav>
@@ -24,15 +24,20 @@
         </div>
     </nav>
 
-    <main style="max-width: 800px; margin: 0 auto; padding-top: 140px;">
-        <section style="text-align: center; margin-bottom: 4rem;">
+    <main>
+        <!-- Hero Header (Top 2/3 transparent) -->
+        <section class="hero">
             <h1>Our Legacy</h1>
             <p>A history of innovation and engineering excellence.</p>
         </section>
 
-        <!-- Dynamic Content -->
-        <div id="canoeTimeline">
-            <p class="text-center" style="opacity: 0.5;">Loading legacy content...</p>
+        <!-- Dynamic Content in Parallax Screen -->
+        <div class="parallax-section">
+            <div class="content-wrapper">
+                <div id="canoeTimeline">
+                    <p class="text-center" style="opacity: 0.5;">Loading legacy content...</p>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -40,7 +45,7 @@
         <p>&copy; 2025 NYU Concrete Canoe | NYU Tandon School of Engineering</p>
     </footer>
 
-    <script src="assets/js/canoes.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="assets/js/timeline.js"></script>
 </body>
 
