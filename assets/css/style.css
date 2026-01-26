@@ -377,20 +377,27 @@ ol, li {
 .carousel {
   position: relative;
   width: 100%;
+  max-width: 100%;
   overflow: hidden;
   border-radius: 20px;
   margin-top: 1.5rem;
   background: rgba(0, 0, 0, 0.2);
+  aspect-ratio: 16 / 9;
 }
 
 .carousel-inner {
   display: flex;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
 }
 
 .carousel-item {
   min-width: 100%;
   aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .carousel-item img {
@@ -398,6 +405,7 @@ ol, li {
   height: 100%;
   object-fit: cover;
   border-radius: 20px;
+  display: block;
 }
 
 .carousel-control {
