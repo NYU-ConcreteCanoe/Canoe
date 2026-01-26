@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NYU Concrete Canoe Team - Design. Build. Paddle. Compete.">
+    <title>NYU Concrete Canoe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body class="page-other">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">NYU Concrete Canoe</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="timeline.html">Timeline</a></li>
+                    <li class="nav-item"><a class="nav-link" href="paddling-improvement.html">PIS System</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sponsors.html">Sponsors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <main>
+
+            <!-- HERO -->
+            <section class="hero">
+                <h1>Paddling Improvement System</h1>
+                <p>
+                    NYU Concrete Canoe’s machine-learning coaching tool
+                </p>
+
+            </section>
+
+            <!-- PARALLAX CONTENT -->
+            <div class="parallax-section">
+                <div class="content-wrapper">
+
+                    <!-- LIVE APPLICATION WINDOW -->
+                    <div class="card" style="margin-bottom: 3rem;">
+                        <h2>Live Web Application</h2>
+                        <p style="margin-bottom: 1.25rem;">
+                            Upload paddling session data and receive stroke-level analytics,
+                            visualizations, and model-based feedback.
+                        </p>
+
+                        <!-- Embedded production app -->
+                        <iframe src="https://concrete-canoe-paddling.vercel.app/"
+                            style="width: 100%; height: 520px; border-radius: 16px; border: none;" loading="lazy">
+                        </iframe>
+
+                        <div
+                            style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                            <a href="assets/files/SamplePaddlingData.zip" class="btn">
+                                Download Sample Data
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- OVERVIEW + DOCUMENTATION -->
+                    <div class="grid">
+
+                        <div class="card">
+                            <h2>Overview</h2>
+                            <p>
+                                The Paddling Improvement System (PIS) is a data-driven training interface developed
+                                by the NYU Concrete Canoe team. It processes motion data collected from Apple Watches
+                                and mobile devices during paddling sessions, segments individual strokes, and evaluates
+                                performance using trained machine-learning models.
+                            </p>
+                            <p style="margin-top: 1rem;">
+                                The system is designed to support consistent technique refinement by making paddling
+                                feedback quantitative, repeatable, and accessible.
+                            </p>
+                        </div>
+
+                        <div class="card">
+                            <h2>Full Documentation</h2>
+                            <p>
+                                Comprehensive technical documentation detailing data collection, preprocessing,
+                                stroke segmentation, model training, backend APIs, and frontend processing is
+                                available in the project repository.
+                            </p>
+
+                            <a href="https://github.com/nyuconcretecanoe/PIS" target="_blank" class="btn"
+                                style="margin-top: 1rem;">
+                                View GitHub Repository
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <!-- HOW TO USE -->
+                    <div class="card" style="margin-top: 3rem;">
+                        <h2>How to Use the PIS Web App</h2>
+
+                        <ol style="margin-top: 1.5rem; line-height: 1.8;">
+                            <li>
+                                <strong>Download the sample dataset</strong><br>
+                                Download the <a href="assets/files/SamplePaddlingData.zip"
+                                    style="color: yellow; text-decoration: underline;">sample
+                                    paddling data</a> using the button above. After unzipping the archive,
+                                you will find folders named after individual paddlers. Each folder contains five CSV
+                                files corresponding to different sensor streams.
+
+                                <div class="media-window">
+                                    <video src="assets/gifs/download.mp4" autoplay loop muted playsinline>
+                                    </video>
+                                </div>
+                            </li>
+
+                            <li style="margin-top: 1rem;">
+                                <strong>Upload the data files</strong><br>
+                                Upload the CSV files into their corresponding prompts on the <a
+                                    href="https://concrete-canoe-paddling.vercel.app/"
+                                    style="color: yellow; text-decoration: underline;">web
+                                    application</a>:
+                                <ul style="margin-top: 0.5rem;">
+                                    <li>
+                                        <strong>Upload 3 CSVs for Phone</strong> — Accelerometer, Gyroscope,
+                                        Magnetometer
+                                        <br>
+                                        <em>
+                                            All three files must be uploaded together using multi-select <br>
+                                            (macOS: ⌘ + click · Windows: Ctrl + click · Mobile: not supported).
+                                        </em>
+
+
+                                    </li>
+                                    <li>
+                                        <strong>Upload 1 CSV for Left Watch</strong> — Left wrist Apple Watch data
+                                    </li>
+                                    <li>
+                                        <strong>Upload 1 CSV for Right Watch</strong> — Right wrist Apple Watch data
+                                    </li>
+                                </ul>
+                                <div class="media-window">
+                                    <video src="assets/gifs/upload.mp4" autoplay loop muted playsinline>
+                                    </video>
+                                </div>
+                            </li>
+
+                            <li style="margin-top: 1rem;">
+                                <strong>Analyze the session</strong><br>
+                                Press <em>Analyze</em> to execute the processing pipeline. The system aligns time-series
+                                data, segments strokes, extracts features, and applies trained models to return
+                                performance analytics and visual summaries.
+
+                                <div class="media-window">
+                                    <video src="assets/gifs/analyze.mp4" autoplay loop muted playsinline>
+                                    </video>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="card">
+                        <h2>Contributors</h2>
+                        <p style="text-align: left;">
+                            <strong>Ideation:</strong> Alex Huang<br>
+                            <strong>Development:</strong> Shubham Parab · Anthony Lamelas · Ahmad Hassan · Pasang
+                            Bhote<br>
+                            <strong>Web Page & Frontend Integration:</strong> Shubham Parab · Aunirbhan Das
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </main>
+
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 NYU Concrete Canoe | NYU Tandon School of Engineering</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
