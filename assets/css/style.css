@@ -36,7 +36,7 @@ body {
 /* Prevent links from turning purple */
 a,
 a:visited {
-  color: inherit;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -488,6 +488,25 @@ ol, li {
 
   .nav-links {
     gap: 1.5rem;
+  }
+
+  body {
+    background-image: none;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('canoe.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #000;
   }
 }
 
