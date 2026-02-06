@@ -7,16 +7,4 @@ The team designs, builds, and competes with a fully functional concrete canoe fo
 ---
 
 ## Live Website
-[Visit the Website](https://yourusername.github.io/nyu-concrete-canoe/)
-
-Hosted using GitHub Pages.
-
----
-
-## Overview
-This website serves as the public platform for the NYU Concrete Canoe team.  
-It provides:
-
-- A home page introducing the project, team, and mission  
-- A sponsor page with partnership information and a downloadable sponsorship packet  
-- A contact page with a functional contact form for inquiries
+[Visit the Website](aunirbhan.github.io/Canoe/)
