@@ -19,7 +19,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
         <div class="container">
-            <a href="index.html" class="navbar-brand">NYU Concrete Canoe</a>
+            <a href="index.html" class="navbar-brand"><img src="assets/img/headerLogo.png" alt="NYU Concrete Canoe Logo">NYU Concrete Canoe</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -50,18 +50,12 @@
                 <!-- Contact Form -->
                 <section style="max-width: 600px; margin: 4rem auto 0;">
                     <div class="card">
-                        <!-- FORM FUNCTIONALITY: 
-                             To make this send to nyuconcretecanoe@gmail.com:
-                             1. Go to Formspree.io and create a free account.
-                             2. Create a new form and copy the unique ID.
-                             3. Replace 'yourFormID' below with that ID. 
-                        -->
-                        <form action="https://formspree.io/f/yourFormID" method="POST" style="text-align: left;">
+                        <form id="contactForm" style="text-align: left;">
                             <div style="margin-bottom: 1.5rem;">
                                 <label
                                     style="display: block; margin-bottom: 0.5rem; color: var(--text-dim); font-size: 0.9rem;">Full
                                     Name</label>
-                                <input type="text" name="name" placeholder="Your Name" required
+                                <input type="text" id="contactName" placeholder="Your Name" required
                                     style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white;">
                             </div>
 
@@ -69,14 +63,14 @@
                                 <label
                                     style="display: block; margin-bottom: 0.5rem; color: var(--text-dim); font-size: 0.9rem;">Email
                                     Address</label>
-                                <input type="email" name="email" placeholder="you@example.com" required
+                                <input type="email" id="contactEmail" placeholder="you@example.com" required
                                     style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white;">
                             </div>
 
                             <div style="margin-bottom: 2rem;">
                                 <label
                                     style="display: block; margin-bottom: 0.5rem; color: var(--text-dim); font-size: 0.9rem;">Message</label>
-                                <textarea name="message" rows="5" placeholder="How can we help?" required
+                                <textarea id="contactMessage" rows="5" placeholder="How can we help?" required
                                     style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; resize: vertical;"></textarea>
                             </div>
 
@@ -84,6 +78,21 @@
                                 Send Message
                             </button>
                         </form>
+
+                        <script>
+                            document.getElementById('contactForm').addEventListener('submit', function (e) {
+                                e.preventDefault();
+                                var name = document.getElementById('contactName').value.trim();
+                                var email = document.getElementById('contactEmail').value.trim();
+                                var message = document.getElementById('contactMessage').value.trim();
+                                var subject = 'NYU Concrete Canoe - Message from ' + name;
+                                var body = 'From: ' + name + ' (' + email + ')\n\n' + message;
+                                window.location.href = 'mailto:nyuconcretecanoe@gmail.com'
+                                    + '?subject=' + encodeURIComponent(subject)
+                                    + '&body=' + encodeURIComponent(body)
+                                    + '&cc=' + encodeURIComponent(email);
+                            });
+                        </script>
 
                         <div style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 3rem;">
                             <a href="https://www.instagram.com/nyuconcretecanoe/" target="_blank" class="btn"
@@ -109,6 +118,7 @@
         <p>&copy; 2025 NYU Concrete Canoe | NYU Tandon School of Engineering</p>
     </footer>
 
+    <script src="assets/js/background.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
