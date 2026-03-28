@@ -95,12 +95,13 @@ nav {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
+nav.navbar {
+  min-height: auto;
+}
+
 nav .container {
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .navbar-brand {
@@ -114,9 +115,12 @@ nav .container {
   letter-spacing: -0.02em;
 }
 
-.navbar-brand img {
-  height: 36px;
+nav .navbar-brand img {
+  height: 36px !important;
+  max-height: 36px;
   width: auto;
+  max-width: 120px;
+  object-fit: contain;
 }
 
 /* Bootstrap nav-link overrides for glassmorphic style */
