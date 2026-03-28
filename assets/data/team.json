@@ -1,24 +1,19 @@
 {
   "leadership": [
     {
-      "name": "Dwayne Ong",
+      "name": "Janice Chen",
       "role": "Team Captain",
-      "image": "assets/img/headshots/dwayneO.JPG"
+      "image": "assets/img/headshots/janiceC.JPG"
     },
     {
-      "name": "Janice Chen",
-      "role": "Vice Captain",
-      "image": "assets/img/headshots/janiceC.JPG"
+      "name": "Dwayne Ong",
+      "role": "Hull Design",
+      "image": "assets/img/headshots/dwayneO.JPG"
     },
     {
       "name": "Vivian Zou",
       "role": "Construction Manager",
       "image": "assets/img/headshots/vivianZ.JPG"
-    },
-    {
-      "name": "Yamin Dembrow",
-      "role": "Structural Lead",
-      "image": "assets/img/headshots/yaminD.JPG"
     },
     {
       "name": "Tony Chen",
@@ -28,12 +23,7 @@
     {
       "name": "Malik",
       "role": "Marketing Lead",
-      "image": "assets/img/headshots/malikU.JPG"
-    },
-    {
-      "name": "Ren Liao",
-      "role": "Principal Reaction Engineer",
-      "image": "assets/img/headshots/renL.JPG"
+      "image": "assets/img/headshots/malikU.png"
     },
     {
       "name": "Julia Jakubisiak",
@@ -46,9 +36,14 @@
       "image": "assets/img/headshots/yanikJ.JPG"
     },
     {
-      "name": "Yifan Chen",
-      "role": "Head of Optimization and Automation",
-      "image": "assets/img/headshots/yifanC.JPG"
+      "name": "Yamin Dembrow",
+      "role": "Structural Lead",
+      "image": "assets/img/headshots/yaminD.JPG"
+    },
+    {
+      "name": "Ren Liao",
+      "role": "Principal Reaction Engineer",
+      "image": "assets/img/headshots/renL.JPG"
     },
     {
       "name": "Joy Lin",
