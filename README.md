@@ -7,4 +7,4 @@ The team designs, builds, and competes with a fully functional concrete canoe fo
 ---
 
 ## Live Website
-[Visit the Website](https://aunirbhan.github.io/Canoe/)
+[Visit the Website](https://nyu-concretecanoe.github.io/Canoe)
