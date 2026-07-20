@@ -1,18 +1,47 @@
 {
+  "_comment": "Sponsor flip-cards on sponsors.html, in display order. 'tier' renders as '<tier> Sponsor' on the card back and picks the colour. Reorder entries to reorder the grid.",
   "sponsors": [
     {
-      "name": "TMS",
-      "tier": "Platinum",
-      "tierColor": "#ffd700",
-      "commitment": "$5,000+ Commitment",
-      "logo": "assets/img/tmsLogo.png"
+      "name": "Sebago Canoe Club",
+      "tier": "Ultimate",
+      "commitment": "Training grounds",
+      "logo": "assets/img/logos/sebago.png"
     },
     {
-      "name": "Carbicrete",
+      "name": "AECOM Tishman",
       "tier": "Gold",
-      "tierColor": "#c0c0c0",
       "commitment": "$2,000+ Commitment",
-      "logo": "assets/img/CarbicreteLogo_2019.webp"
+      "logo": "assets/img/logos/aecomtishman.png"
+    },
+    {
+      "name": "Heidelberg Materials",
+      "tier": "Gold",
+      "commitment": "$2,000+ Commitment",
+      "logo": "assets/img/logos/HeidelbergMaterials.jpg"
+    },
+    {
+      "name": "Dassault Systems",
+      "tier": "Gold",
+      "commitment": "$2,000+ Commitment",
+      "logo": "assets/img/logos/dassaultLogo.png"
+    },
+    {
+      "name": "Floormaps",
+      "tier": "Silver",
+      "commitment": "Aesthetic materials & surface finishing support",
+      "logo": "assets/img/logos/floormaps.png"
+    },
+    {
+      "name": "SolidWorks",
+      "tier": "Gold",
+      "commitment": "$2,000+ Commitment",
+      "logo": "assets/img/logos/SolidWorks-Logo.jpg"
+    },
+    {
+      "name": "ASCE",
+      "tier": "Gold",
+      "commitment": "$2,000+ Commitment",
+      "logo": "assets/img/logos/ASCELogo.jpg"
     }
   ]
 }

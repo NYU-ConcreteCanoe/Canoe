@@ -1,0 +1,337 @@
+# =============================================================================
+# NYU Concrete Canoe - admin panel configuration (Sveltia CMS)
+#
+# Editors sign in with GitHub at /admin/ and every save becomes a commit,
+# which GitHub Pages rebuilds automatically. There is no server to run.
+#
+# BEFORE THIS WORKS, two values below must be filled in. See admin/README.md.
+# =============================================================================
+
+backend:
+  name: github
+  # TODO: set to the repository GitHub Pages actually deploys from.
+  repo: nyu-concretecanoe/Canoe
+  branch: main
+  # TODO: URL of the Cloudflare Worker that completes the GitHub OAuth
+  # handshake. GitHub's token exchange needs a client secret, which cannot
+  # live in a browser. Setup instructions in admin/README.md.
+  base_url: https://REPLACE-ME.workers.dev
+
+# Every save opens a pull request instead of committing to main directly.
+#
+# Editors see a Workflow board with Draft / In Review / Ready columns. Moving
+# an entry to "In Review" pushes a branch named cms/<collection>/<slug> and
+# opens a PR. Nothing reaches the live site until someone with merge rights
+# merges that PR, so a non-technical editor can never break the site.
+publish_mode: editorial_workflow
+
+# Default drop target for images that are not tied to a specific year.
+media_folder: assets/img/uploads
+public_folder: assets/img/uploads
+
+# -----------------------------------------------------------------------------
+# Image handling.
+#
+# Phone photos are 2-8 MB. Committed as-is they would sit in git history
+# permanently and burn through the 1 GB GitHub Pages cap in roughly 125
+# uploads. Sveltia resizes and converts to WebP in the browser BEFORE the
+# commit, which takes a typical photo to a few hundred KB.
+# -----------------------------------------------------------------------------
+media_libraries:
+  default:
+    config:
+      max_file_size: 8000000 # reject anything above 8 MB outright
+      transformations:
+        raster_image:
+          format: webp
+          quality: 82
+          width: 2000
+          height: 2000
+
+collections:
+  # ---------------------------------------------------------------------------
+  # Front page bulletin board. This is the one most people will use.
+  # ---------------------------------------------------------------------------
+  - name: announcements
+    label: Announcements
+    icon: campaign
+    files:
+      - name: announcements
+        label: Front Page Announcements
+        file: assets/data/announcements.json
+        description: >-
+          Posts shown on the home page. Newest first. Pinned posts always
+          appear at the top.
+        fields:
+          - name: settings
+            label: Display Settings
+            widget: object
+            collapsed: true
+            fields:
+              - {
+                  name: heading,
+                  label: Section heading,
+                  widget: string,
+                  default: Latest News,
+                }
+              - {
+                  name: maxVisible,
+                  label: How many posts to show,
+                  widget: number,
+                  value_type: int,
+                  min: 1,
+                  max: 12,
+                  default: 3,
+                }
+          - name: announcements
+            label: Posts
+            label_singular: Post
+            widget: list
+            summary: "{{fields.date}} - {{fields.title}}"
+            fields:
+              - {
+                  name: id,
+                  label: Internal ID,
+                  widget: string,
+                  hint: "Lowercase, no spaces. Used only internally, e.g. spring-2027-recruiting",
+                }
+              - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD", time_format: false }
+              - name: category
+                label: Category
+                widget: select
+                options: [news, competition, recruitment]
+                default: news
+              - { name: title, label: Title, widget: string }
+              - {
+                  name: body,
+                  label: Body,
+                  widget: text,
+                  hint: "Two or three sentences. Plain text only.",
+                }
+              - name: link
+                label: Button link
+                widget: object
+                required: false
+                collapsed: true
+                fields:
+                  - { name: text, label: Button text, widget: string, required: false }
+                  - {
+                      name: url,
+                      label: URL,
+                      widget: string,
+                      required: false,
+                      hint: "Another page (contact.html) or a full https:// link",
+                    }
+              - {
+                  name: image,
+                  label: Image,
+                  widget: image,
+                  required: false,
+                  hint: "Optional. Shown above the text.",
+                }
+              - {
+                  name: pinned,
+                  label: Pin to top,
+                  widget: boolean,
+                  default: false,
+                  required: false,
+                }
+
+  # ---------------------------------------------------------------------------
+  # Awards and competition results.
+  # ---------------------------------------------------------------------------
+  - name: awards
+    label: Awards
+    icon: trophy
+    files:
+      - name: awards
+        label: Competition Results
+        file: assets/data/awards.json
+        description: Results shown under the Awards tab on the Timeline page.
+        fields:
+          - name: seasons
+            label: Seasons
+            label_singular: Season
+            widget: list
+            summary: "{{fields.season}}"
+            fields:
+              - {
+                  name: season,
+                  label: Season,
+                  widget: string,
+                  hint: "e.g. 2026-2027",
+                }
+              - name: events
+                label: Competitions
+                label_singular: Competition
+                widget: list
+                summary: "{{fields.shortName}}"
+                fields:
+                  - { name: id, label: Internal ID, widget: string }
+                  - {
+                      name: name,
+                      label: Full competition name,
+                      widget: string,
+                    }
+                  - {
+                      name: shortName,
+                      label: Short name,
+                      widget: string,
+                      hint: "Shown as the heading, e.g. Nationals",
+                    }
+                  - { name: location, label: Location, widget: string, required: false }
+                  - {
+                      name: icon,
+                      label: Emoji,
+                      widget: string,
+                      default: "🏆",
+                      required: false,
+                    }
+                  - {
+                      name: headline,
+                      label: Headline banner,
+                      widget: string,
+                      required: false,
+                      hint: "Gold banner, e.g. Best placement in program history",
+                    }
+                  - { name: summary, label: Summary, widget: text, required: false }
+                  - name: placements
+                    label: Placements
+                    label_singular: Placement
+                    widget: list
+                    summary: "{{fields.place}} - {{fields.category}}"
+                    required: false
+                    fields:
+                      - { name: place, label: Place, widget: string, hint: "e.g. 3rd" }
+                      - {
+                          name: category,
+                          label: Category,
+                          widget: string,
+                          hint: "e.g. Overall, Technical Proposal",
+                        }
+                      - {
+                          name: featured,
+                          label: Highlight this one,
+                          widget: boolean,
+                          default: false,
+                          required: false,
+                        }
+                  - {
+                      name: innovations,
+                      label: Innovations,
+                      widget: list,
+                      required: false,
+                      hint: "Short phrases, shown as chips",
+                    }
+                  - name: roster
+                    label: Team credits
+                    widget: list
+                    required: false
+                    summary: "{{fields.group}}"
+                    fields:
+                      - {
+                          name: group,
+                          label: Group name,
+                          widget: string,
+                          hint: "e.g. Paddlers, Presenters (5th place)",
+                        }
+                      - { name: members, label: Members, widget: list }
+                  - { name: note, label: Closing note, widget: text, required: false }
+                  - name: images
+                    label: Photos
+                    widget: list
+                    required: false
+                    field: { name: image, label: Photo, widget: image }
+
+  # ---------------------------------------------------------------------------
+  # Canoe history. Images live under assets/img/canoes/<year>/.
+  # ---------------------------------------------------------------------------
+  - name: canoes
+    label: Canoe Timeline
+    icon: sailing
+    files:
+      - name: canoes
+        label: Canoe History
+        file: assets/data/canoes.json
+        media_folder: /assets/img/canoes
+        public_folder: assets/img/canoes
+        description: >-
+          One entry per canoe, newest first. When adding photos, upload them
+          into the folder for that canoe's year.
+        fields:
+          - name: canoes
+            label: Canoes
+            label_singular: Canoe
+            widget: list
+            summary: "{{fields.year}} - {{fields.name}}"
+            fields:
+              - { name: year, label: Year, widget: number, value_type: int }
+              - { name: name, label: Canoe name, widget: string }
+              - { name: icon, label: Emoji, widget: string, required: false }
+              - {
+                  name: description,
+                  label: Description,
+                  widget: text,
+                  hint: "Basic HTML such as <strong> is allowed here.",
+                }
+              - { name: tags, label: Tags, widget: list }
+              - name: images
+                label: Photos
+                widget: list
+                required: false
+                field: { name: image, label: Photo, widget: image }
+
+  # ---------------------------------------------------------------------------
+  # Student leadership shown on the About page.
+  # ---------------------------------------------------------------------------
+  - name: team
+    label: Team Roster
+    icon: group
+    files:
+      - name: team
+        label: Team Roster
+        file: assets/data/team.json
+        media_folder: /assets/img/headshots
+        public_folder: assets/img/headshots
+        fields:
+          - name: leadership
+            label: Leadership
+            label_singular: Member
+            widget: list
+            summary: "{{fields.name}} - {{fields.role}}"
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: role, label: Role, widget: string }
+              - {
+                  name: image,
+                  label: Headshot,
+                  widget: image,
+                  required: false,
+                  hint: "Leave empty to use the placeholder image.",
+                }
+          - name: members
+            label: Members
+            label_singular: Member
+            widget: list
+            required: false
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: role, label: Role, widget: string, required: false }
+              - { name: image, label: Headshot, widget: image, required: false }
+
+# -----------------------------------------------------------------------------
+# Deliberately NOT editable through this panel:
+#
+#   Sponsors (assets/data/sponsors.json)
+#     Data-driven and ready, but left out to keep the panel scoped to the three
+#     things that change most. To enable, add a collection block pointing at
+#     assets/data/sponsors.json with fields: name, tier (select), commitment,
+#     logo (image, media_folder /assets/img/logos).
+#
+#   Page copy on index / about / contact / paddling-improvement
+#     Still hardcoded in HTML on purpose. This is structural text that rarely
+#     changes, and exposing it would let an editor break the layout.
+#
+# Anything not listed in `collections` above is unreachable from the panel. An
+# editor cannot touch HTML, CSS, or JS through this interface at all.
+# -----------------------------------------------------------------------------
