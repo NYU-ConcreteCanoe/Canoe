@@ -1,0 +1,320 @@
+/* ==============================================
+   NYU CONCRETE CANOE - HORIZONTAL TIMELINE
+   Widescreen presentation view. One year per screen,
+   advanced by scroll. Below 900px this whole layout
+   switches off and the standard vertical cards render
+   instead, so mobile is unchanged.
+   ============================================== */
+
+/* ---------- Desktop / presentation ---------- */
+
+@media (min-width: 901px) {
+
+  /* The page itself must not scroll; the rail does. */
+  body.page-horizontal {
+    overflow: hidden;
+  }
+
+  .h-timeline {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+    /* clears the fixed navbar */
+  }
+
+  .h-rail {
+    flex: 1;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+
+  .h-rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .h-panel {
+    flex: 0 0 100vw;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding: 2rem clamp(3rem, 7vw, 9rem) 3rem;
+    box-sizing: border-box;
+  }
+
+  /* --- Media side --- */
+
+  .h-media {
+    position: relative;
+    height: min(66vh, 620px);
+    border-radius: 24px;
+    overflow: hidden;
+    background: var(--glass-bg);
+    backdrop-filter: saturate(180%) blur(var(--blur-amount));
+    -webkit-backdrop-filter: saturate(180%) blur(var(--blur-amount));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+  }
+
+  .h-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+  }
+
+  .h-media img.is-active {
+    opacity: 1;
+  }
+
+  .h-media-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 5rem;
+    opacity: 0.25;
+  }
+
+  /* Dots for multiple photos within one year */
+  .h-dots {
+    position: absolute;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: 100px;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+  }
+
+  .h-dot {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .h-dot[aria-current="true"] {
+    background: #fff;
+    width: 22px;
+    border-radius: 4px;
+  }
+
+  /* --- Text side --- */
+
+  .h-content {
+    text-align: left;
+  }
+
+  .h-year {
+    display: block;
+    font-size: clamp(4rem, 9vw, 8rem);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    opacity: 0.18;
+    margin-bottom: -0.5rem;
+  }
+
+  .h-name {
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    margin: 0 0 1.25rem;
+    text-align: left;
+  }
+
+  .h-icon {
+    font-size: 2.2rem;
+    margin-right: 0.75rem;
+    vertical-align: baseline;
+  }
+
+  .h-desc {
+    font-size: 1.15rem;
+    line-height: 1.75;
+    text-align: left;
+    max-width: 46ch;
+    color: var(--text-dim);
+  }
+
+  .h-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 2rem;
+  }
+
+  /* Panels animate in as they become current */
+  .h-panel .h-content>* {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+      transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .h-panel.is-current .h-content>* {
+    opacity: 1;
+    transform: none;
+  }
+
+  .h-panel.is-current .h-year {
+    opacity: 0.18;
+  }
+
+  .h-panel.is-current .h-content>*:nth-child(2) {
+    transition-delay: 0.06s;
+  }
+
+  .h-panel.is-current .h-content>*:nth-child(3) {
+    transition-delay: 0.12s;
+  }
+
+  .h-panel.is-current .h-content>*:nth-child(4) {
+    transition-delay: 0.18s;
+  }
+
+  /* --- Year scrubber --- */
+
+  .h-scrubber {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 1.25rem 2rem 2rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .h-scrubber::-webkit-scrollbar {
+    display: none;
+  }
+
+  .h-scrub {
+    flex: 0 0 auto;
+    padding: 0.45rem 0.9rem;
+    border: none;
+    background: transparent;
+    color: var(--text-dim);
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 100px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.3s;
+  }
+
+  .h-scrub:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .h-scrub[aria-current="true"] {
+    opacity: 1;
+    background: #fff;
+    color: #000;
+  }
+
+  /* --- Edge arrows --- */
+
+  .h-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px;
+    height: 52px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    z-index: 5;
+    transition: all 0.3s;
+  }
+
+  .h-nav:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+    transform: translateY(-50%) scale(1.08);
+  }
+
+  .h-nav:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .h-nav.prev {
+    left: 1.5rem;
+  }
+
+  .h-nav.next {
+    right: 1.5rem;
+  }
+
+  .h-hint {
+    position: fixed;
+    bottom: 6.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    pointer-events: none;
+    transition: opacity 0.5s;
+  }
+
+  .h-hint.is-hidden {
+    opacity: 0;
+  }
+
+  /* The vertical fallback and footer are desktop-hidden: the wide view fills
+     the viewport and must not be scrolled past. */
+  #verticalFallback,
+  body.page-horizontal footer {
+    display: none;
+  }
+}
+
+/* ---------- Mobile: fall back to the existing vertical layout ---------- */
+
+@media (max-width: 900px) {
+  .h-timeline {
+    display: none;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .h-rail {
+    scroll-behavior: auto;
+  }
+
+  .h-panel .h-content>*,
+  .h-media img {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}

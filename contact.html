@@ -16,10 +16,12 @@
 
 <body class="page-other">
 
+    <a class="skip-link" href="#main">Skip to content</a>
+
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent" aria-label="Main navigation">
         <div class="container">
-            <a href="index.html" class="navbar-brand"><img src="assets/img/headerLogo.png" alt="NYU Concrete Canoe Logo">NYU Concrete Canoe</a>
+            <a href="index.html" class="navbar-brand"><img src="assets/img/headerLogo.png" alt="">NYU Concrete Canoe</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -31,13 +33,13 @@
                     <li class="nav-item"><a class="nav-link" href="timeline.html">Timeline</a></li>
                     <li class="nav-item"><a class="nav-link" href="paddling-improvement.html">PIS System</a></li>
                     <li class="nav-item"><a class="nav-link" href="sponsors.html">Sponsors</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contact.html" aria-current="page">Contact</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <main>
+    <main id="main">
         <!-- Intro -->
         <section class="hero">
             <h1>Contact Us</h1>
@@ -52,7 +54,7 @@
                     <div class="card">
                         <form id="contactForm" style="text-align: left;">
                             <div style="margin-bottom: 1.5rem;">
-                                <label
+                                <label for="contactName"
                                     style="display: block; margin-bottom: 0.5rem; color: var(--text-dim); font-size: 0.9rem;">Full
                                     Name</label>
                                 <input type="text" id="contactName" placeholder="Your Name" required
@@ -60,7 +62,7 @@
                             </div>
 
                             <div style="margin-bottom: 1.5rem;">
-                                <label
+                                <label for="contactEmail"
                                     style="display: block; margin-bottom: 0.5rem; color: var(--text-dim); font-size: 0.9rem;">Email
                                     Address</label>
                                 <input type="email" id="contactEmail" placeholder="you@example.com" required
@@ -68,7 +70,7 @@
                             </div>
 
                             <div style="margin-bottom: 2rem;">
-                                <label
+                                <label for="contactMessage"
                                     style="display: block; margin-bottom: 0.5rem; color: var(--text-dim); font-size: 0.9rem;">Message</label>
                                 <textarea id="contactMessage" rows="5" placeholder="How can we help?" required
                                     style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; resize: vertical;"></textarea>
@@ -96,15 +98,15 @@
 
                         <div style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 3rem;">
                             <a href="https://www.instagram.com/nyuconcretecanoe/" target="_blank" class="btn"
-                                style="border-radius: 50%; width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                                style="border-radius: 50%; width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;" aria-label="Instagram">
                                 <i class="fa fa-instagram"></i>
                             </a>
                             <a href="mailto:nyuconcretecanoe@gmail.com" class="btn"
-                                style="border-radius: 50%; width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                                style="border-radius: 50%; width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;" aria-label="Email us">
                                 <i class="fa fa-envelope"></i>
                             </a>
                             <a href="assets/files/sponsorship.pdf" target="_blank" class="btn"
-                                style="border-radius: 50%; width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                                style="border-radius: 50%; width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;" aria-label="Sponsorship package">
                                 <i class="fa fa-heart"></i>
                             </a>
                         </div>

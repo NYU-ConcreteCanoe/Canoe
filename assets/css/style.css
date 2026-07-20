@@ -7,7 +7,7 @@
   --glass-bg-hover: rgba(255, 255, 255, 0.12);
   --glass-border: rgba(255, 255, 255, 0.2);
   --text-light: #ffffff;
-  --text-dim: rgba(255, 255, 255, 0.85);
+  --text-dim: rgba(255, 255, 255, 0.92);
   --blur-amount: 30px;
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
@@ -54,6 +54,22 @@ body {
   opacity: 1;
 }
 
+/* Scrim over the photo. The background is a random canoe photo, so it can be
+   bright or busy. White hero text on a text-shadow alone is not reliably
+   readable against it; this guarantees a dark base underneath. Darker at the
+   top and bottom, where the navbar and hero text sit. */
+.bg-slideshow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.62) 0%,
+      rgba(0, 0, 0, 0.38) 35%,
+      rgba(0, 0, 0, 0.42) 65%,
+      rgba(0, 0, 0, 0.62) 100%);
+  pointer-events: none;
+}
+
 /* Prevent links from turning purple */
 a,
 a:visited {
@@ -86,7 +102,7 @@ nav {
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 0.8rem 2rem;
+  padding: 1.1rem 2rem;
   background: rgba(8, 8, 8, 0.8);
   backdrop-filter: saturate(180%) blur(24px);
   -webkit-backdrop-filter: saturate(180%) blur(24px);
@@ -111,23 +127,23 @@ nav .container {
   text-decoration: none;
   color: white;
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   letter-spacing: -0.02em;
 }
 
 nav .navbar-brand img {
-  height: 36px !important;
-  max-height: 36px;
+  height: 46px !important;
+  max-height: 46px;
   width: auto;
-  max-width: 120px;
+  max-width: 150px;
   object-fit: contain;
 }
 
 /* Bootstrap nav-link overrides for glassmorphic style */
 .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   letter-spacing: 0.02em;
   padding: 0.4rem 0.8rem;
   border-radius: 8px;
@@ -138,6 +154,43 @@ nav .navbar-brand img {
 .navbar-nav .nav-link:focus {
   color: white;
   background: rgba(255, 255, 255, 0.1);
+}
+
+/* Current page. Previously no page indicated where you were. */
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link[aria-current="page"] {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.16);
+  font-weight: 700;
+}
+
+/* Visible keyboard focus. The browser default outline was being lost against
+   the dark navbar. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Lets keyboard and screen reader users jump past the nav on every page. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1100;
+  padding: 0.85rem 1.5rem;
+  background: #fff;
+  color: #000;
+  font-weight: 700;
+  border-radius: 0 0 10px 0;
+}
+
+.skip-link:focus {
+  left: 0;
+  color: #000;
 }
 
 /* Glossy Cards */
@@ -540,7 +593,7 @@ footer {
   text-align: center;
   padding: 4rem 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  opacity: 0.6;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 /* ==============================================
@@ -724,11 +777,11 @@ footer {
 
 .award-section-label {
   margin: 2rem 0 0.75rem;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  opacity: 0.65;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .roster-group {
