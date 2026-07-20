@@ -9,7 +9,9 @@
 
 backend:
   name: github
-  # TODO: set to the repository GitHub Pages actually deploys from.
+  # Confirmed: this is the repo GitHub Pages serves from. Note that a local
+  # clone's `origin` may point at a personal fork instead - the admin panel
+  # always targets the repo named here, not wherever you cloned from.
   repo: nyu-concretecanoe/Canoe
   branch: main
   # TODO: URL of the Cloudflare Worker that completes the GitHub OAuth

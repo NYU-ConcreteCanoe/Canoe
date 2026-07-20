@@ -1,10 +1,22 @@
 {
   "canoes": [
     {
+      "year": 2026,
+      "name": "Chrysalis",
+      "icon": "\ud83e\udd8b",
+      "description": "<strong>Chrysalis</strong> is the canoe reborn. Pioneering a meshless fiber reinforced concrete design, the 2025-26 team paired a carbon negative mix and recycled sustainable materials with an AI-powered paddle trainer, taking 1st place overall at Regionals and 3rd at Nationals - the best finish in program history.",
+      "tags": [
+        "Meshless Fiber Reinforced Concrete",
+        "Carbon Negative",
+        "Recycled Materials"
+      ],
+      "images": []
+    },
+    {
       "year": 2025,
       "name": "W-Train",
-      "icon": "\ud83e\udd8b",
-      "description": "The 2025 canoe, <strong>W-Train</strong>, represents renewal and transformation as the team pushes design boundaries with sustainable materials and improved hydrodynamics.",
+      "icon": "\ud83d\ude8a",
+      "description": "The 2025 canoe, <strong>W-Train</strong>, carried the team through the 2024-25 season.",
       "tags": [
         "Sustainability",
         "Innovation",

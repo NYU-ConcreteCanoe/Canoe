@@ -26,21 +26,13 @@ declared in `config.yml`, so the panel has no way to open them.
 
 ## One-time setup
 
-Two values in `config.yml` are placeholders and must be filled in first.
+One value in `config.yml` is still a placeholder: `base_url`.
 
-### 1. Confirm the repo
+The repo is already set to `nyu-concretecanoe/Canoe`, which is what GitHub
+Pages serves. A local clone's `origin` may point at a personal fork — that does
+not matter, the panel targets the repo named in `config.yml`.
 
-```yaml
-backend:
-  repo: nyu-concretecanoe/Canoe   # must match where Pages deploys from
-```
-
-The `README.md` at the repo root points at `nyu-concretecanoe.github.io/Canoe`,
-but this working copy's `origin` is `Aunirbhan/Canoe`. **Set this to whichever
-repo GitHub Pages actually serves**, or editors will open PRs against the wrong
-place.
-
-### 2. Deploy the OAuth worker
+### 1. Deploy the OAuth worker
 
 GitHub's token exchange requires a client secret, which cannot live in a
 browser. A ~30-line Cloudflare Worker handles the handshake. It is free and
@@ -59,7 +51,7 @@ you do not need a credit card.
 > the host is `<org>.github.io`, which is shared with every other repo under
 > that account — it cannot be scoped to `/Canoe`. A custom domain avoids this.
 
-### 3. Set permissions
+### 2. Set permissions
 
 This is where the "who can do what" rules live. Use GitHub's own roles rather
 than building anything custom.
