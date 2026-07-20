@@ -1,0 +1,45 @@
+name: Rebuild image manifest
+
+# Static hosting has no directory listing, so the browser cannot discover which
+# photos exist in assets/img/canoes/<year>/. This job scans the folders on every
+# push and writes the result to assets/data/images.json, which the timeline and
+# the background slideshow both read.
+#
+# Practical effect: adding photos means adding files. Nobody edits JSON.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "assets/img/**"
+      - ".github/workflows/image-manifest.yml"
+      - "scripts/build-image-manifest.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Build manifest
+        run: node scripts/build-image-manifest.mjs
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- assets/data/images.json; then
+            echo "Manifest unchanged."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/images.json
+          git commit -m "chore: rebuild image manifest [skip ci]"
+          git push

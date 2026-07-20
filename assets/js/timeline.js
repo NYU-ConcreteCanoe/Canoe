@@ -40,19 +40,30 @@
 
   /* ---------- Canoes (unchanged rendering) ---------- */
 
-  function renderCanoes(data) {
+  // Photos come from assets/data/images.json, which a GitHub Action rebuilds
+  // whenever files under assets/img/ change. Adding photos to a year folder is
+  // therefore all that is needed - no JSON editing. An explicit "images" array
+  // in canoes.json still wins, for when a specific order or subset is wanted.
+  function imagesFor(canoe, manifest) {
+    if (canoe.images && canoe.images.length) return canoe.images;
+    var byYear = (manifest && manifest.canoes) || {};
+    return byYear[String(canoe.year)] || [];
+  }
+
+  function renderCanoes(data, manifest) {
     var canoes = (data && data.canoes) || [];
     if (!canoes.length) return '<p class="text-center">No history found.</p>';
 
     return canoes
       .map(function (canoe, canoeIdx) {
+        var images = imagesFor(canoe, manifest);
         var imagesHtml = "";
-        if (canoe.images && canoe.images.length > 0) {
+        if (images.length > 0) {
           var carouselId = "carousel-" + canoe.year;
           imagesHtml =
             '<div class="simple-carousel" id="' + carouselId + '">' +
             '<div class="carousel-track">' +
-            canoe.images
+            images
               .map(function (img) {
                 return (
                   '<div class="carousel-slide">' +
@@ -64,7 +75,7 @@
               })
               .join("") +
             "</div>" +
-            (canoe.images.length > 1
+            (images.length > 1
               ? '<button class="carousel-btn prev" onclick="scrollCarousel(\'' +
                 carouselId +
                 '\', -1)" aria-label="Previous">' +
@@ -288,9 +299,16 @@
 
     // Each panel loads and fails independently, so a problem with one data
     // file cannot blank out the other tab.
-    getJSON("assets/data/canoes.json")
-      .then(function (data) {
-        canoesPanel.innerHTML = renderCanoes(data);
+    // The manifest is optional: if it is missing the timeline still renders
+    // using whatever explicit images canoes.json carries.
+    Promise.all([
+      getJSON("assets/data/canoes.json"),
+      getJSON("assets/data/images.json").catch(function () {
+        return { canoes: {} };
+      }),
+    ])
+      .then(function (results) {
+        canoesPanel.innerHTML = renderCanoes(results[0], results[1]);
       })
       .catch(function (err) {
         console.error("Timeline Error:", err);

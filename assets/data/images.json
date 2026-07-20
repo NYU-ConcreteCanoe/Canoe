@@ -1,0 +1,110 @@
+{
+  "_comment": "GENERATED FILE - do not edit by hand. Rebuilt by .github/workflows/image-manifest.yml whenever files under assets/img/ change. To add photos, add the files; this updates itself.",
+  "canoes": {
+    "2008": [
+      "assets/img/canoes/2008/1.jpg",
+      "assets/img/canoes/2008/2.JPG",
+      "assets/img/canoes/2008/3.JPG",
+      "assets/img/canoes/2008/4.JPG",
+      "assets/img/canoes/2008/5.JPG"
+    ],
+    "2009": [
+      "assets/img/canoes/2009/1.JPG",
+      "assets/img/canoes/2009/2.JPG",
+      "assets/img/canoes/2009/3.JPG",
+      "assets/img/canoes/2009/4.JPG",
+      "assets/img/canoes/2009/5.JPG",
+      "assets/img/canoes/2009/6.JPG",
+      "assets/img/canoes/2009/7.JPG"
+    ],
+    "2010": [
+      "assets/img/canoes/2010/1.JPG",
+      "assets/img/canoes/2010/2.JPG",
+      "assets/img/canoes/2010/3.JPG",
+      "assets/img/canoes/2010/4.JPG",
+      "assets/img/canoes/2010/5.JPG"
+    ],
+    "2013": [
+      "assets/img/canoes/2013/1.JPG",
+      "assets/img/canoes/2013/2.JPG",
+      "assets/img/canoes/2013/3.JPG",
+      "assets/img/canoes/2013/4.JPG",
+      "assets/img/canoes/2013/5.JPG"
+    ],
+    "2014": [
+      "assets/img/canoes/2014/1.JPG",
+      "assets/img/canoes/2014/2.JPG"
+    ],
+    "2015": [
+      "assets/img/canoes/2015/1.JPG"
+    ],
+    "2016": [
+      "assets/img/canoes/2016/1.JPG",
+      "assets/img/canoes/2016/2.JPG",
+      "assets/img/canoes/2016/3.JPG",
+      "assets/img/canoes/2016/4.JPG",
+      "assets/img/canoes/2016/5.jpg"
+    ],
+    "2017": [
+      "assets/img/canoes/2017/1.JPG",
+      "assets/img/canoes/2017/2.JPG",
+      "assets/img/canoes/2017/3.JPG",
+      "assets/img/canoes/2017/4.JPG",
+      "assets/img/canoes/2017/5.JPG",
+      "assets/img/canoes/2017/6.jpg",
+      "assets/img/canoes/2017/7.jpg"
+    ],
+    "2018": [
+      "assets/img/canoes/2018/1.JPG",
+      "assets/img/canoes/2018/2.JPG",
+      "assets/img/canoes/2018/3.jpeg",
+      "assets/img/canoes/2018/4.jpeg",
+      "assets/img/canoes/2018/5.jpeg"
+    ],
+    "2019": [
+      "assets/img/canoes/2019/1.JPG",
+      "assets/img/canoes/2019/2.JPG",
+      "assets/img/canoes/2019/3.JPG",
+      "assets/img/canoes/2019/4.jpg",
+      "assets/img/canoes/2019/5.jpg"
+    ],
+    "2020": [
+      "assets/img/canoes/2020/1.jpg",
+      "assets/img/canoes/2020/2.jpg",
+      "assets/img/canoes/2020/3.jpg"
+    ],
+    "2021": [
+      "assets/img/canoes/2021/1.jpeg",
+      "assets/img/canoes/2021/2.jpeg",
+      "assets/img/canoes/2021/3.jpg"
+    ],
+    "2022": [
+      "assets/img/canoes/2022/1.jpeg",
+      "assets/img/canoes/2022/2.jpg",
+      "assets/img/canoes/2022/3.jpeg",
+      "assets/img/canoes/2022/4.jpg",
+      "assets/img/canoes/2022/5.jpeg"
+    ],
+    "2023": [
+      "assets/img/canoes/2023/1.jpeg",
+      "assets/img/canoes/2023/2.jpg",
+      "assets/img/canoes/2023/3.jpeg",
+      "assets/img/canoes/2023/4.jpg",
+      "assets/img/canoes/2023/5.jpeg"
+    ],
+    "2024": [
+      "assets/img/canoes/2024/1.jpeg",
+      "assets/img/canoes/2024/2.jpeg",
+      "assets/img/canoes/2024/3.jpg",
+      "assets/img/canoes/2024/4.jpg",
+      "assets/img/canoes/2024/5.jpg",
+      "assets/img/canoes/2024/6.jpg"
+    ],
+    "2025": [
+      "assets/img/canoes/2025/1.jpeg",
+      "assets/img/canoes/2025/2.jpeg",
+      "assets/img/canoes/2025/3.JPG",
+      "assets/img/canoes/2025/4.JPG"
+    ]
+  }
+}
