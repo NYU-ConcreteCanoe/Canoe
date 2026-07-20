@@ -45,8 +45,20 @@
         <!-- Dynamic Content in Parallax Screen -->
         <div class="parallax-section">
             <div class="content-wrapper">
-                <div id="canoeTimeline">
+                <div class="timeline-tabs" id="timelineTabs" role="tablist" aria-label="Legacy sections">
+                    <button class="timeline-tab" id="tab-canoes" data-tab="canoes" role="tab"
+                        aria-selected="true" aria-controls="panel-canoes" type="button">Canoes</button>
+                    <button class="timeline-tab" id="tab-awards" data-tab="awards" role="tab"
+                        aria-selected="false" aria-controls="panel-awards" tabindex="-1"
+                        type="button">Awards</button>
+                </div>
+
+                <div id="panel-canoes" role="tabpanel" aria-labelledby="tab-canoes">
                     <p class="text-center" style="opacity: 0.5;">Loading legacy content...</p>
+                </div>
+
+                <div id="panel-awards" role="tabpanel" aria-labelledby="tab-awards" hidden>
+                    <p class="text-center" style="opacity: 0.5;">Loading awards...</p>
                 </div>
             </div>
         </div>

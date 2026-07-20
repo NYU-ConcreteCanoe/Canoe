@@ -542,3 +542,231 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   opacity: 0.6;
 }
+
+/* ==============================================
+   ANNOUNCEMENTS (front page bulletin board)
+   Cards reuse .card / .grid / .tag / .btn. Only the
+   internals below are new, so no existing rule changes.
+   ============================================== */
+
+.announcement-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  /* .card sets 3rem, which is generous for a 300px grid column */
+  padding: 2.25rem;
+}
+
+.announcement-card h3,
+.announcement-card p {
+  text-align: left;
+}
+
+.announcement-card p {
+  line-height: 1.7;
+  /* Push any link to the card bottom so a row of cards aligns */
+  flex: 1;
+}
+
+.announcement-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* .timeline-year carries its own margin-bottom for the timeline layout */
+.announcement-meta .timeline-year {
+  margin-bottom: 0;
+}
+
+.announcement-image {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 1.25rem;
+}
+
+.announcement-link {
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.75rem;
+  font-size: 0.95rem;
+}
+
+/* ==============================================
+   TIMELINE TABS (Canoes / Awards)
+   ============================================== */
+
+.timeline-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0 auto 4rem;
+  padding: 0.5rem;
+  width: fit-content;
+  background: var(--glass-bg);
+  backdrop-filter: saturate(180%) blur(var(--blur-amount));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--blur-amount));
+  border: 1px solid var(--glass-border);
+  border-radius: 100px;
+  box-shadow: var(--shadow);
+}
+
+.timeline-tab {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 100px;
+  background: transparent;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.timeline-tab:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-light);
+}
+
+.timeline-tab[aria-selected="true"] {
+  background: white;
+  color: black;
+}
+
+/* ==============================================
+   AWARDS
+   ============================================== */
+
+.award-card {
+  text-align: left;
+  margin-bottom: 4rem;
+}
+
+.award-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.award-header h2 {
+  margin: 0;
+  text-align: left;
+}
+
+.award-icon {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.award-headline {
+  display: inline-block;
+  padding: 0.4rem 1.2rem;
+  margin-bottom: 1.5rem;
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 20px;
+  color: #ffd700;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.award-summary {
+  text-align: left;
+  line-height: 1.8;
+  font-size: 1.15rem;
+}
+
+.placement-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+  list-style: none;
+  padding: 0;
+}
+
+.placement {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+}
+
+.placement--featured {
+  background: rgba(255, 215, 0, 0.12);
+  border-color: rgba(255, 215, 0, 0.35);
+}
+
+.placement-place {
+  font-size: 1.5rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.placement--featured .placement-place {
+  color: #ffd700;
+}
+
+.placement-category {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+}
+
+.award-section-label {
+  margin: 2rem 0 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+.roster-group {
+  margin-bottom: 1.25rem;
+}
+
+.roster-group-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.roster-names {
+  line-height: 1.9;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+
+.award-note {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-style: italic;
+  opacity: 0.8;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .timeline-tab {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.9rem;
+  }
+
+  .award-header {
+    gap: 1rem;
+  }
+
+  .award-icon {
+    font-size: 2.5rem;
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "_comment": "Awards and competition results. Newest season first. Add a new season by copying an existing block. 'images' may be left empty - the layout adapts. 'featured: true' highlights a placement as the headline result.",
+  "seasons": [
+    {
+      "season": "2025-2026",
+      "events": [
+        {
+          "id": "nationals-2026",
+          "name": "2026 ASCE National Concrete Canoe Competition",
+          "shortName": "Nationals",
+          "icon": "🏆",
+          "headline": "Best placement in program history",
+          "summary": "The NYU Tandon VIP Concrete Canoe team placed 3rd overall at the 2026 ASCE National Concrete Canoe Competition, the best finish in the program's history, competing against teams from across the United States, Canada, China, and India.",
+          "placements": [
+            {
+              "place": "3rd",
+              "category": "Overall",
+              "featured": true
+            },
+            {
+              "place": "2nd",
+              "category": "Best Technical Proposal"
+            },
+            {
+              "place": "5th",
+              "category": "Best Technical Presentation"
+            }
+          ],
+          "innovations": [
+            "Carbon negative design",
+            "Recycled sustainable materials",
+            "AI-powered paddle trainer"
+          ],
+          "roster": [
+            {
+              "group": "Team Captains",
+              "members": ["Vivian Zou", "Janice Chen"]
+            },
+            {
+              "group": "Project Proposal (2nd place)",
+              "members": [
+                "Vivian Zou",
+                "Marko Ilievski",
+                "Dwayne Khenley Ong",
+                "Janice Chen",
+                "Laura Plata",
+                "Andy Do"
+              ]
+            },
+            {
+              "group": "Presenters (5th place)",
+              "members": [
+                "Vivian Zou",
+                "Janice Chen",
+                "Alex Huang",
+                "Marko Ilievski"
+              ]
+            },
+            {
+              "group": "Paddlers",
+              "members": [
+                "Vivian Zou",
+                "Laura Plata",
+                "Sandhya Srinivasan",
+                "Tony Chen",
+                "Alex Huang",
+                "Marko Ilievski",
+                "Barnabas Jiang",
+                "Julia Jakubisiak"
+              ]
+            },
+            {
+              "group": "Team Members",
+              "members": [
+                "Paulo Henrique Gomes Alf",
+                "Cassandra Chang",
+                "Yamin Dembrow",
+                "Andrew Jiang",
+                "Ren Lia",
+                "Joy Lin",
+                "Caroline Lou",
+                "Dhrishit Patel",
+                "Avari T.",
+                "Savannah Crawford",
+                "Aunirbhan Das",
+                "Samira Jahan",
+                "David Ortiz",
+                "Eugene Ryu",
+                "Malik Umar",
+                "Yanik Jhaveri"
+              ]
+            }
+          ],
+          "note": "With gratitude to faculty advisor Professor Weihua Jin, whose dedication made this historic result possible.",
+          "images": []
+        },
+        {
+          "id": "regionals-2026",
+          "name": "2026 ASCE Metropolitan Student Symposium",
+          "shortName": "Regionals",
+          "location": "The College of New Jersey",
+          "icon": "🥇",
+          "headline": "1st place in every judged category",
+          "summary": "NYU Concrete Canoe swept the 2026 ASCE Metropolitan Student Symposium, taking 1st place in every single judged category.",
+          "placements": [
+            {
+              "place": "1st",
+              "category": "Overall",
+              "featured": true
+            },
+            { "place": "1st", "category": "Technical Presentation" },
+            { "place": "1st", "category": "Technical Proposal" },
+            { "place": "1st", "category": "Final Product" },
+            { "place": "1st", "category": "Men's Sprint" },
+            { "place": "1st", "category": "Women's Sprint" },
+            { "place": "1st", "category": "Co-Ed Sprint" },
+            { "place": "1st", "category": "Men's Slalom" },
+            { "place": "1st", "category": "Women's Slalom" }
+          ],
+          "innovations": [],
+          "roster": [],
+          "images": []
+        }
+      ]
+    }
+  ]
+}

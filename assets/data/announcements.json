@@ -1,0 +1,48 @@
+{
+  "_comment": "Front-page bulletin board. Newest first. 'pinned: true' floats a post to the top regardless of date. 'image' and 'link' are both optional - omit or leave empty and the card adapts. 'category' controls the chip colour: news | competition | recruitment.",
+  "settings": {
+    "maxVisible": 3,
+    "heading": "Latest News"
+  },
+  "announcements": [
+    {
+      "id": "nationals-2026-result",
+      "date": "2026-06-22",
+      "category": "competition",
+      "title": "3rd Place at ASCE Nationals — Best Finish in Program History",
+      "body": "Our team placed 3rd overall at the 2026 ASCE National Concrete Canoe Competition, competing against teams from the United States, Canada, China, and India. We also earned 2nd place in Best Technical Proposal and 5th in Best Technical Presentation.",
+      "link": {
+        "text": "See all awards",
+        "url": "timeline.html#awards"
+      },
+      "image": "",
+      "pinned": true
+    },
+    {
+      "id": "regionals-2026-sweep",
+      "date": "2026-04-12",
+      "category": "competition",
+      "title": "Clean Sweep at Metropolitan Regionals",
+      "body": "At the 2026 ASCE Metropolitan Student Symposium hosted at The College of New Jersey, NYU Concrete Canoe won 1st place in every single judged category, including 1st Place Overall.",
+      "link": {
+        "text": "See all awards",
+        "url": "timeline.html#awards"
+      },
+      "image": "",
+      "pinned": false
+    },
+    {
+      "id": "join-the-team",
+      "date": "2026-01-15",
+      "category": "recruitment",
+      "title": "New Members Welcome",
+      "body": "No experience necessary — we train you. Whether you're interested in engineering, design, marketing, or project management, there's a place for you on the team.",
+      "link": {
+        "text": "Get in touch",
+        "url": "contact.html"
+      },
+      "image": "",
+      "pinned": false
+    }
+  ]
+}
