@@ -309,8 +309,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  padding: 2rem;
+  /* Room for the pinned arrows either side. */
+  padding: 2rem clamp(5rem, 9vw, 8rem);
   background: rgba(0, 0, 0, 0.94);
   backdrop-filter: blur(8px);
 }
@@ -361,7 +361,7 @@ body.viewer-open {
 
 .viewer-arrow,
 .viewer-close {
-  flex: 0 0 auto;
+  position: absolute;
   border: none;
   background: rgba(255, 255, 255, 0.12);
   color: #fff;
@@ -373,10 +373,27 @@ body.viewer-open {
   transition: background 0.25s;
 }
 
+/* Fixed to the viewport, not to the image. Photos vary between portrait and
+   landscape, and as flex siblings the arrows jumped inward and outward on
+   every step, which made them hard to click twice in a row. */
 .viewer-arrow {
+  top: 50%;
+  transform: translateY(-50%);
   width: 54px;
   height: 54px;
   font-size: 1.2rem;
+}
+
+.viewer-arrow.prev {
+  left: clamp(0.75rem, 2.5vw, 2.5rem);
+}
+
+.viewer-arrow.next {
+  right: clamp(0.75rem, 2.5vw, 2.5rem);
+}
+
+.viewer-arrow:hover {
+  transform: translateY(-50%) scale(1.06);
 }
 
 .viewer-close {
@@ -399,8 +416,7 @@ body.viewer-open {
 
 @media (max-width: 700px) {
   .viewer {
-    padding: 1rem;
-    gap: 0.35rem;
+    padding: 1rem 3.5rem;
   }
 
   .viewer-arrow {
@@ -412,4 +428,20 @@ body.viewer-open {
     max-width: 92vw;
     max-height: 70vh;
   }
+}
+
+/* The whole card opens the viewer, so it should read as clickable. The rail
+   itself uses grab/grabbing, which still wins while a drag is in progress. */
+.t-card {
+  cursor: zoom-in;
+}
+
+.t-rail.is-dragging .t-card {
+  cursor: grabbing;
+}
+
+/* Media with no photos is not clickable. */
+.t-media--empty,
+.t-card:has(.t-media--empty) {
+  cursor: default;
 }

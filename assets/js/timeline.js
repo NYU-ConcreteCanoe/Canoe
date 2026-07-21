@@ -142,18 +142,24 @@
   }
 
   function onRailClick(e) {
-    var zoom = e.target.closest(".t-zoom");
-    if (zoom) {
-      var media = zoom.closest(".t-media");
-      openViewer(zoom.dataset.year, Number(media.dataset.index || 0));
-      return;
-    }
-
+    // Stepping photos in place must win over opening the viewer, otherwise
+    // the arrows would be unusable.
     var arrow = e.target.closest(".t-arrow");
     if (arrow) {
       var m = arrow.closest(".t-media");
       showPhoto(m, Number(m.dataset.index || 0) + Number(arrow.dataset.step));
+      return;
     }
+
+    // Anywhere else on the card opens the viewer at the photo on show. A drag
+    // of the rail does not reach here: drag-scroll.js swallows the click that
+    // follows a real drag.
+    var card = e.target.closest(".t-card");
+    if (!card) return;
+    var media = card.querySelector(".t-media");
+    var stop = card.closest(".t-stop");
+    if (!media || !stop || media.classList.contains("t-media--empty")) return;
+    openViewer(stop.dataset.year, Number(media.dataset.index || 0));
   }
 
   /* ---------- Full screen viewer ---------- */
