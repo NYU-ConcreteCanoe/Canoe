@@ -34,10 +34,19 @@ async function listDir(path) {
 }
 
 const years = {};
+const unsorted = [];
 let total = 0;
 
 for (const entry of await listDir(CANOES_DIR)) {
-  // Year folders only; ignores stray files and .DS_Store
+  // Loose images sitting directly in assets/img/canoes/ belong to no year.
+  // The admin panel uploads here, because an upload folder is fixed per
+  // collection and cannot be derived from the year being edited. Collect them
+  // so they are reported rather than silently ignored.
+  if (entry.isFile() && IMAGE_RE.test(entry.name)) {
+    unsorted.push(`${CANOES_DIR}/${entry.name}`);
+    continue;
+  }
+
   if (!entry.isDirectory() || !/^\d{4}$/.test(entry.name)) continue;
 
   const files = (await listDir(`${CANOES_DIR}/${entry.name}`))
@@ -51,10 +60,16 @@ for (const entry of await listDir(CANOES_DIR)) {
   }
 }
 
+unsorted.sort(naturalSort);
+
 const manifest = {
   _comment:
     "GENERATED FILE - do not edit by hand. Rebuilt by .github/workflows/image-manifest.yml whenever files under assets/img/ change. To add photos, add the files; this updates itself.",
   canoes: years,
+  // Images uploaded through the admin panel land here until someone moves them
+  // into the right year folder. They are listed so they are visible rather
+  // than lost; the site does not display them.
+  unsorted,
 };
 
 // Preserve byte-identical output when nothing changed, so the workflow's
@@ -74,4 +89,12 @@ if (prev !== next) {
   );
 } else {
   console.log("Manifest unchanged.");
+}
+
+if (unsorted.length) {
+  console.warn(
+    `\n${unsorted.length} image(s) are sitting loose in ${CANOES_DIR} and are ` +
+      `not shown on the site. Move them into the folder for their year:\n` +
+      unsorted.map((f) => `  ${f}`).join("\n"),
+  );
 }
