@@ -823,3 +823,37 @@ footer {
     font-size: 2.5rem;
   }
 }
+/* ==============================================
+   FORM STATUS MESSAGE
+   ============================================== */
+
+.form-status {
+  margin: 1.5rem 0 0;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  text-align: left;
+  border: 1px solid transparent;
+}
+
+/* Never signal success or failure by colour alone: each state also carries
+   a leading symbol. */
+.form-status.is-success {
+  background: rgba(46, 204, 113, 0.14);
+  border-color: rgba(46, 204, 113, 0.45);
+}
+
+.form-status.is-success::before {
+  content: "\2713\00a0\00a0";
+  font-weight: 700;
+}
+
+.form-status.is-error {
+  background: rgba(231, 76, 60, 0.16);
+  border-color: rgba(231, 76, 60, 0.5);
+}
+
+.form-status.is-error::before {
+  content: "\26a0\00a0\00a0";
+  font-weight: 700;
+}
