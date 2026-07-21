@@ -64,8 +64,8 @@ than building anything custom.
 Then turn on branch protection so Write access alone cannot publish:
 
 **Settings → Branches → Add rule** for `main`:
-- ✅ Require a pull request before merging
-- ✅ Require approvals: **1**
+- Require a pull request before merging
+- Require approvals: **1**
 
 Without this rule, anyone with Write access can merge their own PR and the
 review step is advisory only.

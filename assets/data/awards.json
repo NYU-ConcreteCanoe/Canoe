@@ -8,7 +8,6 @@
           "id": "nationals-2026",
           "name": "2026 ASCE National Concrete Canoe Competition",
           "shortName": "Nationals",
-          "icon": "🏆",
           "headline": "Best placement in program history",
           "summary": "The NYU Tandon VIP Concrete Canoe team placed 3rd overall at the 2026 ASCE National Concrete Canoe Competition, the best finish in the program's history, competing against teams from across the United States, Canada, China, and India.",
           "placements": [
@@ -34,7 +33,10 @@
           "roster": [
             {
               "group": "Team Captains",
-              "members": ["Vivian Zou", "Janice Chen"]
+              "members": [
+                "Vivian Zou",
+                "Janice Chen"
+              ]
             },
             {
               "group": "Project Proposal (2nd place)",
@@ -99,7 +101,6 @@
           "name": "2026 ASCE Metropolitan Student Symposium",
           "shortName": "Regionals",
           "location": "The College of New Jersey",
-          "icon": "🥇",
           "headline": "1st place in every judged category",
           "summary": "NYU Concrete Canoe swept the 2026 ASCE Metropolitan Student Symposium, taking 1st place in every single judged category.",
           "placements": [
@@ -108,14 +109,38 @@
               "category": "Overall",
               "featured": true
             },
-            { "place": "1st", "category": "Technical Presentation" },
-            { "place": "1st", "category": "Technical Proposal" },
-            { "place": "1st", "category": "Final Product" },
-            { "place": "1st", "category": "Men's Sprint" },
-            { "place": "1st", "category": "Women's Sprint" },
-            { "place": "1st", "category": "Co-Ed Sprint" },
-            { "place": "1st", "category": "Men's Slalom" },
-            { "place": "1st", "category": "Women's Slalom" }
+            {
+              "place": "1st",
+              "category": "Technical Presentation"
+            },
+            {
+              "place": "1st",
+              "category": "Technical Proposal"
+            },
+            {
+              "place": "1st",
+              "category": "Final Product"
+            },
+            {
+              "place": "1st",
+              "category": "Men's Sprint"
+            },
+            {
+              "place": "1st",
+              "category": "Women's Sprint"
+            },
+            {
+              "place": "1st",
+              "category": "Co-Ed Sprint"
+            },
+            {
+              "place": "1st",
+              "category": "Men's Slalom"
+            },
+            {
+              "place": "1st",
+              "category": "Women's Slalom"
+            }
           ],
           "innovations": [],
           "roster": [],

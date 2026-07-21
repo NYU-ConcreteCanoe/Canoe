@@ -1,0 +1,233 @@
+/* ==============================================
+   NYU CONCRETE CANOE - HORIZONTAL TIMELINE
+   Earliest on the left, most recent on the right.
+   Scrolls by wheel, drag or keyboard; the scrollbar
+   is hidden and a continuous line runs behind the
+   stops to read as a timeline rather than a carousel.
+   ============================================== */
+
+.t-head {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.t-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.t-rail {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 2.5rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+  padding: 3.5rem 0 2rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+}
+
+.t-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.t-rail.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+  user-select: none;
+}
+
+.t-rail:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 6px;
+  border-radius: 24px;
+}
+
+/* The continuous line every stop hangs from. */
+.t-line {
+  position: absolute;
+  top: 3.5rem;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.35) 8%,
+      rgba(255, 255, 255, 0.35) 92%,
+      rgba(255, 255, 255, 0.05));
+}
+
+.t-stop {
+  position: relative;
+  flex: 0 0 min(440px, 84vw);
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 2.25rem;
+}
+
+/* Dot sitting on the line above each card. */
+.t-marker {
+  position: absolute;
+  top: -0.4rem;
+  left: 2.5rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.55);
+}
+
+.t-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--glass-bg);
+  backdrop-filter: saturate(180%) blur(var(--blur-amount));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--blur-amount));
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+@media (hover: hover) {
+  .t-card:hover {
+    background: var(--glass-bg-hover);
+    border-color: rgba(255, 255, 255, 0.32);
+  }
+}
+
+/* --- Media --- */
+
+.t-media {
+  position: relative;
+  height: 260px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.t-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  /* Prevents the browser's native image drag from fighting the rail drag */
+  pointer-events: none;
+  user-select: none;
+}
+
+.t-media img.is-active {
+  opacity: 1;
+}
+
+/* Years with no photos yet show the year rather than an empty box. */
+.t-media--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.t-media--empty span {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.22);
+  letter-spacing: -0.03em;
+}
+
+.t-dots {
+  position: absolute;
+  bottom: 0.9rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 100px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.t-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: background 0.25s, width 0.25s;
+}
+
+.t-dot[aria-current="true"] {
+  background: #fff;
+  width: 20px;
+  border-radius: 4px;
+}
+
+/* --- Text --- */
+
+.t-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.75rem;
+}
+
+.t-year {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.3rem 0.9rem;
+  margin-bottom: 0.85rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.t-name {
+  font-size: 1.5rem;
+  text-align: left;
+  margin-bottom: 0.75rem;
+}
+
+.t-desc {
+  font-size: 1rem;
+  line-height: 1.65;
+  text-align: left;
+  color: var(--text-dim);
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.t-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+@media (max-width: 700px) {
+  .t-media {
+    height: 200px;
+  }
+
+  .t-text {
+    padding: 1.4rem;
+  }
+
+  .t-marker {
+    left: 1.75rem;
+  }
+}

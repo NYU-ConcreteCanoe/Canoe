@@ -203,14 +203,18 @@ textarea:focus-visible {
   padding: 3rem;
   margin-bottom: 2rem;
   box-shadow: var(--shadow);
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.4s;
-  animation: reveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) backwards, float 6s ease-in-out infinite 0.8s;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  animation: reveal 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
 }
 
-.card:hover {
-  background: var(--glass-bg-hover);
-  transform: translateY(-8px);
-  border-color: rgba(255, 255, 255, 0.4);
+/* Cards no longer lift or bob. Hover is a quiet background and border shift,
+   and only where hover is a real pointer - it previously fired on touch too,
+   leaving cards stuck in the hovered state after a tap. */
+@media (hover: hover) {
+  .card:hover {
+    background: var(--glass-bg-hover);
+    border-color: rgba(255, 255, 255, 0.32);
+  }
 }
 
 @keyframes reveal {
@@ -222,19 +226,6 @@ textarea:focus-visible {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-/* Animations */
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
   }
 }
 
@@ -313,7 +304,14 @@ section {
   transform-style: preserve-3d;
 }
 
-.flip-card:hover .flip-card-inner {
+@media (hover: hover) {
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+.flip-card:focus-within .flip-card-inner,
+.flip-card.is-flipped .flip-card-inner {
   transform: rotateY(180deg);
 }
 
@@ -429,7 +427,6 @@ ol, li {
 .btn:hover {
   background: white;
   color: black;
-  transform: scale(1.05);
 }
 
 /* Timeline Components */
@@ -597,56 +594,159 @@ footer {
 }
 
 /* ==============================================
-   ANNOUNCEMENTS (front page bulletin board)
-   Cards reuse .card / .grid / .tag / .btn. Only the
-   internals below are new, so no existing rule changes.
+   NEWS STRIP (front page)
+   Horizontal rail: wheel, drag or keyboard. The
+   scrollbar is hidden, so the edge fade and the hint
+   are what signal there is more to the right.
    ============================================== */
 
-.announcement-card {
+.news-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.news-head h2 {
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.news-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.news-rail {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+  padding: 0.5rem 0 1.5rem;
+  /* Hidden scrollbar, still scrollable */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+}
+
+.news-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.news-rail.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+  /* Stops text selecting while dragging across cards */
+  user-select: none;
+}
+
+.news-rail.is-short {
+  cursor: default;
+}
+
+.news-rail:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+  border-radius: 24px;
+}
+
+/* Wide and short rather than thin and tall. */
+.news-card {
+  flex: 0 0 min(420px, 82vw);
+  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  /* .card sets 3rem, which is generous for a 300px grid column */
-  padding: 2.25rem;
+  background: var(--glass-bg);
+  backdrop-filter: saturate(180%) blur(var(--blur-amount));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--blur-amount));
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-.announcement-card h3,
-.announcement-card p {
-  text-align: left;
+@media (hover: hover) {
+  .news-card:hover {
+    background: var(--glass-bg-hover);
+    border-color: rgba(255, 255, 255, 0.32);
+  }
 }
 
-.announcement-card p {
-  line-height: 1.7;
-  /* Push any link to the card bottom so a row of cards aligns */
+.news-image {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+  /* Dragging an image would otherwise start a native image drag */
+  pointer-events: none;
+  user-select: none;
+}
+
+.news-body {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
   flex: 1;
 }
 
-.announcement-meta {
+.news-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
   align-items: center;
-  margin-bottom: 1rem;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
 }
 
-/* .timeline-year carries its own margin-bottom for the timeline layout */
-.announcement-meta .timeline-year {
+.news-date {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.news-card h3 {
+  font-size: 1.35rem;
+  text-align: left;
+  margin-bottom: 0.75rem;
+}
+
+.news-card p {
+  font-size: 1rem;
+  line-height: 1.65;
+  text-align: left;
+  color: var(--text-dim);
   margin-bottom: 0;
+  flex: 1;
 }
 
-.announcement-image {
-  width: 100%;
-  max-height: 220px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 1.25rem;
-}
-
-.announcement-link {
-  margin-top: 1.5rem;
-  padding: 0.7rem 1.75rem;
+.news-link {
+  align-self: flex-start;
+  margin-top: 1.25rem;
+  font-weight: 700;
   font-size: 0.95rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+  padding-bottom: 2px;
+}
+
+.news-link:hover {
+  border-bottom-color: #fff;
+}
+
+@media (max-width: 700px) {
+  .news-image {
+    height: 160px;
+  }
+
+  .news-body {
+    padding: 1.4rem;
+  }
 }
 
 /* ==============================================
@@ -856,4 +956,64 @@ footer {
 .form-status.is-error::before {
   content: "\26a0\00a0\00a0";
   font-weight: 700;
+}
+
+/* ==============================================
+   REDUCED MOTION
+   ============================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==============================================
+   SQUARE FEATURE GRID
+   Locked to 2x2 on desktop so the four blocks always
+   read as a square, rather than reflowing to 3+1.
+   ============================================== */
+
+.grid-square {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.grid-square .card {
+  /* Equal-height square tiles; content is centred within. */
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  margin-bottom: 0;
+}
+
+.grid-square .card h3 {
+  margin-bottom: 1rem;
+}
+
+.grid-square .card p {
+  margin-bottom: 0;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 700px) {
+  .grid-square {
+    grid-template-columns: 1fr;
+  }
+
+  /* A forced square gets very tall in one column, so release it. */
+  .grid-square .card {
+    aspect-ratio: auto;
+    padding: 2rem;
+  }
 }

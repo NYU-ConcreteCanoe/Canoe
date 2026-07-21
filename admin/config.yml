@@ -183,13 +183,6 @@ collections:
                     }
                   - { name: location, label: Location, widget: string, required: false }
                   - {
-                      name: icon,
-                      label: Emoji,
-                      widget: string,
-                      default: "🏆",
-                      required: false,
-                    }
-                  - {
                       name: headline,
                       label: Headline banner,
                       widget: string,
@@ -269,7 +262,6 @@ collections:
             fields:
               - { name: year, label: Year, widget: number, value_type: int }
               - { name: name, label: Canoe name, widget: string }
-              - { name: icon, label: Emoji, widget: string, required: false }
               - {
                   name: description,
                   label: Description,

@@ -54,68 +54,88 @@
     var canoes = (data && data.canoes) || [];
     if (!canoes.length) return '<p class="text-center">No history found.</p>';
 
-    return canoes
-      .map(function (canoe, canoeIdx) {
+    // Oldest on the left, newest on the right, so the rail reads as time.
+    var ordered = canoes.slice().sort(function (a, b) {
+      return Number(a.year) - Number(b.year);
+    });
+
+    var cards = ordered
+      .map(function (canoe) {
         var images = imagesFor(canoe, manifest);
-        var imagesHtml = "";
-        if (images.length > 0) {
-          var carouselId = "carousel-" + canoe.year;
-          imagesHtml =
-            '<div class="simple-carousel" id="' + carouselId + '">' +
-            '<div class="carousel-track">' +
+        var media = images.length
+          ? '<div class="t-media">' +
             images
-              .map(function (img) {
+              .map(function (img, i) {
                 return (
-                  '<div class="carousel-slide">' +
                   '<img src="' + esc(img) + '" alt="' +
-                  esc(canoe.name + " " + canoe.year) +
-                  '" loading="lazy">' +
-                  "</div>"
+                  esc(canoe.name + " " + canoe.year) + '"' +
+                  (i === 0 ? ' class="is-active"' : "") +
+                  ' loading="lazy">'
                 );
               })
               .join("") +
-            "</div>" +
             (images.length > 1
-              ? '<button class="carousel-btn prev" onclick="scrollCarousel(\'' +
-                carouselId +
-                '\', -1)" aria-label="Previous">' +
-                '<i class="fa fa-chevron-left"></i></button>' +
-                '<button class="carousel-btn next" onclick="scrollCarousel(\'' +
-                carouselId +
-                '\', 1)" aria-label="Next">' +
-                '<i class="fa fa-chevron-right"></i></button>'
+              ? '<div class="t-dots">' +
+                images
+                  .map(function (_, i) {
+                    return (
+                      '<button class="t-dot" data-photo="' + i + '"' +
+                      (i === 0 ? ' aria-current="true"' : "") +
+                      ' aria-label="Photo ' + (i + 1) + ' of ' +
+                      esc(canoe.name) + '"></button>'
+                    );
+                  })
+                  .join("") +
+                "</div>"
               : "") +
-            "</div>";
-        }
+            "</div>"
+          : '<div class="t-media t-media--empty"><span>' +
+            esc(canoe.year) + "</span></div>";
 
         return (
-          '<div class="card" style="margin-bottom: 6rem; animation-delay: ' +
-          canoeIdx * 0.1 +
-          's;">' +
-          '<div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem;">' +
-          '<span style="font-size: 3.5rem;">' + (canoe.icon || "🛶") + "</span>" +
-          '<div style="text-align: left;">' +
-          '<span class="timeline-year">' + esc(canoe.year) + "</span>" +
-          '<h2 style="margin: 0; text-align: left;">' + esc(canoe.name) + "</h2>" +
-          "</div></div>" +
-          '<p style="text-align: left; line-height: 1.8; font-size: 1.25rem;">' +
-          (canoe.description || "") +
-          "</p>" +
-          imagesHtml +
-          '<div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 2rem; justify-content: flex-start;">' +
+          '<article class="t-stop" data-year="' + esc(canoe.year) + '">' +
+          '<div class="t-marker" aria-hidden="true"></div>' +
+          '<div class="t-card">' +
+          media +
+          '<div class="t-text">' +
+          '<span class="t-year">' + esc(canoe.year) + "</span>" +
+          '<h3 class="t-name">' + esc(canoe.name) + "</h3>" +
+          '<p class="t-desc">' + (canoe.description || "") + "</p>" +
+          '<div class="t-tags">' +
           (canoe.tags || [])
             .map(function (tag) {
-              return (
-                '<span class="tag" style="font-size: 0.9rem; padding: 0.4rem 1.2rem;">' +
-                esc(tag) +
-                "</span>"
-              );
+              return '<span class="tag">' + esc(tag) + "</span>";
             })
             .join("") +
-          "</div></div>"
+          "</div></div></div></article>"
         );
       })
       .join("");
+
+    return (
+      '<div class="t-head">' +
+      '<p class="t-hint">Scroll or drag sideways. Left is earliest.</p>' +
+      "</div>" +
+      '<div class="t-rail" id="timelineRail" tabindex="0" role="region" ' +
+      'aria-label="Canoe history, earliest on the left, scrolls horizontally">' +
+      '<div class="t-line" aria-hidden="true"></div>' +
+      cards +
+      "</div>"
+    );
+  }
+
+  // Photo dots inside a timeline card.
+  function onCanoeClick(e) {
+    var dot = e.target.closest(".t-dot");
+    if (!dot) return;
+    var media = dot.closest(".t-media");
+    var i = Number(dot.dataset.photo);
+    media.querySelectorAll("img").forEach(function (img, n) {
+      img.classList.toggle("is-active", n === i);
+    });
+    media.querySelectorAll(".t-dot").forEach(function (d, n) {
+      d.setAttribute("aria-current", n === i ? "true" : "false");
+    });
   }
 
   /* ---------- Awards ---------- */
@@ -204,7 +224,6 @@
               return (
                 '<div class="card award-card" id="' + esc(ev.id || "") + '">' +
                 '<div class="award-header">' +
-                '<span class="award-icon">' + (ev.icon || "🏆") + "</span>" +
                 "<div><h2>" + esc(ev.shortName || ev.name) + "</h2>" +
                 '<div style="opacity: 0.7; font-size: 0.95rem; margin-top: 0.35rem;">' +
                 esc(ev.name) +
@@ -309,6 +328,17 @@
     ])
       .then(function (results) {
         canoesPanel.innerHTML = renderCanoes(results[0], results[1]);
+        canoesPanel.addEventListener("click", onCanoeClick);
+
+        var rail = document.getElementById("timelineRail");
+        if (rail) {
+          if (window.enableDragScroll) {
+            window.enableDragScroll(rail, { step: 420 });
+          }
+          // Start at the present. The rail runs oldest to newest, so the most
+          // recent canoe is the one people expect to see first.
+          rail.scrollLeft = rail.scrollWidth;
+        }
       })
       .catch(function (err) {
         console.error("Timeline Error:", err);

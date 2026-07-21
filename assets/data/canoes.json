@@ -4,7 +4,6 @@
     {
       "year": 2026,
       "name": "Chrysalis",
-      "icon": "🦋",
       "description": "<strong>Chrysalis</strong> is the canoe reborn. Pioneering a meshless fiber reinforced concrete design, the 2025-26 team paired a carbon negative mix and recycled sustainable materials with an AI-powered paddle trainer, taking 1st place overall at Regionals and 3rd at Nationals - the best finish in program history.",
       "tags": [
         "Meshless Fiber Reinforced Concrete",
@@ -15,7 +14,6 @@
     {
       "year": 2025,
       "name": "W-Train",
-      "icon": "🚊",
       "description": "The 2025 canoe, <strong>W-Train</strong>, carried the team through the 2024-25 season.",
       "tags": [
         "Sustainability",
@@ -26,7 +24,6 @@
     {
       "year": 2024,
       "name": "Rise",
-      "icon": "🌅",
       "description": "<strong>Rise</strong> stood for resilience and teamwork. The team achieved major aesthetic and structural improvements for the national showcase.",
       "tags": [
         "Resilience",
@@ -37,7 +34,6 @@
     {
       "year": 2023,
       "name": "Jet",
-      "icon": "✈️",
       "description": "<strong>Jet</strong> emphasized lightweight innovation and aerodynamic flow, earning recognition for technical writing and design presentation.",
       "tags": [
         "Lightweight",
@@ -48,7 +44,6 @@
     {
       "year": 2022,
       "name": "Blossom",
-      "icon": "🌸",
       "description": "<strong>Blossom</strong> symbolized the team's return to form after the pandemic hiatus. It was a celebration of rebirth through collaborative spirit.",
       "tags": [
         "Rebirth",
@@ -59,7 +54,6 @@
     {
       "year": 2021,
       "name": "Golem",
-      "icon": "🪨",
       "description": "With <strong>Golem</strong>, the team focused on durability, strength, and balance, combining traditional casting methods with digital fabrication tools.",
       "tags": [
         "Durability",
@@ -70,7 +64,6 @@
     {
       "year": 2020,
       "name": "Voyager",
-      "icon": "🚀",
       "description": "<strong>Voyager</strong> was inspired by exploration. The design pushed experimentation with advanced concrete composites and curing methods.",
       "tags": [
         "Exploration",
@@ -81,7 +74,6 @@
     {
       "year": 2019,
       "name": "Bluefin",
-      "icon": "🐟",
       "description": "<strong>Bluefin</strong> emphasized hydrodynamic efficiency, with a streamlined hull and a renewed focus on paddling performance.",
       "tags": [
         "Hydrodynamics",
@@ -92,7 +84,6 @@
     {
       "year": 2018,
       "name": "Spotlight",
-      "icon": "💡",
       "description": "<strong>Spotlight</strong> brought creative innovation into the mix design and aesthetics, highlighting the team's growing technical versatility.",
       "tags": [
         "Creative Design",
@@ -103,7 +94,6 @@
     {
       "year": 2017,
       "name": "Sprout",
-      "icon": "🌱",
       "description": "<strong>Sprout</strong> represented the new generation of builders, integrating sustainability and eco-friendly design principles.",
       "tags": [
         "New Generation",
@@ -114,7 +104,6 @@
     {
       "year": 2016,
       "name": "Koi",
-      "icon": "🐠",
       "description": "<strong>Koi</strong> featured colorful visual motifs and experimental aggregate mixtures inspired by fluid motion and aquatic balance.",
       "tags": [
         "Visual Design",
@@ -125,7 +114,6 @@
     {
       "year": 2015,
       "name": "Graffiti",
-      "icon": "🎨",
       "description": "<strong>Graffiti</strong> captured artistic expression, merging engineering with creative visuals for a bold and modern identity.",
       "tags": [
         "Artistic",
@@ -136,7 +124,6 @@
     {
       "year": 2014,
       "name": "Maka",
-      "icon": "🏝️",
       "description": "<strong>Maka</strong> emphasized balance between design and craft. Its minimalist shape refined through precise formwork techniques.",
       "tags": [
         "Minimalist",
@@ -147,7 +134,6 @@
     {
       "year": 2013,
       "name": "Illa",
-      "icon": "🏄",
       "description": "<strong>Illa</strong> was a pivotal design, marking the team's transition to lighter, high-performance materials for faster competition speeds.",
       "tags": [
         "Pivotal",
@@ -158,7 +144,6 @@
     {
       "year": 2010,
       "name": "KingConCrete",
-      "icon": "👑",
       "description": "<strong>KingConCrete</strong> became one of NYU's most iconic canoes, known for its strength and unique layered aggregate finish.",
       "tags": [
         "Iconic",
@@ -169,7 +154,6 @@
     {
       "year": 2009,
       "name": "Fusion",
-      "icon": "🏺",
       "description": "<strong>Fusion</strong> was a competitive canoe of Poly's Concrete Canoe legacy, representing the team's early spirit.",
       "tags": [
         "Origin",
@@ -180,7 +164,6 @@
     {
       "year": 2008,
       "name": "Osiris",
-      "icon": "🏺",
       "description": "<strong>Osiris</strong> was the origin of NYU's modern Concrete Canoe legacy, representing the team's early dedication to precision and spirit.",
       "tags": [
         "Origin",

@@ -1,8 +1,8 @@
 /* ==============================================
    NYU CONCRETE CANOE - FRONT PAGE ANNOUNCEMENTS
-   Renders assets/data/announcements.json into the
-   existing .card / .grid / .tag visual vocabulary.
-   No new CSS is required by this module.
+   Renders assets/data/announcements.json as a
+   horizontal strip. Scrolling behaviour comes from
+   drag-scroll.js; the scrollbar is hidden.
    ============================================== */
 
 (function () {
@@ -60,27 +60,25 @@
     var image = safeUrl(post.image);
     var link = post.link && safeUrl(post.link.url) ? post.link : null;
 
-    // .timeline-year is reused for the date chip and .tag for the category,
-    // both already defined in style.css.
     return (
-      '<article class="card announcement-card">' +
-      '<div class="announcement-meta">' +
-      (date ? '<span class="timeline-year">' + esc(date) + "</span>" : "") +
+      '<article class="news-card">' +
+      (image
+        ? '<img class="news-image" src="' + esc(image) +
+          '" alt="" loading="lazy" onerror="this.remove()">'
+        : "") +
+      '<div class="news-body">' +
+      '<div class="news-meta">' +
+      (date ? '<span class="news-date">' + esc(date) + "</span>" : "") +
       '<span class="tag">' + category + "</span>" +
       (post.pinned ? '<span class="tag">Pinned</span>' : "") +
       "</div>" +
       "<h3>" + esc(post.title) + "</h3>" +
-      (image
-        ? '<img class="announcement-image" src="' + esc(image) +
-          '" alt="' + esc(post.title) + '" loading="lazy" ' +
-          "onerror=\"this.remove()\">"
-        : "") +
       "<p>" + esc(post.body) + "</p>" +
       (link
-        ? '<a class="btn announcement-link" href="' + esc(safeUrl(link.url)) +
-          '">' + esc(link.text || "Read more") + "</a>"
+        ? '<a class="news-link" href="' + esc(safeUrl(link.url)) + '">' +
+          esc(link.text || "Read more") + "</a>"
         : "") +
-      "</article>"
+      "</div></article>"
     );
   }
 
@@ -104,12 +102,24 @@
           return;
         }
 
-        var max = Number(settings.maxVisible) > 0 ? Number(settings.maxVisible) : 3;
+        var max = Number(settings.maxVisible) > 0 ? Number(settings.maxVisible) : 6;
         var visible = posts.slice().sort(sortPosts).slice(0, max);
 
         container.innerHTML =
+          '<div class="news-head">' +
           "<h2>" + esc(settings.heading || "Latest News") + "</h2>" +
-          '<div class="grid">' + visible.map(renderCard).join("") + "</div>";
+          '<p class="news-hint">Scroll or drag to see more</p>' +
+          "</div>" +
+          '<div class="news-rail" id="newsRail" tabindex="0" role="region" ' +
+          'aria-label="Latest news, scrolls horizontally">' +
+          visible.map(renderCard).join("") +
+          "</div>";
+
+        var rail = document.getElementById("newsRail");
+        if (rail) {
+          if (window.enableDragScroll) window.enableDragScroll(rail);
+          if (visible.length < 2) rail.classList.add("is-short");
+        }
       })
       .catch(function (err) {
         // The bulletin board is supplementary; if it fails to load the rest
