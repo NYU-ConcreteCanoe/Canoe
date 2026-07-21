@@ -1,4 +1,4 @@
-// Background — picks one random canoe image per page load.
+// Background, picks one random canoe image per page load.
 //
 // The list comes from assets/data/images.json, which a GitHub Action rebuilds
 // whenever files under assets/img/ change. Photos added to a year folder are

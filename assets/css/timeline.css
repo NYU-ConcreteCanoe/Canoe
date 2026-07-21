@@ -6,20 +6,6 @@
    stops to read as a timeline rather than a carousel.
    ============================================== */
 
-.t-head {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
-}
-
-.t-hint {
-  margin: 0;
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
-}
-
 .t-rail {
   position: relative;
   display: flex;
@@ -74,16 +60,37 @@
   padding-top: 2.25rem;
 }
 
-/* Dot sitting on the line above each card. */
+/* The year itself sits on the line, so the rail reads as a real timeline
+   rather than a row of anonymous dots. */
 .t-marker {
   position: absolute;
-  top: -0.4rem;
-  left: 2.5rem;
-  width: 14px;
-  height: 14px;
+  top: -1.15rem;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.t-marker::after {
+  content: "";
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
   background: #fff;
-  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 0 0 5px rgba(10, 10, 10, 0.9);
+  order: -1;
+}
+
+.t-marker-year {
+  padding: 0.3rem 0.85rem;
+  border-radius: 100px;
+  background: rgba(10, 10, 10, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  white-space: nowrap;
 }
 
 .t-card {
@@ -140,40 +147,77 @@
 }
 
 .t-media--empty span {
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: rgba(255, 255, 255, 0.22);
-  letter-spacing: -0.03em;
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
 }
 
-.t-dots {
+/* Photo controls */
+
+.t-arrow,
+.t-zoom {
   position: absolute;
-  bottom: 0.9rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.4rem;
-  padding: 0.45rem 0.75rem;
-  border-radius: 100px;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-}
-
-.t-dot {
-  width: 7px;
-  height: 7px;
-  padding: 0;
   border: none;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
   cursor: pointer;
-  transition: background 0.25s, width 0.25s;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s, opacity 0.25s;
+  opacity: 0;
 }
 
-.t-dot[aria-current="true"] {
-  background: #fff;
-  width: 20px;
-  border-radius: 4px;
+.t-arrow {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+}
+
+.t-arrow.prev { left: 0.65rem; }
+.t-arrow.next { right: 0.65rem; }
+
+.t-zoom {
+  top: 0.65rem;
+  right: 0.65rem;
+  width: 34px;
+  height: 34px;
+  font-size: 0.85rem;
+}
+
+/* Controls stay out of the way until the card is hovered or focused. On
+   touch, where hover never happens, they are always visible. */
+.t-card:hover .t-arrow,
+.t-card:hover .t-zoom,
+.t-card:focus-within .t-arrow,
+.t-card:focus-within .t-zoom {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .t-arrow,
+  .t-zoom {
+    opacity: 1;
+  }
+}
+
+.t-arrow:hover,
+.t-zoom:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.t-count {
+  position: absolute;
+  bottom: 0.7rem;
+  right: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+  background: rgba(0, 0, 0, 0.6);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 /* --- Text --- */
@@ -183,17 +227,6 @@
   flex-direction: column;
   flex: 1;
   padding: 1.75rem;
-}
-
-.t-year {
-  display: inline-block;
-  align-self: flex-start;
-  padding: 0.3rem 0.9rem;
-  margin-bottom: 0.85rem;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  font-weight: 700;
-  font-size: 0.85rem;
 }
 
 .t-name {
@@ -229,5 +262,121 @@
 
   .t-marker {
     left: 1.75rem;
+  }
+}
+
+/* ==============================================
+   FULL SCREEN PHOTO VIEWER
+   ============================================== */
+
+.viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.94);
+  backdrop-filter: blur(8px);
+}
+
+.viewer[hidden] {
+  display: none;
+}
+
+/* Stops the page behind the viewer from scrolling. */
+body.viewer-open {
+  overflow: hidden;
+}
+
+.viewer-stage {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.viewer-stage img {
+  max-width: min(1400px, 88vw);
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.viewer-stage figcaption {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.viewer-count {
+  padding: 0.25rem 0.7rem;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.viewer-arrow,
+.viewer-close {
+  flex: 0 0 auto;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s;
+}
+
+.viewer-arrow {
+  width: 54px;
+  height: 54px;
+  font-size: 1.2rem;
+}
+
+.viewer-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 46px;
+  height: 46px;
+  font-size: 1.1rem;
+}
+
+.viewer-arrow:hover,
+.viewer-close:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.viewer-arrow[hidden] {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .viewer {
+    padding: 1rem;
+    gap: 0.35rem;
+  }
+
+  .viewer-arrow {
+    width: 42px;
+    height: 42px;
+  }
+
+  .viewer-stage img {
+    max-width: 92vw;
+    max-height: 70vh;
   }
 }

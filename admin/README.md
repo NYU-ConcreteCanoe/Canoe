@@ -1,4 +1,4 @@
-# Admin panel — setup and workflow
+# Admin panel, setup and workflow
 
 The admin panel lets team members edit site content through a form at
 `/admin/`. Every save opens a **pull request**. Nothing reaches the live site
@@ -18,7 +18,7 @@ GitHub Pages redeploys automatically when a PR is merged.
 | Team Roster | `assets/data/team.json` | Names, roles, headshots |
 
 Nothing else is reachable. An editor **cannot** touch HTML, CSS, JS, page
-layout, or the navigation through this interface — those files are simply not
+layout, or the navigation through this interface, those files are simply not
 declared in `config.yml`, so the panel has no way to open them.
 
 ---
@@ -28,7 +28,7 @@ declared in `config.yml`, so the panel has no way to open them.
 One value in `config.yml` is still a placeholder: `base_url`.
 
 The repo is already set to `nyu-concretecanoe/Canoe`, which is what GitHub
-Pages serves. A local clone's `origin` may point at a personal fork — that does
+Pages serves. A local clone's `origin` may point at a personal fork, that does
 not matter, the panel targets the repo named in `config.yml`.
 
 ### 1. Deploy the OAuth worker
@@ -43,12 +43,12 @@ you do not need a credit card.
    - Authorization callback URL: `https://<your-worker>.workers.dev/callback`
 3. In the Worker's settings, add environment variables:
    - `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` from step 2
-   - `ALLOWED_DOMAINS` — the hostname serving the site
+   - `ALLOWED_DOMAINS`, the hostname serving the site
 4. Put the Worker URL in `config.yml` as `base_url`.
 
 > **Note on `ALLOWED_DOMAINS`:** it matches on hostname only. On a project site
 > the host is `<org>.github.io`, which is shared with every other repo under
-> that account — it cannot be scoped to `/Canoe`. A custom domain avoids this.
+> that account, it cannot be scoped to `/Canoe`. A custom domain avoids this.
 
 ### 2. Set permissions
 
@@ -94,7 +94,7 @@ in `assets/img/canoes/<year>/`. New uploads through the panel go to the
 collection root, `assets/img/canoes/`, because the upload destination is fixed
 per collection and cannot be derived from the year field being edited.
 
-This does not break anything — `canoes.json` stores explicit paths, so photos
+This does not break anything, `canoes.json` stores explicit paths, so photos
 work from either location. But the tidy per-year convention will erode over
 time. Three options:
 
@@ -108,11 +108,11 @@ time. Three options:
 **Images are permanent.** Git history cannot be pruned casually. A deleted
 photo still occupies space forever, and GitHub Pages caps a published site at
 1 GB. The browser-side resizing in `config.yml` (WebP, max 2000px, 8 MB
-rejection ceiling) is what keeps this sustainable — do not remove it.
+rejection ceiling) is what keeps this sustainable, do not remove it.
 
 **Pages rate limit.** Branch-deploy Pages allows ~10 builds/hour. Merging many
 PRs quickly can hit that and delay deploys. Batching merges avoids it.
 
 **Sveltia CMS is pre-1.0** and has a single maintainer. It is config-compatible
 with Decap CMS, so the exit path is swapping the `<script>` tag in
-`admin/index.html` — the same `config.yml` works with both.
+`admin/index.html`, the same `config.yml` works with both.
