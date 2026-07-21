@@ -1,0 +1,42 @@
+name: Site checks
+
+# Runs on every pull request and on pushes to main. A failure means something
+# is broken or unsafe; the checks are the gate before anything is published.
+#
+# Run the same checks locally with:  node scripts/test.mjs
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run site checks
+        run: node scripts/test.mjs
+
+      # The manifest is generated. If someone adds photos without it being
+      # rebuilt, the timeline silently will not show them, so a stale manifest
+      # is treated as a failure rather than fixed quietly here.
+      - name: Check the image manifest is up to date
+        run: |
+          node scripts/build-image-manifest.mjs
+          if ! git diff --quiet -- assets/data/images.json; then
+            echo "::error::assets/data/images.json is out of date."
+            echo "Run 'node scripts/build-image-manifest.mjs' and commit the result."
+            git diff -- assets/data/images.json
+            exit 1
+          fi
+          echo "Image manifest is up to date."

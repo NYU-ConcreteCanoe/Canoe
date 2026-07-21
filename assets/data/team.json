@@ -1,4 +1,5 @@
 {
+  "_comment": "Team shown on the About page. 'leadership' renders as cards. Leave 'image' empty if there is no headshot yet and a placeholder is used automatically. Headshots live in assets/img/headshots/.",
   "leadership": [
     {
       "name": "Janice Chen",
@@ -38,30 +39,23 @@
     {
       "name": "Yamin Dembrow",
       "role": "Structural Lead",
-      "image": "assets/img/headshots/yaminD.JPG"
+      "image": ""
     },
     {
       "name": "Ren Liao",
       "role": "Principal Reaction Engineer",
-      "image": "assets/img/headshots/renL.JPG"
+      "image": ""
     },
     {
       "name": "Joy Lin",
       "role": "Aesthetics",
-      "image": "assets/img/headshots/joyL.JPG"
+      "image": ""
     },
     {
       "name": "Alex Huang",
       "role": "Senior Advisor",
-      "image": "assets/img/headshots/alexH.JPG"
+      "image": ""
     }
   ],
-
-  "members": [
-    {
-      "name": "First Last",
-      "role": "Structures",
-      "image": "assets/img/placeholder.jpg"
-    }
-  ]
+  "members": []
 }

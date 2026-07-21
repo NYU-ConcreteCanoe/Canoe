@@ -1,3 +1,27 @@
+// Names and roles are authored by team members through the admin panel, so
+// they are escaped rather than injected as HTML.
+function esc(value) {
+  return String(value == null ? "" : value).replace(/[&<>"']/g, (c) => {
+    return {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    }[c];
+  });
+}
+
+// Headshots must stay inside the repo. Anything absolute, protocol-relative or
+// climbing out of the tree is rejected and falls back to the placeholder.
+function safePath(path) {
+  const p = String(path == null ? "" : path).trim();
+  if (!p) return "";
+  if (/^[a-z]+:/i.test(p) || p.startsWith("//") || p.startsWith("/")) return "";
+  if (p.includes("..")) return "";
+  return p;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("team-container");
 
@@ -15,16 +39,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const cardsHTML = data.leadership
         .map((member) => {
           // Default Parameters if elements are missing in JSON
-          const name = member.name || "Team Member";
-          const role = member.role || "NYU Concrete Canoe";
-          const imagePath =
-            member.image || "assets/img/headshots/placeholder.jpeg";
+          const name = esc(member.name || "Team Member");
+          const role = esc(member.role || "NYU Concrete Canoe");
+          const imagePath = esc(
+            safePath(member.image) || "assets/img/headshots/placeholder.jpeg",
+          );
 
           return `
                 <div class="card">
-                    <img 
-                        src="${imagePath}" 
-                        alt="${name}" 
+                    <img
+                        src="${imagePath}"
+                        alt="${name}"
                         style="width: 100%; border-radius: 12px; margin-bottom: 1.5rem;"
                         onerror="this.onerror=null; this.src='assets/img/headshots/placeholder.jpeg'; this.style.opacity='0.5';"
                     >
