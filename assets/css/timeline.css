@@ -21,9 +21,12 @@
   gap: 2.5rem;
   overflow-x: auto;
   overscroll-behavior-x: contain;
-  scroll-snap-type: x proximity;
+  scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: 3.5rem 0 2rem;
+  /* Half the rail minus half a card, so the first and last years can be
+     scrolled to the centre like every other one. Without this the newest canoe
+     could only ever sit against the right edge. */
+  padding: 3.5rem calc(50% - clamp(170px, 14vw, 330px)) 2.5rem;
   scrollbar-width: none;
   -ms-overflow-style: none;
   cursor: grab;
@@ -39,24 +42,49 @@
   user-select: none;
 }
 
+.t-rail.is-dragging .t-card {
+  transition: none;
+}
+
 .t-rail:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 6px;
   border-radius: 24px;
 }
 
-/* The continuous line every stop hangs from. */
+/* The line is drawn per stop rather than once across the rail. A single
+   absolutely positioned element cannot work here: inside a scroll container
+   width:100% is the visible width, not the scrollable width, so it only ever
+   spanned one screen. Each segment overhangs by half the gap on both sides so
+   they meet seamlessly, and the run stops at the first and last markers. */
 .t-line {
+  display: none;
+}
+
+.t-stop::before {
+  content: "";
   position: absolute;
-  top: 3.5rem;
-  left: 0;
+  top: -0.2rem;
+  left: -1.25rem;
+  right: -1.25rem;
   height: 2px;
-  width: 100%;
+  background: rgba(255, 255, 255, 0.28);
+  pointer-events: none;
+}
+
+.t-stop:first-child::before {
+  left: 2.3rem;
   background: linear-gradient(to right,
-      rgba(255, 255, 255, 0.05),
-      rgba(255, 255, 255, 0.35) 8%,
-      rgba(255, 255, 255, 0.35) 92%,
-      rgba(255, 255, 255, 0.05));
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.28) 12px);
+}
+
+.t-stop:last-child::before {
+  right: auto;
+  width: calc(2.3rem + 11px);
+  background: linear-gradient(to left,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.28) 12px);
 }
 
 .t-stop {
@@ -76,9 +104,12 @@
   position: absolute;
   top: -1.15rem;
   left: 2rem;
+  height: 1.9rem;
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  /* Sits above the line segment that runs behind it. */
+  z-index: 1;
 }
 
 .t-marker::after {
@@ -101,6 +132,27 @@
   letter-spacing: -0.01em;
   line-height: 1.3;
   white-space: nowrap;
+}
+
+/* Only the centred year is at full size. Everything either side sits back a
+   little, so the eye lands on the current canoe. Scaling the card rather than
+   the stop keeps the marker and the line unaffected. */
+.t-stop .t-card {
+  transform: scale(0.94);
+  opacity: 0.62;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.45s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+.t-stop.is-current .t-card {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.t-stop.is-current .t-marker-year {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
 }
 
 .t-card {
@@ -444,4 +496,16 @@ body.viewer-open {
 .t-media--empty,
 .t-card:has(.t-media--empty) {
   cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .t-stop .t-card {
+    transform: none;
+    transition: none;
+  }
+
+  .t-stop.is-current .t-card {
+    transform: none;
+  }
 }

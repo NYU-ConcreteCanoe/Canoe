@@ -714,6 +714,58 @@ footer {
   flex: 1;
 }
 
+/* Grouped lists inside a news card, e.g. Nationals / Regionals placements. */
+.news-section {
+  margin-top: 1.1rem;
+}
+
+.news-section-heading {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 0.5rem;
+  text-align: left;
+}
+
+.news-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  /* Two columns once the card is wide enough, so a nine-item list does not
+     make this card tower over the others in the strip. */
+  columns: 2;
+  column-gap: 1.25rem;
+}
+
+.news-list li {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 0.3rem;
+  padding-left: 0.85rem;
+  position: relative;
+  break-inside: avoid;
+  color: var(--text-dim);
+}
+
+.news-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+@media (max-width: 480px) {
+  .news-list {
+    columns: 1;
+  }
+}
+
 .news-link {
   align-self: flex-start;
   margin-top: 1.25rem;

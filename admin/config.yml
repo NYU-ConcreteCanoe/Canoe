@@ -131,6 +131,17 @@ collections:
                   required: false,
                   hint: "Optional. Shown above the text.",
                 }
+              - name: sections
+                label: Grouped lists
+                label_singular: List
+                widget: list
+                required: false
+                collapsed: true
+                summary: "{{fields.heading}}"
+                hint: "Optional. Use for things like competition placements."
+                fields:
+                  - { name: heading, label: Heading, widget: string, hint: "e.g. Nationals" }
+                  - { name: items, label: Items, widget: list }
               - {
                   name: embed,
                   label: Embed a post or video,

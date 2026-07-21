@@ -121,7 +121,6 @@
     return (
       '<div class="t-rail" id="timelineRail" tabindex="0" role="region" ' +
       'aria-label="Canoe history, earliest on the left, scrolls horizontally">' +
-      '<div class="t-line" aria-hidden="true"></div>' +
       stops +
       "</div>"
     );
@@ -297,13 +296,49 @@
           window.enableDragScroll(rail, { step: 460 });
         }
 
-        // Jump to the most recent canoe WITHOUT animating. The rail sets
-        // scroll-behavior: smooth, so assigning scrollLeft directly made the
-        // page visibly scroll all the way from the oldest year to the newest
-        // on every single load, which read as a stutter.
+        var stops = Array.prototype.slice.call(rail.querySelectorAll(".t-stop"));
+
+        // Marks whichever year is nearest the middle of the rail, so it can be
+        // shown at full size while the rest sit back.
+        var ticking = false;
+        function markCentred() {
+          var mid = rail.scrollLeft + rail.clientWidth / 2;
+          var best = null, bestDistance = Infinity;
+          stops.forEach(function (stop) {
+            var centre = stop.offsetLeft + stop.offsetWidth / 2;
+            var distance = Math.abs(centre - mid);
+            if (distance < bestDistance) {
+              bestDistance = distance;
+              best = stop;
+            }
+          });
+          stops.forEach(function (stop) {
+            stop.classList.toggle("is-current", stop === best);
+          });
+        }
+        function onScroll() {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(function () {
+            markCentred();
+            ticking = false;
+          });
+        }
+        rail.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+
+        // Open centred on the most recent canoe, WITHOUT animating. The rail
+        // sets scroll-behavior: smooth, so assigning scrollLeft directly made
+        // the page visibly scroll all the way from the oldest year to the
+        // newest on every single load, which read as a stutter.
+        var newest = stops[stops.length - 1];
         var previous = rail.style.scrollBehavior;
         rail.style.scrollBehavior = "auto";
-        rail.scrollLeft = rail.scrollWidth;
+        if (newest) {
+          rail.scrollLeft =
+            newest.offsetLeft - (rail.clientWidth - newest.offsetWidth) / 2;
+        }
+        markCentred();
         requestAnimationFrame(function () {
           rail.style.scrollBehavior = previous || "";
         });

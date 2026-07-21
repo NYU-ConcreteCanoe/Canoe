@@ -156,7 +156,29 @@
       (date ? '<div class="news-meta"><span class="news-date">' +
         esc(date) + "</span></div>" : "") +
       "<h3>" + esc(post.title) + "</h3>" +
-      "<p>" + esc(post.body) + "</p>" +
+      (post.body ? "<p>" + esc(post.body) + "</p>" : "") +
+      // Optional grouped lists, e.g. placements split into Nationals and
+      // Regionals. Reads far better than the same results as a paragraph.
+      (Array.isArray(post.sections)
+        ? post.sections
+            .filter(function (s) {
+              return s && s.heading && Array.isArray(s.items) && s.items.length;
+            })
+            .map(function (s) {
+              return (
+                '<div class="news-section">' +
+                '<h4 class="news-section-heading">' + esc(s.heading) + "</h4>" +
+                '<ul class="news-list">' +
+                s.items
+                  .map(function (item) {
+                    return "<li>" + esc(item) + "</li>";
+                  })
+                  .join("") +
+                "</ul></div>"
+              );
+            })
+            .join("")
+        : "") +
       (link
         ? '<a class="news-link" href="' + esc(safeUrl(link.url)) + '">' +
           esc(link.text || "Read more") + "</a>"
