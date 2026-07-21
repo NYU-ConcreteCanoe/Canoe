@@ -132,6 +132,13 @@ collections:
                   hint: "Optional. Shown above the text.",
                 }
               - {
+                  name: embed,
+                  label: Embed a post or video,
+                  widget: string,
+                  required: false,
+                  hint: "Optional. Paste a LinkedIn, Instagram or YouTube link and the post plays here instead of the text. Nothing else is allowed.",
+                }
+              - {
                   name: pinned,
                   label: Pin to top,
                   widget: boolean,

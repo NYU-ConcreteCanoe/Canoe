@@ -64,7 +64,24 @@
     "linkedin.com": "LinkedIn post",
     "www.instagram.com": "Instagram post",
     "instagram.com": "Instagram post",
+    "www.youtube.com": "Video",
+    "youtube.com": "Video",
+    "youtu.be": "Video",
+    "www.youtube-nocookie.com": "Video",
+    "youtube-nocookie.com": "Video",
   };
+
+  // Pulls the video id out of whatever YouTube URL was pasted: a watch link, a
+  // youtu.be short link, or an /embed/ link.
+  function youtubeId(parsed) {
+    if (/youtu\.be$/.test(parsed.hostname)) {
+      return parsed.pathname.slice(1).split("/")[0];
+    }
+    if (parsed.pathname.indexOf("/embed/") === 0) {
+      return parsed.pathname.slice(7).split("/")[0];
+    }
+    return parsed.searchParams.get("v") || "";
+  }
 
   function embedInfo(url) {
     var raw = String(url == null ? "" : url).trim();
@@ -78,6 +95,20 @@
     if (parsed.protocol !== "https:") return null;
     var label = EMBED_HOSTS[parsed.hostname];
     if (!label) return null;
+
+    // YouTube: normalise any link shape to a nocookie embed, so editors can
+    // paste whatever the share button gave them and viewers are not tracked.
+    if (/youtu\.?be/.test(parsed.hostname)) {
+      var id = youtubeId(parsed);
+      if (!/^[\w-]{6,}$/.test(id)) return null;
+      var start = parsed.searchParams.get("t") || parsed.searchParams.get("start");
+      return {
+        url: "https://www.youtube-nocookie.com/embed/" + id +
+             (start ? "?start=" + encodeURIComponent(parseInt(start, 10) || 0) : ""),
+        label: label,
+        ratio: "video",
+      };
+    }
 
     // Instagram permalinks need /embed appended to be framable.
     if (/instagram\.com$/.test(parsed.hostname) &&
@@ -97,12 +128,15 @@
     // reads as part of the strip.
     if (embed) {
       return (
-        '<article class="news-card news-card--embed">' +
-        '<div class="news-embed">' +
+        '<article class="news-card news-card--embed' +
+        (embed.ratio === "video" ? " news-card--video" : "") + '">' +
+        '<div class="news-embed' +
+        (embed.ratio === "video" ? " news-embed--video" : "") + '">' +
         '<iframe src="' + esc(embed.url) + '" title="' + esc(embed.label) +
         '" loading="lazy" frameborder="0" allowfullscreen ' +
         'referrerpolicy="no-referrer-when-downgrade" ' +
-        'sandbox="allow-scripts allow-same-origin allow-popups"></iframe>' +
+        'allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture" ' +
+        'sandbox="allow-scripts allow-same-origin allow-popups allow-presentation"></iframe>' +
         "</div>" +
         '<div class="news-body news-body--embed">' +
         (date ? '<div class="news-meta"><span class="news-date">' +
@@ -155,10 +189,7 @@
         var visible = posts.slice().sort(sortPosts).slice(0, max);
 
         container.innerHTML =
-          '<div class="news-head">' +
           "<h2>" + esc(settings.heading || "Latest News") + "</h2>" +
-          '<p class="news-hint">Scroll or drag to see more</p>' +
-          "</div>" +
           '<div class="news-rail" id="newsRail" tabindex="0" role="region" ' +
           'aria-label="Latest news, scrolls horizontally">' +
           visible.map(renderCard).join("") +

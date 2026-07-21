@@ -1,0 +1,8 @@
+# macOS Finder metadata. These appear in every image folder and are easy to
+# commit by accident with `git add -A`.
+.DS_Store
+._*
+
+# Editor and OS noise
+Thumbs.db
+*.swp

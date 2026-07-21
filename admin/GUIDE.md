@@ -37,6 +37,10 @@ reachable through the panel.
    - **Button link** - optional. Either another page (`contact.html`) or a full
      `https://` address.
    - **Image** - optional.
+   - **Embed a post or video** - optional. Paste a LinkedIn, Instagram or
+     YouTube link and that post or video shows in the strip instead of your
+     text. Any YouTube link shape works, including a share link with a
+     timestamp. Other sites are not allowed.
    - **Pin to top** - keeps it first regardless of date. Use sparingly.
 5. Click **Save**, then set the status to **In Review**.
 6. Tell someone with merge rights. Once merged, it is live in a couple of

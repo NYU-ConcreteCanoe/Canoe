@@ -604,26 +604,10 @@ footer {
    are what signal there is more to the right.
    ============================================== */
 
-.news-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.5rem;
-}
-
-.news-head h2 {
-  margin-bottom: 0;
+/* The strip heading sits left, matching the cards below it. */
+#announcements > h2 {
   text-align: left;
-}
-
-.news-hint {
-  margin: 0;
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.5rem;
 }
 
 .news-rail {
@@ -855,15 +839,18 @@ footer {
    trying to restyle them.
    ============================================== */
 
+/* LinkedIn serves this embed at 504x628. The card is that plus the padding
+   either side, so the glass frame stays visible around the embed instead of
+   the iframe bleeding to the card edges. */
 .news-card--embed {
-  flex: 0 0 min(520px, 88vw);
+  flex: 0 0 min(552px, 90vw);
 }
 
 .news-embed {
   position: relative;
   width: 100%;
-  height: 560px;
-  background: rgba(255, 255, 255, 0.04);
+  height: 628px;
+  padding: 1.25rem 1.25rem 0;
 }
 
 .news-embed iframe {
@@ -871,6 +858,10 @@ footer {
   height: 100%;
   border: 0;
   display: block;
+  border-radius: 14px;
+  /* These embeds render light, so a white base avoids a dark flash while the
+     iframe loads. */
+  background: #fff;
 }
 
 /* The embed carries its own date and author, so the strip only adds a thin
@@ -887,6 +878,22 @@ footer {
 
 @media (max-width: 700px) {
   .news-embed {
-    height: 480px;
+    height: 560px;
+    padding: 1rem 1rem 0;
   }
+}
+
+/* Video embeds are 16:9, unlike the tall LinkedIn/Instagram post embeds. */
+.news-card--video {
+  flex: 0 0 min(560px, 90vw);
+}
+
+.news-embed--video {
+  height: auto;
+  aspect-ratio: 16 / 9;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.news-embed--video iframe {
+  background: #000;
 }
