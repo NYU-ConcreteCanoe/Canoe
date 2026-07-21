@@ -6,6 +6,14 @@
    stops to read as a timeline rather than a carousel.
    ============================================== */
 
+/* The rail is the one thing on the site that wants the full screen width. On
+   a 3440px display the shared 1100px content-wrapper would waste most of it,
+   which matters when the page is projected in a classroom. */
+.content-wrapper--wide {
+  max-width: none;
+  padding-inline: clamp(1rem, 4vw, 5rem);
+}
+
 .t-rail {
   position: relative;
   display: flex;
@@ -53,7 +61,9 @@
 
 .t-stop {
   position: relative;
-  flex: 0 0 min(440px, 84vw);
+  /* Grows with the screen so a projected timeline stays readable from the back
+     of a room, and caps so it never becomes a single giant panel. */
+  flex: 0 0 clamp(340px, 28vw, 660px);
   scroll-snap-align: center;
   display: flex;
   flex-direction: column;
@@ -83,10 +93,10 @@
 
 .t-marker-year {
   padding: 0.3rem 0.85rem;
+  font-size: clamp(0.95rem, 1vw, 1.4rem);
   border-radius: 100px;
   background: rgba(10, 10, 10, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.25);
-  font-size: 1rem;
   font-weight: 800;
   letter-spacing: -0.01em;
   line-height: 1.3;
@@ -118,7 +128,7 @@
 
 .t-media {
   position: relative;
-  height: 260px;
+  height: clamp(190px, 25vh, 400px);
   background: rgba(0, 0, 0, 0.35);
 }
 
@@ -230,13 +240,13 @@
 }
 
 .t-name {
-  font-size: 1.5rem;
+  font-size: clamp(1.35rem, 1.4vw, 2rem);
   text-align: left;
   margin-bottom: 0.75rem;
 }
 
 .t-desc {
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 0.95vw, 1.25rem);
   line-height: 1.65;
   text-align: left;
   color: var(--text-dim);
@@ -252,8 +262,19 @@
 }
 
 @media (max-width: 700px) {
+  .t-stop {
+    /* Leaves roughly 14% of the next card showing, which is what tells people
+       the rail scrolls sideways. */
+    flex: 0 0 86vw;
+  }
+
+  .t-rail {
+    gap: 1.25rem;
+    padding-top: 3rem;
+  }
+
   .t-media {
-    height: 200px;
+    height: clamp(170px, 24vh, 240px);
   }
 
   .t-text {
@@ -261,7 +282,19 @@
   }
 
   .t-marker {
-    left: 1.75rem;
+    left: 1.5rem;
+  }
+}
+
+/* Very wide displays: widen the gap so the stops do not read as one solid
+   band, and give the rail more breathing room. */
+@media (min-width: 2000px) {
+  .t-rail {
+    gap: 3.5rem;
+  }
+
+  .t-text {
+    padding: 2.25rem;
   }
 }
 
