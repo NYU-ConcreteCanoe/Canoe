@@ -10,12 +10,11 @@ before anyone sees it, and undone afterwards.
 
 ---
 
-## The four things you can edit
+## The three things you can edit
 
 | | What it controls |
 |---|---|
 | **Announcements** | The news strip on the front page |
-| **Awards** | Competition results on the Timeline page |
 | **Canoe Timeline** | Each year's canoe: name, description, tags |
 | **Team Roster** | Names, roles and headshots on the About page |
 

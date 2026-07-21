@@ -1,7 +1,7 @@
 {
-  "_comment": "Front-page bulletin board. Newest first. 'pinned: true' floats a post to the top regardless of date. 'image' and 'link' are both optional - omit or leave empty and the card adapts. 'category' controls the chip colour: news | competition | recruitment.",
+  "_comment": "Front-page news strip. Newest first. 'pinned: true' floats a post to the top. A post is EITHER a normal text post (title/body, optional image and link) OR an embedded social post: set 'embed' to a LinkedIn or Instagram post URL and it renders the post itself. Only linkedin.com and instagram.com are allowed. 'category' controls the chip: news | competition | recruitment.",
   "settings": {
-    "maxVisible": 3,
+    "maxVisible": 8,
     "heading": "Latest News"
   },
   "announcements": [
@@ -12,11 +12,22 @@
       "title": "3rd Place at ASCE Nationals, Our Best Finish Yet",
       "body": "Our team placed 3rd overall at the 2026 ASCE National Concrete Canoe Competition, competing against teams from the United States, Canada, China, and India. We also earned 2nd place in Best Technical Proposal and 5th in Best Technical Presentation.",
       "link": {
-        "text": "See all awards",
-        "url": "timeline.html#awards"
+        "text": "",
+        "url": ""
       },
       "image": "",
-      "pinned": true
+      "pinned": true,
+      "embed": ""
+    },
+    {
+      "id": "linkedin-nationals-2026",
+      "date": "2026-06-24",
+      "category": "competition",
+      "title": "NYU Tandon on our national result",
+      "body": "",
+      "embed": "https://www.linkedin.com/embed/feed/update/urn:li:share:7483636426480271360?collapsed=1",
+      "image": "",
+      "pinned": false
     },
     {
       "id": "regionals-2026-sweep",
@@ -25,11 +36,12 @@
       "title": "Clean Sweep at Metropolitan Regionals",
       "body": "At the 2026 ASCE Metropolitan Student Symposium hosted at The College of New Jersey, NYU Concrete Canoe won 1st place in every single judged category, including 1st Place Overall.",
       "link": {
-        "text": "See all awards",
-        "url": "timeline.html#awards"
+        "text": "",
+        "url": ""
       },
       "image": "",
-      "pinned": false
+      "pinned": false,
+      "embed": ""
     },
     {
       "id": "join-the-team",
@@ -42,7 +54,8 @@
         "url": "contact.html"
       },
       "image": "",
-      "pinned": false
+      "pinned": false,
+      "embed": ""
     }
   ]
 }

@@ -103,12 +103,12 @@ nav {
   right: 0;
   z-index: 1000;
   padding: 1.1rem 2rem;
-  background: rgba(8, 8, 8, 0.8);
+  /* Flat bar. The two 1px light borders plus a drop shadow previously read as
+     a thin bright strip across the top, which drew the eye more than the nav
+     itself. A solid dark bar needs neither. */
+  background: rgba(10, 10, 10, 0.92);
   backdrop-filter: saturate(180%) blur(24px);
   -webkit-backdrop-filter: saturate(180%) blur(24px);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
 nav.navbar {
@@ -137,6 +137,10 @@ nav .navbar-brand img {
   width: auto;
   max-width: 150px;
   object-fit: contain;
+  /* The logo artwork is black on transparent, which would disappear against
+     the near-black navbar. This renders it solid white instead. Remove this
+     line if a light version of the logo is supplied. */
+  filter: brightness(0) invert(1);
 }
 
 /* Bootstrap nav-link overrides for glassmorphic style */
@@ -750,180 +754,6 @@ footer {
 }
 
 /* ==============================================
-   TIMELINE TABS (Canoes / Awards)
-   ============================================== */
-
-.timeline-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin: 0 auto 4rem;
-  padding: 0.5rem;
-  width: fit-content;
-  background: var(--glass-bg);
-  backdrop-filter: saturate(180%) blur(var(--blur-amount));
-  -webkit-backdrop-filter: saturate(180%) blur(var(--blur-amount));
-  border: 1px solid var(--glass-border);
-  border-radius: 100px;
-  box-shadow: var(--shadow);
-}
-
-.timeline-tab {
-  padding: 0.75rem 2rem;
-  border: none;
-  border-radius: 100px;
-  background: transparent;
-  color: var(--text-dim);
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.timeline-tab:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text-light);
-}
-
-.timeline-tab[aria-selected="true"] {
-  background: white;
-  color: black;
-}
-
-/* ==============================================
-   AWARDS
-   ============================================== */
-
-.award-card {
-  text-align: left;
-  margin-bottom: 4rem;
-}
-
-.award-header {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
-}
-
-.award-header h2 {
-  margin: 0;
-  text-align: left;
-}
-
-.award-icon {
-  font-size: 3.5rem;
-  line-height: 1;
-}
-
-.award-headline {
-  display: inline-block;
-  padding: 0.4rem 1.2rem;
-  margin-bottom: 1.5rem;
-  background: rgba(255, 215, 0, 0.15);
-  border: 1px solid rgba(255, 215, 0, 0.4);
-  border-radius: 20px;
-  color: #ffd700;
-  font-weight: 700;
-  font-size: 0.9rem;
-}
-
-.award-summary {
-  text-align: left;
-  line-height: 1.8;
-  font-size: 1.15rem;
-}
-
-.placement-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
-  list-style: none;
-  padding: 0;
-}
-
-.placement {
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  padding: 1rem 1.25rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
-}
-
-.placement--featured {
-  background: rgba(255, 215, 0, 0.12);
-  border-color: rgba(255, 215, 0, 0.35);
-}
-
-.placement-place {
-  font-size: 1.5rem;
-  font-weight: 800;
-  white-space: nowrap;
-}
-
-.placement--featured .placement-place {
-  color: #ffd700;
-}
-
-.placement-category {
-  font-size: 0.95rem;
-  color: var(--text-dim);
-}
-
-.award-section-label {
-  margin: 2rem 0 0.75rem;
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.roster-group {
-  margin-bottom: 1.25rem;
-}
-
-.roster-group-name {
-  font-weight: 700;
-  font-size: 0.95rem;
-  margin-bottom: 0.5rem;
-}
-
-.roster-names {
-  line-height: 1.9;
-  color: var(--text-dim);
-  font-size: 0.95rem;
-}
-
-.award-note {
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  font-style: italic;
-  opacity: 0.8;
-  text-align: left;
-}
-
-@media (max-width: 768px) {
-  .timeline-tab {
-    padding: 0.6rem 1.4rem;
-    font-size: 0.9rem;
-  }
-
-  .award-header {
-    gap: 1rem;
-  }
-
-  .award-icon {
-    font-size: 2.5rem;
-  }
-}
-/* ==============================================
    FORM STATUS MESSAGE
    ============================================== */
 
@@ -1015,5 +845,48 @@ footer {
   .grid-square .card {
     aspect-ratio: auto;
     padding: 2rem;
+  }
+}
+
+/* ==============================================
+   NEWS: EMBEDDED SOCIAL POSTS
+   LinkedIn/Instagram embeds have their own fixed
+   chrome, so the card gives them room rather than
+   trying to restyle them.
+   ============================================== */
+
+.news-card--embed {
+  flex: 0 0 min(520px, 88vw);
+}
+
+.news-embed {
+  position: relative;
+  width: 100%;
+  height: 560px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.news-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* The embed carries its own date and author, so the strip only adds a thin
+   label above it. */
+.news-body--embed {
+  padding: 1.1rem 1.5rem 1.4rem;
+  flex: 0 0 auto;
+}
+
+.news-body--embed h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+
+@media (max-width: 700px) {
+  .news-embed {
+    height: 480px;
   }
 }

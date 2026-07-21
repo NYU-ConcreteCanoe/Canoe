@@ -140,105 +140,6 @@ collections:
                 }
 
   # ---------------------------------------------------------------------------
-  # Awards and competition results.
-  # ---------------------------------------------------------------------------
-  - name: awards
-    label: Awards
-    icon: trophy
-    files:
-      - name: awards
-        label: Competition Results
-        file: assets/data/awards.json
-        description: Results shown under the Awards tab on the Timeline page.
-        fields:
-          - name: seasons
-            label: Seasons
-            label_singular: Season
-            widget: list
-            summary: "{{fields.season}}"
-            fields:
-              - {
-                  name: season,
-                  label: Season,
-                  widget: string,
-                  hint: "e.g. 2026-2027",
-                }
-              - name: events
-                label: Competitions
-                label_singular: Competition
-                widget: list
-                summary: "{{fields.shortName}}"
-                fields:
-                  - { name: id, label: Internal ID, widget: string }
-                  - {
-                      name: name,
-                      label: Full competition name,
-                      widget: string,
-                    }
-                  - {
-                      name: shortName,
-                      label: Short name,
-                      widget: string,
-                      hint: "Shown as the heading, e.g. Nationals",
-                    }
-                  - { name: location, label: Location, widget: string, required: false }
-                  - {
-                      name: headline,
-                      label: Headline banner,
-                      widget: string,
-                      required: false,
-                      hint: "Gold banner, e.g. Best placement in program history",
-                    }
-                  - { name: summary, label: Summary, widget: text, required: false }
-                  - name: placements
-                    label: Placements
-                    label_singular: Placement
-                    widget: list
-                    summary: "{{fields.place}} - {{fields.category}}"
-                    required: false
-                    fields:
-                      - { name: place, label: Place, widget: string, hint: "e.g. 3rd" }
-                      - {
-                          name: category,
-                          label: Category,
-                          widget: string,
-                          hint: "e.g. Overall, Technical Proposal",
-                        }
-                      - {
-                          name: featured,
-                          label: Highlight this one,
-                          widget: boolean,
-                          default: false,
-                          required: false,
-                        }
-                  - {
-                      name: innovations,
-                      label: Innovations,
-                      widget: list,
-                      required: false,
-                      hint: "Short phrases, shown as chips",
-                    }
-                  - name: roster
-                    label: Team credits
-                    widget: list
-                    required: false
-                    summary: "{{fields.group}}"
-                    fields:
-                      - {
-                          name: group,
-                          label: Group name,
-                          widget: string,
-                          hint: "e.g. Paddlers, Presenters (5th place)",
-                        }
-                      - { name: members, label: Members, widget: list }
-                  - { name: note, label: Closing note, widget: text, required: false }
-                  - name: images
-                    label: Photos
-                    widget: list
-                    required: false
-                    field: { name: image, label: Photo, widget: image }
-
-  # ---------------------------------------------------------------------------
   # Canoe history. Images live under assets/img/canoes/<year>/.
   # ---------------------------------------------------------------------------
   - name: canoes
@@ -315,6 +216,11 @@ collections:
 
 # -----------------------------------------------------------------------------
 # Deliberately NOT editable through this panel:
+#
+#   Awards (assets/data/awards.json)
+#     The data is kept and still holds the 2026 Nationals and Regionals
+#     results, but nothing renders it since the Awards tab was removed. Re-add
+#     a collection here when the trophy-room page is built.
 #
 #   Sponsors (assets/data/sponsors.json)
 #     Data-driven and ready, but left out to keep the panel scoped to the three

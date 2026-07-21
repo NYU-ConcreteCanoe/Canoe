@@ -14,7 +14,6 @@ GitHub Pages redeploys automatically when a PR is merged.
 | Section | File it writes | Includes |
 |---|---|---|
 | Announcements | `assets/data/announcements.json` | Text, optional image, optional link, pinning |
-| Awards | `assets/data/awards.json` | Results, placements, roster credits, photos |
 | Canoe Timeline | `assets/data/canoes.json` | Year, name, description, tags, photos |
 | Team Roster | `assets/data/team.json` | Names, roles, headshots |
 

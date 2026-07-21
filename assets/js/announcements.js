@@ -54,11 +54,63 @@
     return String(b.date || "").localeCompare(String(a.date || ""));
   }
 
+  /* ---------- Social embeds ---------- */
+
+  // Only these hosts may be framed. An embed URL comes from the admin panel,
+  // and an arbitrary iframe src would let anyone with edit access frame any
+  // page on the site, so the host is checked rather than trusted.
+  var EMBED_HOSTS = {
+    "www.linkedin.com": "LinkedIn post",
+    "linkedin.com": "LinkedIn post",
+    "www.instagram.com": "Instagram post",
+    "instagram.com": "Instagram post",
+  };
+
+  function embedInfo(url) {
+    var raw = String(url == null ? "" : url).trim();
+    if (!raw) return null;
+    var parsed;
+    try {
+      parsed = new URL(raw, location.href);
+    } catch (err) {
+      return null;
+    }
+    if (parsed.protocol !== "https:") return null;
+    var label = EMBED_HOSTS[parsed.hostname];
+    if (!label) return null;
+
+    // Instagram permalinks need /embed appended to be framable.
+    if (/instagram\.com$/.test(parsed.hostname) &&
+        !/\/embed\/?$/.test(parsed.pathname)) {
+      parsed.pathname = parsed.pathname.replace(/\/?$/, "/") + "embed";
+    }
+    return { url: parsed.href, label: label };
+  }
+
   function renderCard(post) {
     var date = formatDate(post.date);
-    var category = esc(post.category || "news");
     var image = safeUrl(post.image);
     var link = post.link && safeUrl(post.link.url) ? post.link : null;
+    var embed = embedInfo(post.embed);
+
+    // An embedded post is the card. The surrounding chrome stays so it still
+    // reads as part of the strip.
+    if (embed) {
+      return (
+        '<article class="news-card news-card--embed">' +
+        '<div class="news-embed">' +
+        '<iframe src="' + esc(embed.url) + '" title="' + esc(embed.label) +
+        '" loading="lazy" frameborder="0" allowfullscreen ' +
+        'referrerpolicy="no-referrer-when-downgrade" ' +
+        'sandbox="allow-scripts allow-same-origin allow-popups"></iframe>' +
+        "</div>" +
+        '<div class="news-body news-body--embed">' +
+        (date ? '<div class="news-meta"><span class="news-date">' +
+          esc(date) + "</span></div>" : "") +
+        (post.title ? "<h3>" + esc(post.title) + "</h3>" : "") +
+        "</div></article>"
+      );
+    }
 
     return (
       '<article class="news-card">' +
@@ -67,11 +119,8 @@
           '" alt="" loading="lazy" onerror="this.remove()">'
         : "") +
       '<div class="news-body">' +
-      '<div class="news-meta">' +
-      (date ? '<span class="news-date">' + esc(date) + "</span>" : "") +
-      '<span class="tag">' + category + "</span>" +
-      (post.pinned ? '<span class="tag">Pinned</span>' : "") +
-      "</div>" +
+      (date ? '<div class="news-meta"><span class="news-date">' +
+        esc(date) + "</span></div>" : "") +
       "<h3>" + esc(post.title) + "</h3>" +
       "<p>" + esc(post.body) + "</p>" +
       (link
