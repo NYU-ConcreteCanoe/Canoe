@@ -9,15 +9,8 @@
 
 backend:
   name: github
-  # Confirmed: this is the repo GitHub Pages serves from. Note that a local
-  # clone's `origin` may point at a personal fork instead - the admin panel
-  # always targets the repo named here, not wherever you cloned from.
   repo: nyu-concretecanoe/Canoe
   branch: main
-  # TODO: URL of the Cloudflare Worker that completes the GitHub OAuth
-  # handshake. GitHub's token exchange needs a client secret, which cannot
-  # live in a browser. Setup instructions in admin/README.md.
-  base_url: https://REPLACE-ME.workers.dev
 
 # Every save opens a pull request instead of committing to main directly.
 #
@@ -31,14 +24,8 @@ publish_mode: editorial_workflow
 media_folder: assets/img/uploads
 public_folder: assets/img/uploads
 
-# -----------------------------------------------------------------------------
 # Image handling.
-#
-# Phone photos are 2-8 MB. Committed as-is they would sit in git history
-# permanently and burn through the 1 GB GitHub Pages cap in roughly 125
-# uploads. Sveltia resizes and converts to WebP in the browser BEFORE the
-# commit, which takes a typical photo to a few hundred KB.
-# -----------------------------------------------------------------------------
+# Phone photos are 2-8 MB. Sveltia resizes and converts to WebP.
 media_libraries:
   default:
     config:
@@ -51,9 +38,7 @@ media_libraries:
           height: 2000
 
 collections:
-  # ---------------------------------------------------------------------------
   # Front page bulletin board. This is the one most people will use.
-  # ---------------------------------------------------------------------------
   - name: announcements
     label: Announcements
     icon: campaign
@@ -157,9 +142,7 @@ collections:
                   required: false,
                 }
 
-  # ---------------------------------------------------------------------------
   # Canoe history. Images live under assets/img/canoes/<year>/.
-  # ---------------------------------------------------------------------------
   - name: canoes
     label: Canoe Timeline
     icon: sailing
@@ -194,9 +177,7 @@ collections:
                 required: false
                 field: { name: image, label: Photo, widget: image }
 
-  # ---------------------------------------------------------------------------
   # Student leadership shown on the About page.
-  # ---------------------------------------------------------------------------
   - name: team
     label: Team Roster
     icon: group
@@ -231,25 +212,3 @@ collections:
               - { name: name, label: Name, widget: string }
               - { name: role, label: Role, widget: string, required: false }
               - { name: image, label: Headshot, widget: image, required: false }
-
-# -----------------------------------------------------------------------------
-# Deliberately NOT editable through this panel:
-#
-#   Awards (assets/data/awards.json)
-#     The data is kept and still holds the 2026 Nationals and Regionals
-#     results, but nothing renders it since the Awards tab was removed. Re-add
-#     a collection here when the trophy-room page is built.
-#
-#   Sponsors (assets/data/sponsors.json)
-#     Data-driven and ready, but left out to keep the panel scoped to the three
-#     things that change most. To enable, add a collection block pointing at
-#     assets/data/sponsors.json with fields: name, tier (select), commitment,
-#     logo (image, media_folder /assets/img/logos).
-#
-#   Page copy on index / about / contact / paddling-improvement
-#     Still hardcoded in HTML on purpose. This is structural text that rarely
-#     changes, and exposing it would let an editor break the layout.
-#
-# Anything not listed in `collections` above is unreachable from the panel. An
-# editor cannot touch HTML, CSS, or JS through this interface at all.
-# -----------------------------------------------------------------------------
