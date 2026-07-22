@@ -949,3 +949,70 @@ footer {
 .news-embed--video iframe {
   background: #000;
 }
+
+/* About page: subteams as one gapless block of purple pieces. */
+.subteams-lead {
+  text-align: center;
+  color: var(--text-dim);
+  opacity: 0.85;
+  margin: -0.5rem 0 1.5rem;
+}
+
+.puzzle-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;                       /* touching = one block */
+  max-width: 900px;
+  margin: 2rem auto 0;
+  border-radius: 20px;
+  overflow: hidden;            /* round just the outer corners */
+}
+
+.puzzle-piece {
+  position: relative;
+  min-height: 200px;
+  animation: joinIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+
+/* Muted purple, a slightly different tone per block. */
+.piece-bg { position: absolute; inset: 0; z-index: 0; background: #5f5878; }
+.puzzle-piece:nth-child(1) .piece-bg { background: #675f80; }
+.puzzle-piece:nth-child(2) .piece-bg { background: #726a8d; }
+.puzzle-piece:nth-child(3) .piece-bg { background: #5f5878; }
+.puzzle-piece:nth-child(4) .piece-bg { background: #7b7295; }
+.puzzle-piece:nth-child(5) .piece-bg { background: #6d6486; }
+.puzzle-piece:nth-child(6) .piece-bg { background: #565070; }
+.puzzle-piece:nth-child(7) .piece-bg { background: #746b90; }
+.piece--hero .piece-bg { background: #837b9c; }
+
+.piece-body {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 1.6rem 1.4rem;
+  box-sizing: border-box;
+}
+.piece-body h3 { margin: 0 0 0.4rem; font-size: 1.1rem; color: #fff; }
+.piece-body p { margin: 0; font-size: 0.85rem; line-height: 1.4; color: rgba(255, 255, 255, 0.9); }
+
+/* Blocks slide in from the outside and lock together. */
+@keyframes joinIn {
+  from { opacity: 0; transform: translate(var(--jx, 0), var(--jy, 0)); }
+  to   { opacity: 1; transform: none; }
+}
+.puzzle-piece:nth-child(1) { --jx: -50px; --jy: -40px; animation-delay: 0.00s; }
+.puzzle-piece:nth-child(2) { --jx: -18px; --jy: -46px; animation-delay: 0.05s; }
+.puzzle-piece:nth-child(3) { --jx:  18px; --jy: -46px; animation-delay: 0.10s; }
+.puzzle-piece:nth-child(4) { --jx:  50px; --jy: -40px; animation-delay: 0.15s; }
+.puzzle-piece:nth-child(5) { --jx: -50px; --jy:  40px; animation-delay: 0.20s; }
+.puzzle-piece:nth-child(6) { --jx: -18px; --jy:  46px; animation-delay: 0.25s; }
+.puzzle-piece:nth-child(7) { --jx:  18px; --jy:  46px; animation-delay: 0.30s; }
+.puzzle-piece:nth-child(8) { --jx:  50px; --jy:  40px; animation-delay: 0.35s; }
+
+@media (max-width: 720px) {
+  .puzzle-grid { grid-template-columns: repeat(2, 1fr); max-width: 460px; }
+}

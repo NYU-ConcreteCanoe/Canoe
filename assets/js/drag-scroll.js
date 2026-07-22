@@ -15,26 +15,29 @@
     var opts = options || {};
     var step = opts.step || 0;
 
-    var down = false, startX = 0, startScroll = 0, moved = 0;
+    var down = false, startX = 0, startScroll = 0, moved = 0, onText = false;
 
     rail.addEventListener("pointerdown", function (e) {
       // Let links and buttons keep their normal click behaviour.
       if (e.target.closest("a, button")) return;
+      // On text: leave it selectable, don't drag.
+      onText = !!e.target.closest(".news-body, .t-text");
       down = true;
       moved = 0;
       startX = e.clientX;
       startScroll = rail.scrollLeft;
-      rail.classList.add("is-dragging");
     });
 
     rail.addEventListener("pointermove", function (e) {
-      if (!down) return;
+      if (!down || onText) return;
       var dx = e.clientX - startX;
       moved = Math.abs(dx);
-      // Only capture the pointer once this looks like a drag, so a plain
-      // click still lands on whatever is underneath.
-      if (moved > 4 && rail.setPointerCapture) {
-        try { rail.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+      // Begin dragging only past a small threshold.
+      if (moved > 4) {
+        rail.classList.add("is-dragging");
+        if (rail.setPointerCapture) {
+          try { rail.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+        }
       }
       rail.scrollLeft = startScroll - dx;
     });

@@ -57,7 +57,7 @@ function expectEmpty(msg, offenders, { asWarning = false, limit = 12 } = {}) {
  * Filesystem helpers
  * ------------------------------------------------------------------ */
 
-const IGNORED_DIRS = new Set([".git", "node_modules", ".vscode"]);
+const IGNORED_DIRS = new Set([".git", "node_modules", ".vscode", ".claude"]);
 
 function walk(dir, out = []) {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
@@ -71,11 +71,9 @@ function walk(dir, out = []) {
 
 const ALL_FILES = walk(ROOT);
 const byExt = (...exts) => ALL_FILES.filter((f) => exts.includes(extname(f).toLowerCase()));
-// admin/index.html is a mount point for the CMS, not a page of the site. It
-// intentionally has no <main>, <h1> or navigation, so page-level checks skip it
-// while security and syntax checks still cover it.
+// admin/ and manage/ are private tools; skip page-level checks.
 const ALL_HTML = byExt(".html");
-const HTML = ALL_HTML.filter((f) => !rel(f).startsWith("admin/"));
+const HTML = ALL_HTML.filter((f) => !/^(admin|manage)\//.test(rel(f)));
 const JS = byExt(".js", ".mjs");
 const CSS = byExt(".css");
 const JSON_FILES = byExt(".json");

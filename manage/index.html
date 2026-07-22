@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Private tool; keep out of search results. -->
+    <meta name="robots" content="noindex, nofollow">
+    <title>Manage the Timeline | NYU Concrete Canoe</title>
+    <link rel="icon" href="../assets/img/logo_transparent.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* Standalone admin styling; colours mirror the site. */
+        :root {
+            --bg: #0a0a0a;
+            --panel: rgba(255, 255, 255, 0.04);
+            --panel-2: rgba(255, 255, 255, 0.06);
+            --line: rgba(255, 255, 255, 0.12);
+            --text: #f2f2f2;
+            --dim: #9aa0a6;
+            --accent: #8a5cf6;
+            --danger: #ff6b6b;
+            --ok: #4ade80;
+            --radius: 14px;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+        }
+
+        a { color: var(--accent); }
+
+        .wrap { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+
+        header.topbar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        header.topbar img { height: 34px; }
+        header.topbar h1 { font-size: 1.15rem; margin: 0; font-weight: 600; }
+        header.topbar .spacer { flex: 1; }
+        header.topbar .who { color: var(--dim); font-size: 0.85rem; }
+
+        button, .btn {
+            font: inherit;
+            cursor: pointer;
+            border: 1px solid var(--line);
+            background: var(--panel-2);
+            color: var(--text);
+            padding: 0.55rem 0.95rem;
+            border-radius: 10px;
+            transition: background 0.15s, border-color 0.15s, opacity 0.15s;
+        }
+        button:hover, .btn:hover { background: rgba(255, 255, 255, 0.12); }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .btn-primary { background: #fff; color: #000; border-color: #fff; font-weight: 600; }
+        .btn-primary:hover { background: #e8e8e8; }
+        .btn-ghost { background: transparent; }
+        .btn-danger { color: var(--danger); border-color: rgba(255, 107, 107, 0.4); }
+        .btn-danger:hover { background: rgba(255, 107, 107, 0.12); }
+        .btn-sm { padding: 0.3rem 0.55rem; font-size: 0.85rem; border-radius: 8px; }
+
+        input[type="text"], input[type="number"], input[type="password"], textarea {
+            font: inherit;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            color: var(--text);
+            padding: 0.7rem 0.85rem;
+        }
+        textarea { resize: vertical; min-height: 5.5rem; }
+        label { display: block; font-size: 0.85rem; color: var(--dim); margin-bottom: 0.4rem; }
+        .field { margin-bottom: 1.1rem; }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 1.4rem;
+        }
+
+        /* ---- Token gate ---- */
+        #tokenGate { max-width: 620px; margin: 3rem auto; }
+        #tokenGate ol { color: var(--dim); padding-left: 1.2rem; }
+        #tokenGate code {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.1rem 0.35rem;
+            border-radius: 5px;
+            color: var(--text);
+        }
+        .token-row { display: flex; gap: 0.6rem; margin-top: 0.5rem; }
+        .token-row input { flex: 1; }
+
+        /* ---- Workspace ---- */
+        #workspace { display: grid; grid-template-columns: 240px 1fr; gap: 1.5rem; align-items: start; }
+        @media (max-width: 760px) { #workspace { grid-template-columns: 1fr; } }
+
+        #years .year-list { list-style: none; margin: 0 0 1rem; padding: 0; max-height: 60vh; overflow-y: auto; }
+        #years .year-list li { margin-bottom: 0.35rem; }
+        #years .year-list button {
+            width: 100%; text-align: left; display: flex; justify-content: space-between; align-items: center;
+        }
+        #years .year-list button.active { border-color: var(--accent); background: rgba(138, 92, 246, 0.15); }
+        #years .year-list .count { color: var(--dim); font-size: 0.8rem; }
+
+        .editor-head { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+        .editor-head h2 { margin: 0; font-size: 1.4rem; }
+        .editor-head .sub { color: var(--dim); font-size: 0.9rem; }
+
+        /* ---- Tags ---- */
+        .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.5rem; }
+        .tag-chip {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            background: rgba(138, 92, 246, 0.18); border: 1px solid rgba(138, 92, 246, 0.4);
+            border-radius: 999px; padding: 0.2rem 0.6rem; font-size: 0.85rem;
+        }
+        .tag-chip button { border: none; background: none; padding: 0; color: var(--dim); font-size: 0.9rem; line-height: 1; }
+        .tag-chip button:hover { color: var(--danger); background: none; }
+
+        /* ---- Photos ---- */
+        .section-title { font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim); margin: 1.6rem 0 0.8rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.8rem; }
+        .thumb { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; background: #000; }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .thumb .thumb-x {
+            position: absolute; top: 5px; right: 5px; width: 30px; height: 30px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; padding: 0;
+            background: rgba(0, 0, 0, 0.6); border-color: rgba(255, 255, 255, 0.2);
+        }
+        .thumb.marked-delete { opacity: 0.45; }
+        .thumb.marked-delete::after {
+            content: "Will delete"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 0, 0, 0.25); font-size: 0.8rem; font-weight: 600;
+        }
+        .thumb.pending::after {
+            content: "New"; position: absolute; bottom: 6px; left: 6px; background: var(--ok); color: #000;
+            font-size: 0.7rem; font-weight: 700; padding: 0.05rem 0.4rem; border-radius: 5px;
+        }
+
+        .dropzone {
+            border: 2px dashed var(--line); border-radius: var(--radius); padding: 1.6rem; text-align: center;
+            color: var(--dim); transition: border-color 0.15s, background 0.15s; cursor: pointer;
+        }
+        .dropzone.drag { border-color: var(--accent); background: rgba(138, 92, 246, 0.08); color: var(--text); }
+        .dropzone i { font-size: 1.6rem; display: block; margin-bottom: 0.5rem; }
+
+        .actions { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-top: 1.6rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
+        .actions .spacer { flex: 1; }
+
+        /* ---- Toast ---- */
+        #toast {
+            position: fixed; left: 50%; bottom: 1.5rem; transform: translateX(-50%);
+            max-width: 90%; z-index: 50; display: flex; flex-direction: column; gap: 0.5rem; align-items: center;
+        }
+        .toast {
+            background: #16181d; border: 1px solid var(--line); border-radius: 12px; padding: 0.8rem 1.1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); font-size: 0.9rem; max-width: 520px;
+        }
+        .toast.ok { border-color: rgba(74, 222, 128, 0.4); }
+        .toast.err { border-color: rgba(255, 107, 107, 0.5); }
+        .toast a { text-decoration: underline; }
+
+        .muted { color: var(--dim); font-size: 0.9rem; }
+        .empty-note { color: var(--dim); padding: 1rem 0; }
+        [hidden] { display: none !important; }
+
+        /* Keyboard skip link: off-screen until focused. */
+        .skip-link {
+            position: absolute; left: -999px; top: 0; z-index: 100;
+            background: #fff; color: #000; padding: 0.6rem 1rem; border-radius: 0 0 8px 0;
+        }
+        .skip-link:focus { left: 0; }
+    </style>
+</head>
+
+<body>
+    <a class="skip-link" href="#workspace">Skip to content</a>
+    <div class="wrap">
+        <header class="topbar">
+            <img src="../assets/img/logo_transparent.png" alt="">
+            <h1>Manage the Timeline</h1>
+            <span class="spacer"></span>
+            <span class="who" id="who" hidden></span>
+            <a class="btn btn-ghost btn-sm" href="../timeline.html" target="_blank" rel="noopener">View timeline</a>
+            <button class="btn-ghost btn-sm" id="signOut" hidden>Sign out</button>
+        </header>
+
+        <!-- Sign in: paste a GitHub token once. -->
+        <section id="tokenGate" class="card">
+            <h2 style="margin-top:0;">Sign in</h2>
+            <p class="muted">
+                This tool edits the website directly through GitHub. Paste a personal
+                access token once and it stays in this browser until you sign out.
+            </p>
+            <ol>
+                <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub &rarr; fine-grained tokens</a>.</li>
+                <li><strong>Resource owner:</strong> <code>NYU-ConcreteCanoe</code>.</li>
+                <li><strong>Repository access:</strong> Only select repositories &rarr; <code>Canoe</code>.</li>
+                <li><strong>Permissions:</strong> Repository permissions &rarr; <code>Contents</code> &rarr; <em>Read and write</em>.</li>
+                <li>Generate, copy the token, and paste it below.</li>
+            </ol>
+            <p class="muted" style="font-size:0.82rem;">
+                If the organisation blocks fine-grained tokens, a classic token with the
+                <code>repo</code> scope works too.
+            </p>
+            <div class="token-row">
+                <input type="password" id="tokenInput" placeholder="github_pat_..." autocomplete="off" spellcheck="false">
+                <button class="btn-primary" id="tokenSave">Save</button>
+            </div>
+            <p id="tokenError" class="muted" style="color:var(--danger);" hidden></p>
+        </section>
+
+        <!-- Main editing surface -->
+        <main id="workspace" hidden>
+            <aside id="years" class="card">
+                <ul class="year-list" id="yearList"></ul>
+                <button class="btn-primary" id="newYear" style="width:100%;">
+                    <i class="fa fa-plus"></i>&nbsp; New year
+                </button>
+            </aside>
+            <section id="editor" class="card">
+                <p class="empty-note">Pick a year on the left, or add a new one.</p>
+            </section>
+        </main>
+    </div>
+
+    <div id="toast"></div>
+
+    <script src="manage.js" defer></script>
+</body>
+
+</html>

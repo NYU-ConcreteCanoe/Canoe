@@ -6,3 +6,8 @@
 # Editor and OS noise
 Thumbs.db
 *.swp
+
+# Local env / secrets
+.env
+.env.local
+*.env
