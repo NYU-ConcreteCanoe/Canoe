@@ -29,6 +29,18 @@
     );
   }
 
+  // The light WebP copies built by scripts/build-image-derivatives.mjs, used for
+  // the card thumbnails so the rail stays quick to load. The full-screen viewer
+  // still opens the full-resolution original. A missing derivative falls back to
+  // the original via the <img> onerror below, so nothing breaks if the build has
+  // not run yet.
+  //   assets/img/canoes/2019/1.JPG -> assets/img/derived/canoes/2019/1.webp
+  function derived(src) {
+    return src
+      .replace(/^assets\/img\/canoes\//, "assets/img/derived/canoes/")
+      .replace(/\.[^.]+$/, ".webp");
+  }
+
   function getJSON(path) {
     return fetch(path).then(function (res) {
       if (!res.ok) throw new Error(path + ": HTTP " + res.status);
@@ -58,10 +70,11 @@
         images
           .map(function (img, i) {
             return (
-              '<img src="' + esc(img) + '" alt="' +
+              '<img src="' + esc(derived(img)) + '" alt="' +
               esc(canoe.name + " " + year) + '"' +
               (i === 0 ? ' class="is-active"' : "") +
-              ' loading="lazy" draggable="false">'
+              ' loading="lazy" draggable="false" decoding="async"' +
+              ' onerror="this.onerror=null;this.src=&quot;' + esc(img) + '&quot;">'
             );
           })
           .join("") +

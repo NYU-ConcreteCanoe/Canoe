@@ -6,3 +6,7 @@
 # Editor and OS noise
 Thumbs.db
 *.swp
+
+# Node dependencies (sharp, used to build image derivatives). Installed with
+# `npm install`; not committed. package.json / package-lock.json are.
+node_modules/

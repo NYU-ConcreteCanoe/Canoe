@@ -14,9 +14,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Start the hero downloading before anything else so it springs up first.
+         Points at the light WebP copy; background.js leaves this baked hero alone
+         and only fades it in (see the .bg-slideshow div in the body). -->
+    <link rel="preload" as="image" fetchpriority="high"
+        href="assets/img/derived/canoes/2026/P3240558.webp">
 </head>
 
 <body class="page-home">
+
+    <!-- Baked hero: already in the HTML so the browser downloads it during parse,
+         before any script runs. background.js detects this and skips its random
+         pick here, so the home page hero is deterministic and appears fastest.
+         Falls back to the full original if the light copy is missing. -->
+    <div class="bg-slideshow" aria-hidden="true">
+        <img src="assets/img/derived/canoes/2026/P3240558.webp" alt="" decoding="async"
+            fetchpriority="high"
+            onerror="this.onerror=null;this.src='assets/img/canoes/2026/P3240558.JPG'">
+    </div>
 
     <a class="skip-link" href="#main">Skip to content</a>
 

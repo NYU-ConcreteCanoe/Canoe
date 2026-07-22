@@ -1,0 +1,16 @@
+{
+  "name": "nyu-concrete-canoe-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static site for the NYU Concrete Canoe team.",
+  "type": "module",
+  "scripts": {
+    "manifest": "node scripts/build-image-manifest.mjs",
+    "derivatives": "node scripts/build-image-derivatives.mjs",
+    "images": "node scripts/build-image-derivatives.mjs && node scripts/build-image-manifest.mjs",
+    "test": "node scripts/test.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.3"
+  }
+}
