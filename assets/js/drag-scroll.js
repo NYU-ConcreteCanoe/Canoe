@@ -62,16 +62,19 @@
       }
     }, true);
 
-    // A vertical wheel over the rail moves it sideways, but only while it
-    // still has room. At either end the page takes over again, so the user is
-    // never trapped in the rail.
+    // Only genuine horizontal intent moves the rail sideways: a trackpad
+    // sideways swipe, or Shift + wheel. A plain vertical wheel is left alone so
+    // the page keeps scrolling normally and the user is never trapped in the
+    // rail. Drag, arrow keys and Shift + wheel remain for navigating the rail.
     rail.addEventListener("wheel", function (e) {
-      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+      var horizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+      var delta = horizontal ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+      if (!delta) return;
       var atStart = rail.scrollLeft <= 0;
       var atEnd = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 1;
-      if ((e.deltaY < 0 && atStart) || (e.deltaY > 0 && atEnd)) return;
+      if ((delta < 0 && atStart) || (delta > 0 && atEnd)) return;
       e.preventDefault();
-      rail.scrollLeft += e.deltaY;
+      rail.scrollLeft += delta;
     }, { passive: false });
 
     // Keyboard access for the focused rail.
