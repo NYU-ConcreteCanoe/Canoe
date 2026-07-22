@@ -1,5 +1,13 @@
 {
-  "_comment": "Team shown on the About page. 'leadership' renders as cards. Leave 'image' empty if there is no headshot yet and a placeholder is used automatically. Headshots live in assets/img/headshots/.",
+  "_comment": "Team shown on the About page. 'faculty' and 'leadership' both render as cards. Leave 'image' empty if there is no headshot yet and a placeholder is used automatically. Headshots live in assets/img/headshots/. Edit through /manage/.",
+  "faculty": [
+    {
+      "name": "Weihua Jin",
+      "role": "Faculty Advisor",
+      "email": "wjin@nyu.edu",
+      "image": "assets/img/canoes/2022/2.jpg"
+    }
+  ],
   "leadership": [
     {
       "name": "Janice Chen",

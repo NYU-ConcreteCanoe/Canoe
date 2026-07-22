@@ -22,8 +22,46 @@ function safePath(path) {
   return p;
 }
 
+const PLACEHOLDER = "assets/img/headshots/placeholder.jpeg";
+
+// One person card. Faculty lead with the name and add an email line; students
+// lead with the photo. Both fall back to the placeholder if the file is gone.
+function cardHTML(member, withEmail) {
+  const name = esc(member.name || "Team Member");
+  const role = esc(member.role || "NYU Concrete Canoe");
+  const imagePath = esc(safePath(member.image) || PLACEHOLDER);
+  const email = esc(member.email || "");
+
+  const img = `
+                    <img
+                        src="${imagePath}"
+                        alt="${name}"
+                        style="width: 100%; border-radius: 12px; margin-bottom: 1.5rem;"
+                        onerror="this.onerror=null; this.src='${PLACEHOLDER}'; this.style.opacity='0.5';"
+                    >`;
+
+  if (withEmail) {
+    return `
+                <div class="card">
+                    <h3>${name}</h3>${img}
+                    <p>${role}</p>
+                    ${email ? `<p style="font-size: 1rem; opacity: 0.8;">${email}</p>` : ""}
+                </div>
+                `;
+  }
+
+  return `
+                <div class="card">${img}
+                    <h3>${name}</h3>
+                    <p>${role}</p>
+                </div>
+                `;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("team-container");
+  const facultyContainer = document.getElementById("faculty-container");
+  const facultySection = document.getElementById("faculty");
 
   // Path to team JSON file
   fetch("assets/data/team.json")
@@ -36,31 +74,22 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error("JSON structure is incorrect");
       }
 
-      const cardsHTML = data.leadership
-        .map((member) => {
-          // Default Parameters if elements are missing in JSON
-          const name = esc(member.name || "Team Member");
-          const role = esc(member.role || "NYU Concrete Canoe");
-          const imagePath = esc(
-            safePath(member.image) || "assets/img/headshots/placeholder.jpeg",
-          );
-
-          return `
-                <div class="card">
-                    <img
-                        src="${imagePath}"
-                        alt="${name}"
-                        style="width: 100%; border-radius: 12px; margin-bottom: 1.5rem;"
-                        onerror="this.onerror=null; this.src='assets/img/headshots/placeholder.jpeg'; this.style.opacity='0.5';"
-                    >
-                    <h3>${name}</h3>
-                    <p>${role}</p>
-                </div>
-                `;
-        })
+      container.innerHTML = data.leadership
+        .map((member) => cardHTML(member, false))
         .join("");
 
-      container.innerHTML = cardsHTML;
+      // The faculty section stays hidden unless there is someone to show.
+      const faculty = Array.isArray(data.faculty) ? data.faculty : [];
+      if (facultyContainer && facultySection) {
+        if (faculty.length) {
+          facultyContainer.innerHTML = faculty
+            .map((member) => cardHTML(member, true))
+            .join("");
+          facultySection.hidden = false;
+        } else {
+          facultySection.hidden = true;
+        }
+      }
     })
     .catch((error) => {
       console.error("Error loading team cards:", error);

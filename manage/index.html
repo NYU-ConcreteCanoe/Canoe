@@ -174,6 +174,33 @@
         .toast.err { border-color: rgba(255, 107, 107, 0.5); }
         .toast a { text-decoration: underline; }
 
+        /* ---- View tabs ---- */
+        .viewtabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .viewtabs button.active { border-color: var(--accent); background: rgba(138, 92, 246, 0.18); font-weight: 600; }
+
+        /* ---- People (leadership editor) ---- */
+        .person {
+            display: flex; gap: 0.9rem; align-items: flex-start;
+            border: 1px solid var(--line); border-radius: 12px; padding: 0.8rem;
+            margin-bottom: 0.7rem; background: var(--panel-2);
+        }
+        .person.dragging { opacity: 0.4; }
+        .person.drop-target { border-color: var(--accent); }
+        .person .handle { cursor: grab; color: var(--dim); padding: 0.4rem 0.2rem; user-select: none; }
+        .person .handle:active { cursor: grabbing; }
+        .person .shot { width: 74px; flex: 0 0 74px; }
+        .person .shot img {
+            width: 74px; height: 74px; object-fit: cover; border-radius: 10px;
+            border: 1px solid var(--line); background: #000; display: block;
+        }
+        .person .shot button { width: 100%; margin-top: 0.35rem; padding: 0.2rem; font-size: 0.75rem; }
+        .person .fields { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.45rem; }
+        .person .fields input { padding: 0.45rem 0.6rem; }
+        .person .row-actions { display: flex; flex-direction: column; gap: 0.3rem; }
+        .person .row-actions button { padding: 0.25rem 0.5rem; line-height: 1; }
+        .person .new-badge { color: var(--ok); font-size: 0.72rem; font-weight: 700; }
+        @media (max-width: 620px) { .person { flex-wrap: wrap; } .person .fields { flex-basis: 100%; } }
+
         .muted { color: var(--dim); font-size: 0.9rem; }
         .empty-note { color: var(--dim); padding: 1rem 0; }
         [hidden] { display: none !important; }
@@ -207,22 +234,22 @@
                 access token once and it stays in this browser until you sign out.
             </p>
             <ol>
-                <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub &rarr; fine-grained tokens</a>.</li>
-                <li><strong>Resource owner:</strong> <code>NYU-ConcreteCanoe</code>.</li>
-                <li><strong>Repository access:</strong> Only select repositories &rarr; <code>Canoe</code>.</li>
-                <li><strong>Permissions:</strong> Repository permissions &rarr; <code>Contents</code> &rarr; <em>Read and write</em>.</li>
+                <li>Open <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">GitHub &rarr; Personal access tokens</a> and click <strong>Generate new token (classic)</strong> &mdash; not fine-grained.</li>
+                <li>Under <strong>Select scopes</strong>, check <code>repo</code> (this grants read and write access).</li>
                 <li>Generate, copy the token, and paste it below.</li>
             </ol>
-            <p class="muted" style="font-size:0.82rem;">
-                If the organisation blocks fine-grained tokens, a classic token with the
-                <code>repo</code> scope works too.
-            </p>
             <div class="token-row">
-                <input type="password" id="tokenInput" placeholder="github_pat_..." autocomplete="off" spellcheck="false">
+                <input type="password" id="tokenInput" placeholder="ghp_..." autocomplete="off" spellcheck="false">
                 <button class="btn-primary" id="tokenSave">Save</button>
             </div>
             <p id="tokenError" class="muted" style="color:var(--danger);" hidden></p>
         </section>
+
+        <!-- Which part of the site is being edited -->
+        <nav class="viewtabs" id="viewTabs" hidden>
+            <button id="tabTimeline" class="active" type="button">Timeline</button>
+            <button id="tabLeadership" type="button">About us &middot; Leadership</button>
+        </nav>
 
         <!-- Main editing surface -->
         <main id="workspace" hidden>
@@ -234,6 +261,13 @@
             </aside>
             <section id="editor" class="card">
                 <p class="empty-note">Pick a year on the left, or add a new one.</p>
+            </section>
+        </main>
+
+        <!-- Leadership editor (About us) -->
+        <main id="teamWorkspace" hidden>
+            <section id="teamEditor" class="card">
+                <p class="empty-note">Loading&hellip;</p>
             </section>
         </main>
     </div>
